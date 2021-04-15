@@ -1,20 +1,14 @@
 import { Drawer, Dropdown, Menu } from "antd";
+import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
 import HeaderAction from "./HeaderAction";
 
 import ReactHtmlParser from 'react-html-parser';
-
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 
 import {HeaderWrapper, DropdownTextWrapper, HamburgerIcon} from './style'
-
 import debounce from "../utils/debounce";
-
 import HeaderMobileDrawer from "./HeaderMobileDrawer";
-
-import "antd/dist/antd.css";
-import { useState } from "react";
-import styled, {css} from "styled-components";
 
 const srcMock = "https://bimemahan.com/assets/front/_images/logo/logo.png";
 
@@ -185,24 +179,6 @@ const componentStyles = [
     },
 ]
 
-const cssText = `
-    font-size: 72px;
-    .inside {
-        color : red;
-
-        &:hover {
-            color : green;
-        }
-    }
-`
-
-
-
-const WrapperStyles = css`${cssText}`
-
-const MainWrapper = styled.div`${WrapperStyles}`;
-
-
 const data = [
     {
         name: "logo",
@@ -215,18 +191,13 @@ const data = [
         setByCustomer: false,
     },
     {
-        name: "topOfBannerContent",
-        value: '',
-        setByCustomer: false,
-    },
-    {
         name: "banner",
         value: "",
         setByCustomer: true,
     },
     {
         name: "bannerMobile",
-        value: '',
+        value: "",
         setByCustomer: false,
     },
     {
@@ -298,22 +269,12 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
         <>
             
             <HeaderWrapper id={checkDefaultData("headerId") ? getData("headerId") : ""} style={{ backgroundImage : `${checkDefaultData('headerBackgroundImage') ? `url(${(getData("headerBackgroundImage"))})` : "none"}` }} getStyles={getStyles} checkDefault={checkDefault}  >
-            <MainWrapper>
-                        2222222
-                        <div className="inside">
-                            s54da44das4d
-                        </div>
-                    </MainWrapper>
-            {
-                checkDefaultData("banner") ? <div className="header__insertedBanner"> {ReactHtmlParser(getData("banner"))}
-                    
-                </div> : null
-            }
+            {checkDefaultData("banner") ? <div className="header__insertedBanner">{ReactHtmlParser(getData("banner"))}</div> : null}
             <div className={`header__container ${afterScroll ? "header__container--afterScroll" : ""}`}>
      
              <HamburgerIcon onClick={() => setIsDrawerOpen(prev => !prev)} >
                          <svg height="384pt" viewBox="0 -53 384 384"	width="384pt"	xmlns="http://www.w3.org/2000/svg">	<path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />	<path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />	<path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" /></svg>
-                 </HamburgerIcon>
+            </HamburgerIcon>
      
              <HeaderAction
                      position="left"
@@ -346,6 +307,7 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
             visible={isDrawerOpen}
             placement="right"
             onClose={() => setIsDrawerOpen(false)}>
+                {checkDefaultData("bannerMobile") ? <div className="header__insertedBanner">{ReactHtmlParser(getData("bannerMobile"))}</div> : null}
                 <HeaderMobileDrawer getData={getData} getStyles={getStyles} checkDefault={checkDefault} checkDefaultData={checkDefaultData} items={item} actions={[
                     {handler: (id) => {} , name: 'ثبت نام', id: 'register'},
                     {handler : (id) => {} , name : "سبد خرید", id: 'cart'}
