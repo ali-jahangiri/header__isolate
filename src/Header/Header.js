@@ -266,9 +266,7 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
     } , [])
 
     return (
-        <>
-            
-            <HeaderWrapper id={checkDefaultData("headerId") ? getData("headerId") : ""} style={{ backgroundImage : `${checkDefaultData('headerBackgroundImage') ? `url(${(getData("headerBackgroundImage"))})` : "none"}` }} getStyles={getStyles} checkDefault={checkDefault}  >
+        <HeaderWrapper id={checkDefaultData("headerId") ? getData("headerId") : ""} style={{ backgroundImage : `${checkDefaultData('headerBackgroundImage') ? `url(${(getData("headerBackgroundImage"))})` : "none"}` }} getStyles={getStyles} checkDefault={checkDefault}  >
             {checkDefaultData("banner") ? <div className="header__insertedBanner">{ReactHtmlParser(getData("banner"))}</div> : null}
             <div className={`header__container ${afterScroll ? "header__container--afterScroll" : ""}`}>
      
@@ -314,7 +312,6 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
                 ]} />
             </Drawer>
         </HeaderWrapper>
-        </>
      )
 }
 
