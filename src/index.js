@@ -2,17 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Footer from './Components/Footer/Footer';
+import FooterTwo from "./Components/Footer2";
+
 import "./reset.css";
 
 
-const App = () => {
-  return (
-    <>
-      <Footer />
-      </>
-  )
-}
+const App = () => (
+  <FooterTwo/>
+)
 
 ReactDOM.render(
     <BrowserRouter>

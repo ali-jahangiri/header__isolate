@@ -10,6 +10,7 @@ const ContainerWrapper = styled.div`
     border-radius : ${props => props.checkDefault("containerBorderRadius") ? props.getStyles("containerBorderRadius") : "0"};
     background-color : ${props => props.checkDefault("containerBgColor") ? props.getStyles('containerBgColor') : "white"};
     padding : ${props => props.checkDefault("containerPadding") ? props.getStyles("containerPadding") : 0};
+    transition : ${props => props.checkDefault("containerSmoothWidthChange") ? props.getStyles("containerSmoothWidthChange") === "yes" && "0.3s" : '0'};
     @media (min-width: 480px) {
          &&& {
              max-width : 480px;

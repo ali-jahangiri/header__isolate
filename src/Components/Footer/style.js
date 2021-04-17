@@ -89,7 +89,7 @@ export const FooterWrapper = styled.div`
         }
 
         &__item {
-            color : ${props => props.checkDefault("footerItemColor") ? props.getStyles("footerItemColor") : "black"};
+            color : ${props => props.checkDefault("footerItemColor") ? props.getStyles("footerItemColor") : "black"}; 
         }
 
         &__icon {

@@ -73,6 +73,11 @@ const data = [
         setByCustomer : false
     },
     {
+        name : "containerSmoothWidthChange",
+        value : '',
+        setByCustomer : false
+    },
+    {
         name : "footerItem__1__rowOne",
         value : JSON.stringify({Link : "http://google.com" , Name : "link goes here1"}),
         setByCustomer : false
@@ -165,6 +170,8 @@ const data = [
 
 ]
 
+
+// TODO add white label to footer
 
 const componentStyles = [
     {
