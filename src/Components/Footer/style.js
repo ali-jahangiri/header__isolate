@@ -10,11 +10,34 @@ export const FooterWrapper = styled.div`
     & > div {
         flex : 1;
     }
+    & .certificates {
+        display: 'flex';
+		justify-content: 'center';
+		align-items: 'center';
+		width: '100%';
+		margin: '10px 0';
+		flex-wrap: 'wrap';
+    }
+    & .certificateItem {
+        width: 120;
+			height: 120;
+			margin: 5;
+			display: 'flex';
+			justify-content: 'center';
+			align-items: 'center';
+			
+            img {
+                width: 100;
+            }
+    }
     .footer {
         &__content {
             color : ${props => props.checkDefault() ? props.getStyles() : "black"};
             height : 100%;
-
+            display : flex;
+            justify-content : center;
+            align-items: flex-end;
+            flex-direction : column;
             div {
                 display : flex;
                 justify-content : flex-end;
@@ -22,15 +45,26 @@ export const FooterWrapper = styled.div`
                     width : 1.6rem;
                     height : 1.6rem;
                 }
+
+                // style of image witch user uploaded (fallback style)
+                img {
+                    max-width : 3rem;
+                }
             }
         }
         &__socialIcons {
             display: flex;
             justify-content : space-around;
             width : 100%;
+            a {
+                border-radius : 50px;
+                background-color : ${props => props.checkDefault('socialIconsBgColor') ? props.getStyles("socialIconsBgColor") : "white"};
+                display : flex;
+                padding : 0.8rem;
+            }
             svg ,img {
-                width : 2rem;
-                height : 2rem; 
+                width : 1.5rem;
+                height : 1.5rem;
             }
         }
         &__logo {

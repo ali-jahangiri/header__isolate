@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Footer from './Footer/Footer';
+import Footer from './Components/Footer/Footer';
 import "./reset.css";
 
 

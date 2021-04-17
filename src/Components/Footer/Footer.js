@@ -2,6 +2,10 @@ import { FooterWrapper } from "./style";
 
 import ReactHtmlParser from "react-html-parser";
 
+import Container from "../Container";
+
+import {imageFinder} from "../../utils/ImageFinder";
+
 const data = [
     {
         name : "copyright",
@@ -61,7 +65,7 @@ const data = [
     {
         name : "telegram",
         value : "",
-        setByCustomer : false
+        setByCustomer : true
     },
     {
         name : "footerBgImage",
@@ -95,12 +99,12 @@ const data = [
     },
     {
         name : "footerItem__1__rowTwo",
-        value : JSON.stringify({Link : "http://google.com" , Name : "link goes here1"}),
+        value : "",
         setByCustomer : false
     },
     {
         name : "footerItem__2__rowTwo",
-        value : JSON.stringify({Link : "http://google.com" , Name : "link goes here2"}),
+        value : "",
         setByCustomer : false
     },
     {
@@ -138,6 +142,26 @@ const data = [
         value : "",
         setByCustomer : false
     },
+    {
+        name : "moreSocialIconPath__1",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "moreSocialIconPath__2",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "moreSocialIconIcon__1",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "moreSocialIconIcon__2",
+        value : "",
+        setByCustomer : false
+    }
 
 ]
 
@@ -145,6 +169,41 @@ const data = [
 const componentStyles = [
     {
         name : "backgroundColor",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerBgColor",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerBorder",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerBorderRadius",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerWidth",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerMargin",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "containerPadding",
+        value : '',
+        setByCustomer : false
+    },
+    {
+        name : "border",
         value : '',
         setByCustomer : false
     },
@@ -183,6 +242,11 @@ const componentStyles = [
         value : '',
         setByCustomer : false
     },
+    {
+        name : "socialIconsBgColor",
+        value : "",
+        setByCustomer : false
+    }
     
 ]
 
@@ -200,7 +264,6 @@ const Footer = () => {
 
     const checkDefaultData = name => {
         return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].setByCustomer;
     }
     const checkDefault = name => {
         return Boolean(componentStyles.filter(item => item.name === name)[0]) ? componentStyles.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true);
@@ -216,39 +279,40 @@ const Footer = () => {
         : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
     }
     return (
-        <FooterWrapper checkDefault={checkDefault} getStyles={getStyles} >
+        <Container checkDefault={checkDefault} getStyles={getStyles}>
+            <FooterWrapper checkDefault={checkDefault} getStyles={getStyles} >
             <div className="footer__content">
                 <div>
                     <p>{checkDefaultData("address") ? ReactHtmlParser(getData("address")) : "address"}</p>
-                    {checkDefaultData('addressIcon') ? getData("addressIcon") : addressIcon()}
+                    {checkDefaultData('addressIcon') ? <img src={`../../${imageFinder}${getData("addressIcon")}`} alt="icon" /> : addressIcon()}
                 </div>
                 <div>
                     <p>{checkDefaultData("phon") ? ReactHtmlParser(getData("phon")) : "phon"}</p>
-                    {checkDefaultData("phonIcon") ? getData("phonIcon") : phonIcon()}
+                    {checkDefaultData("phonIcon") ? <img src={`../../${imageFinder}${getData("phonIcon")}`} alt='icon' /> : phonIcon()}
                 </div>
                 <div>
                     <p>{checkDefaultData("email") ? ReactHtmlParser(getData("email")) : "email"}</p>
-                    {checkDefaultData("emailEmail") ? getData("emailEmail") : emailIcon()}
+                    {checkDefaultData("emailIcon") ? <img src={`../../${imageFinder}${getData("emailIcon")}`} alt="icon" /> : emailIcon()}
                 </div>
                 
-                <div className="footer__license">
+                <div className="footer__license certificates">
                 {checkDefaultData('firstCertificate') &&
-							<div>
+							<div className="certificateItem">
 								{ReactHtmlParser(getData('firstCertificate'))}
 							</div>
 						}
 						{checkDefaultData('secondCertificate') &&
-							<div>
+							<div className="certificateItem">
 								{ReactHtmlParser(getData('secondCertificate'))}
 							</div>
 						}
 						{checkDefaultData('thirdCertificate') &&
-							<div>
+							<div className="certificateItem">
 								{ReactHtmlParser(getData('thirdCertificate'))}
 							</div>
 						}
 						{checkDefaultData('fourthCertificate') &&
-							<div>
+							<div className="certificateItem">
 								{ReactHtmlParser(getData('fourthCertificate'))}
 							</div>
 						}
@@ -258,6 +322,7 @@ const Footer = () => {
                 {
                     data.filter(el => el.name.includes("footerItem"))
                         .slice(0,5)
+                        .filter(el => el.value)
                         .map(({ value } , i) => <a className="footer__item" href={JSON.parse(value).Link} key={i}>{JSON.parse(value).Name}</a>)
                 }
             </div>
@@ -266,22 +331,21 @@ const Footer = () => {
             {
                     data.filter(el => el.name.includes("footerItem"))
                         .slice(5,10)
+                        .filter(el => el.value)
                         .map(({ value } , i) => <a className="footer__item" href={JSON.parse(value).Link} key={i}>{JSON.parse(value).Name}</a>)
                 }
             </div>
             <div className="footer__logo">
                 <img src={checkDefaultData("logo") ? getData("logo") : srcMock} className="footer__logo" alt="footer-logo" />
                 <div className="footer__socialIcons">
-                    <a href={"red"}>{checkDefaultData("telegramIcon") ? getData("telegram") : telegramIcon()}</a>
-                    <a href={"red"}>{checkDefaultData("instagramIcon") ? getData("instagram") :  InstagramIcon()}</a>
-                    <a href={"red"}>{checkDefaultData("instagramIcon") ? getData("instagram") :  InstagramIcon()}</a>
-                    <a href={"red"}>{checkDefaultData("instagramIcon") ? getData("instagram") :  InstagramIcon()}</a>
-                    {/* // TODO we should add two more icon */}
-                    {/* <a href={}>{checkDefaultData("") ? getData("") : }</a>
-                    <a href={}>{checkDefaultData("") ? getData("") : }</a> */}
+                    {checkDefaultData("telegram") && getData("telegram") && <a href={getData("telegram")}>{checkDefaultData("telegramIcon") ? <img src={`../../${imageFinder}${getData("telegram")}`} alt="icon" /> : telegramIcon()}</a>}
+                    {checkDefaultData("instagram") && getData("instagram") && <a href={getData("instagram")}>{checkDefaultData("instagramIcon") ? <img src={`../../${imageFinder}${getData("instagram")}`} alt="icon" />:  InstagramIcon()}</a> }
+                    {checkDefaultData("moreSocialIconPath__1") && getData("moreSocialIconPath__1") && <a href={getData("moreSocialIconPath__1")}>{checkDefaultData("moreSocialIconIcon__1") && <img src={`../../${imageFinder}${getData("moreSocialIconIcon__1")}`} alt="icon" />}</a>}
+                    {checkDefaultData("moreSocialIconPath__2") && getData("moreSocialIconPath__2") && <a href={getData("moreSocialIconPath__2")}>{checkDefaultData("moreSocialIconIcon__2") && <img src={`../../${imageFinder}${getData("moreSocialIconIcon__2")}`} alt="icon" />}</a>}
                 </div>
             </div>
         </FooterWrapper>
+        </Container>
     )
 }
 
