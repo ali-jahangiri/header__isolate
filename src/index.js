@@ -2,13 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import FooterTwo from "./Components/Footer2";
+import PolygonSection from './Components/PolygonSection/PolygonSection';
 
 import "./reset.css";
 
 
 const App = () => (
-  <FooterTwo/>
+  <PolygonSection />
 )
 
 ReactDOM.render(

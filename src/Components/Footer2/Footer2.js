@@ -131,11 +131,6 @@ const componentStyles = [
         setByCustomer : false
     },
     {
-        name : "containerSmoothWidthChange",
-        value : '',
-        setByCustomer : false
-    },
-    {
         name : "border",
         value : '',
         setByCustomer : false
