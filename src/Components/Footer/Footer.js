@@ -5,8 +5,10 @@ import ReactHtmlParser from "react-html-parser";
 import Container from "../Container";
 
 import {imageFinder} from "../../utils/ImageFinder";
+import styleConstructor from "../../utils/styleConstructor";
+import dataConstructor from "../../utils/dataConstructor";
 
-const data = [
+const MOCK = [
     {
         name : "copyright",
         value : "",
@@ -216,7 +218,7 @@ const componentStyles = [
     },
     {
         name : "emailIconColor",
-        value : '',
+        value : 'red',
         setByCustomer : false
     },
     {
@@ -267,67 +269,52 @@ const telegramIcon = () => <svg className="footer__icon footer__icon--telegram" 
 const InstagramIcon = () => <svg className='footer__icon footer__icon--instagram' version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512.001 512.001" space="preserve"><g><path d="M432.464,512.001h-37.767c-8.02,0-14.523-6.502-14.523-14.523s6.503-14.523,14.523-14.523h37.767c27.839,0,50.49-22.65,50.49-50.49V79.537c0-27.839-22.65-50.49-50.49-50.49H214.367c-8.02,0-14.523-6.502-14.523-14.523s6.503-14.523,14.523-14.523h218.098c43.855,0,79.536,35.679,79.536,79.536v352.928C512,476.322,476.321,512.001,432.464,512.001z" /><path  d="M289.694,512.001H79.536C35.679,512.001,0,476.322,0,432.465V79.537C0,35.68,35.679,0.001,79.536,0.001h32.684c8.02,0,14.523,6.502,14.523,14.523s-6.503,14.523-14.523,14.523H79.536c-27.839,0-50.49,22.65-50.49,50.49v352.928c0,27.839,22.65,50.49,50.49,50.49h210.158c8.02,0,14.523,6.502,14.523,14.523C304.218,505.499,297.714,512.001,289.694,512.001z" /></g><path d="M359.599,102.056H152.401c-27.806,0-50.347,22.541-50.347,50.347v207.197c0,27.806,22.541,50.347,50.347,50.347h207.197c27.806,0,50.347-22.541,50.347-50.347V152.402C409.946,124.596,387.405,102.056,359.599,102.056z M256.001,330.781c-41.299,0-74.78-33.48-74.78-74.78s33.48-74.78,74.78-74.78s74.78,33.48,74.78,74.78S297.3,330.781,256.001,330.781z" /><g><path d="M359.599,424.47H152.403c-35.77,0-64.87-29.1-64.87-64.87V152.402c0-35.769,29.1-64.87,64.87-64.87h207.196c35.77,0,64.87,29.1,64.87,64.87v207.197C424.469,395.368,395.368,424.47,359.599,424.47z M152.403,116.579c-19.754,0-35.824,16.07-35.824,35.824v207.197c0,19.753,16.07,35.824,35.824,35.824h207.196c19.754,0,35.824-16.07,35.824-35.824V152.402c0-19.753-16.07-35.824-35.824-35.824H152.403V116.579z M256.001,345.304c-49.242,0-89.303-40.061-89.303-89.303s40.061-89.303,89.303-89.303s89.303,40.061,89.303,89.303S305.243,345.304,256.001,345.304z M256.001,195.744c-33.226,0-60.256,27.03-60.256,60.257s27.03,60.257,60.256,60.257s60.257-27.03,60.257-60.257S289.225,195.744,256.001,195.744z" /><circle cx="346.406" cy="164.504" r="20.449" /></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
 
 const Footer = () => {
-    const saveException = () => {}
+    const style = styleConstructor(componentStyles);
+    const data = dataConstructor(MOCK);
 
-    const checkDefaultData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
-    const checkDefault = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) ? componentStyles.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return componentStyles.filter(item => item.name === name)[0].setByCustomer;
-    }
-    const getData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].value : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].value
-    }
-    const getStyles = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) 
-        ? componentStyles.filter(item => item.name === name)[0].value 
-        : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
     return (
-        <Container checkDefault={checkDefault} getStyles={getStyles}>
-            <FooterWrapper checkDefault={checkDefault} getStyles={getStyles} >
+        <Container $style={style}>
+            <FooterWrapper $style={style} >
             <div className="footer__content">
                 <div>
-                    <p>{checkDefaultData("address") ? ReactHtmlParser(getData("address")) : "address"}</p>
-                    {checkDefaultData('addressIcon') ? <img src={`../../${imageFinder}${getData("addressIcon")}`} alt="icon" /> : addressIcon()}
+                    <p>{data.check("address") ? ReactHtmlParser(data.get("address")) : "address"}</p>
+                    {data.check('addressIcon') ? <img src={`../../${imageFinder}${data.get("addressIcon")}`} alt="icon" /> : addressIcon()}
                 </div>
                 <div>
-                    <p>{checkDefaultData("phon") ? ReactHtmlParser(getData("phon")) : "phon"}</p>
-                    {checkDefaultData("phonIcon") ? <img src={`../../${imageFinder}${getData("phonIcon")}`} alt='icon' /> : phonIcon()}
+                    <p>{data.check("phon") ? ReactHtmlParser(data.get("phon")) : "phon"}</p>
+                    {data.check("phonIcon") ? <img src={`../../${imageFinder}${data.get("phonIcon")}`} alt='icon' /> : phonIcon()}
                 </div>
                 <div>
-                    <p>{checkDefaultData("email") ? ReactHtmlParser(getData("email")) : "email"}</p>
-                    {checkDefaultData("emailIcon") ? <img src={`../../${imageFinder}${getData("emailIcon")}`} alt="icon" /> : emailIcon()}
+                    <p>{data.check("email") ? ReactHtmlParser(data.get("email")) : "email"}</p>
+                    {data.check("emailIcon") ? <img src={`../../${imageFinder}${data.get("emailIcon")}`} alt="icon" /> : emailIcon()}
                 </div>
                 
                 <div className="footer__license certificates">
-                {checkDefaultData('firstCertificate') &&
+                {data.check('firstCertificate') &&
 							<div className="certificateItem">
-								{ReactHtmlParser(getData('firstCertificate'))}
+								{ReactHtmlParser(data.get('firstCertificate'))}
 							</div>
 						}
-						{checkDefaultData('secondCertificate') &&
+						{data.check('secondCertificate') &&
 							<div className="certificateItem">
-								{ReactHtmlParser(getData('secondCertificate'))}
+								{ReactHtmlParser(data.get('secondCertificate'))}
 							</div>
 						}
-						{checkDefaultData('thirdCertificate') &&
+						{data.check('thirdCertificate') &&
 							<div className="certificateItem">
-								{ReactHtmlParser(getData('thirdCertificate'))}
+								{ReactHtmlParser(data.get('thirdCertificate'))}
 							</div>
 						}
-						{checkDefaultData('fourthCertificate') &&
+						{data.check('fourthCertificate') &&
 							<div className="certificateItem">
-								{ReactHtmlParser(getData('fourthCertificate'))}
+								{ReactHtmlParser(data.get('fourthCertificate'))}
 							</div>
 						}
                 </div>
             </div>
             <div className="footer__section">
                 {
-                    data.filter(el => el.name.includes("footerItem"))
+                    data.get((allData) => allData.filter(el => el.name.includes("footerItem")))
                         .slice(0,5)
                         .filter(el => el.value)
                         .map(({ value } , i) => <a className="footer__item" href={JSON.parse(value).Link} key={i}>{JSON.parse(value).Name}</a>)
@@ -336,19 +323,19 @@ const Footer = () => {
             <div className="footer__divider"></div>
             <div className="footer__section">
             {
-                    data.filter(el => el.name.includes("footerItem"))
+                    data.get((allData) => allData.filter(el => el.name.includes("footerItem")))
                         .slice(5,10)
                         .filter(el => el.value)
                         .map(({ value } , i) => <a className="footer__item" href={JSON.parse(value).Link} key={i}>{JSON.parse(value).Name}</a>)
                 }
             </div>
             <div className="footer__logo">
-                <img src={checkDefaultData("logo") ? getData("logo") : srcMock} className="footer__logo" alt="footer-logo" />
+                <img src={data.check("logo") ? data.get("logo") : srcMock} className="footer__logo" alt="footer-logo" />
                 <div className="footer__socialIcons">
-                    {checkDefaultData("telegram") && getData("telegram") && <a href={getData("telegram")}>{checkDefaultData("telegramIcon") ? <img src={`../../${imageFinder}${getData("telegram")}`} alt="icon" /> : telegramIcon()}</a>}
-                    {checkDefaultData("instagram") && getData("instagram") && <a href={getData("instagram")}>{checkDefaultData("instagramIcon") ? <img src={`../../${imageFinder}${getData("instagram")}`} alt="icon" />:  InstagramIcon()}</a> }
-                    {checkDefaultData("moreSocialIconPath__1") && getData("moreSocialIconPath__1") && <a href={getData("moreSocialIconPath__1")}>{checkDefaultData("moreSocialIconIcon__1") && <img src={`../../${imageFinder}${getData("moreSocialIconIcon__1")}`} alt="icon" />}</a>}
-                    {checkDefaultData("moreSocialIconPath__2") && getData("moreSocialIconPath__2") && <a href={getData("moreSocialIconPath__2")}>{checkDefaultData("moreSocialIconIcon__2") && <img src={`../../${imageFinder}${getData("moreSocialIconIcon__2")}`} alt="icon" />}</a>}
+                    {data.check("telegram") && data.get("telegram") && <a href={data.get("telegram")}>{data.check("telegramIcon") ? <img src={`../../${imageFinder}${data.get("telegram")}`} alt="icon" /> : telegramIcon()}</a>}
+                    {data.check("instagram") && data.get("instagram") && <a href={data.get("instagram")}>{data.check("instagramIcon") ? <img src={`../../${imageFinder}${data.get("instagram")}`} alt="icon" />:  InstagramIcon()}</a> }
+                    {data.check("moreSocialIconPath__1") && data.get("moreSocialIconPath__1") && <a href={data.get("moreSocialIconPath__1")}>{data.check("moreSocialIconIcon__1") && <img src={`../../${imageFinder}${data.get("moreSocialIconIcon__1")}`} alt="icon" />}</a>}
+                    {data.check("moreSocialIconPath__2") && data.get("moreSocialIconPath__2") && <a href={data.get("moreSocialIconPath__2")}>{data.check("moreSocialIconIcon__2") && <img src={`../../${imageFinder}${data.get("moreSocialIconIcon__2")}`} alt="icon" />}</a>}
                 </div>
             </div>
         </FooterWrapper>

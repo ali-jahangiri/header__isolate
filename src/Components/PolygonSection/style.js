@@ -12,7 +12,7 @@ const PolygonWrapper = styled.div`
             justify-content : center;
             align-items : center;
             flex-direction : column;
-            color : ${props => props.checkDefault("polygonTextColor") ? props.getStyles("polygonTextColor") : "black"};
+            color : ${({ $style }) => $style.check("polygonTextColor") ? $style.get("polygonTextColor") : "black"};
             background-color : lightblue;
             cursor: pointer;
             transition : 0.3s;
@@ -22,7 +22,7 @@ const PolygonWrapper = styled.div`
                 height : 30%;
             }
             &:hover {
-                background-color : ${props => props.checkDefault('polygonItemBgColorHover') ? props.getStyles("polygonItemBgColorHover") : "white"};
+                background-color : ${({ $style }) => $style.check('polygonItemBgColorHover') ? $style.get("polygonItemBgColorHover") : "white"};
             }
         }
     }

@@ -2,13 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import PolygonSection from './Components/PolygonSection/PolygonSection';
+import Slider from './Components/slider/slider';
 
 import "./reset.css";
 
 
 const App = () => (
-  <PolygonSection />
+  <Slider />
 )
 
 ReactDOM.render(

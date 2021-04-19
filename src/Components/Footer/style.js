@@ -32,7 +32,7 @@ export const FooterWrapper = styled.div`
     }
     .footer {
         &__content {
-            color : ${props => props.checkDefault() ? props.getStyles() : "black"};
+            color : ${({ $style }) => $style.check() ? $style.get() : "black"};
             height : 100%;
             display : flex;
             justify-content : center;
@@ -58,7 +58,7 @@ export const FooterWrapper = styled.div`
             width : 100%;
             a {
                 border-radius : 50px;
-                background-color : ${props => props.checkDefault('socialIconsBgColor') ? props.getStyles("socialIconsBgColor") : "white"};
+                background-color : ${({ $style }) => $style.check('socialIconsBgColor') ? $style.get("socialIconsBgColor") : "white"};
                 display : flex;
                 padding : 0.8rem;
             }
@@ -73,11 +73,11 @@ export const FooterWrapper = styled.div`
             }
         }
         &__divider {
-            height : ${props => props.checkDefault("dividerHeight") ? props.getStyles("dividerHeight") : "7rem"};
+            height : ${({ $style  })=> $style.check("dividerHeight") ? $style.get("dividerHeight") : "7rem"};
             width : 0.3rem;
             display : block;
             flex : 0.1;
-            border-left : 2px solid ${props => props.checkDefault("dividerColor") ? props.getStyles("dividerColor") : "grey" };
+            border-left : 2px solid ${({ $style }) => $style.check("dividerColor") ? $style.get("dividerColor") : "grey" };
         }
         &__license {
 
@@ -89,24 +89,24 @@ export const FooterWrapper = styled.div`
         }
 
         &__item {
-            color : ${props => props.checkDefault("footerItemColor") ? props.getStyles("footerItemColor") : "black"}; 
+            color : ${({ $style }) => $style.check("footerItemColor") ? $style.get("footerItemColor") : "black"}; 
         }
 
         &__icon {
             &--email {
-                    fill : ${props => props.checkDefault("emailIconColor") ? props.getStyles("emailIconColor") : 'grey'}
+                    fill : ${({ $style }) => $style.check("emailIconColor") ? $style.get("emailIconColor") : 'grey'}
             }
             &--phon {
-                fill : ${props => props.checkDefault("phonIconColor") ? props.getStyles("phonIconColor") : 'grey'}
+                fill : ${({ $style }) => $style.check("phonIconColor") ? $style.get("phonIconColor") : 'grey'}
             }
             &--address {
-                fill : ${props => props.checkDefault("addressIconColor") ? props.getStyles("addressIconColor") : 'grey'}
+                fill : ${({ $style }) => $style.check("addressIconColor") ? $style.get("addressIconColor") : 'grey'}
             }
             &--instagram {
-                fill : ${props => props.checkDefault("instagramIconColor") ? props.getStyles("instagramIconColor") : 'grey'}
+                fill : ${({ $style }) => $style.check("instagramIconColor") ? $style.get("instagramIconColor") : 'grey'}
             }
             &--telegram {
-                fill : ${props => props.checkDefault("telegramIconColor") ? props.getStyles("telegramIconColor") : 'grey'}                
+                fill : ${({ $style }) => $style.check("telegramIconColor") ? $style.get("telegramIconColor") : 'grey'}                
             }
         }
     }

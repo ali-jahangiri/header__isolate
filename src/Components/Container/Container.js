@@ -2,14 +2,14 @@
 import styled from 'styled-components';
 
 const ContainerWrapper = styled.div`
-    width: ${props => props.checkDefault("containerWidth") ? props.getStyles("containerWidth") : "100%"};
+    width: ${({ $style }) => $style.check("containerWidth") ? $style.get("containerWidth") : "100%"};
     display: flex;
     align-self: center;
-    margin: ${props => props.checkDefault("containerMargin") ? props.getStyles("containerMargin") : 'auto'};
-    border : ${props => props.checkDefault("containerBorder") ? props.getStyles("containerBorder") : "none"};
-    border-radius : ${props => props.checkDefault("containerBorderRadius") ? props.getStyles("containerBorderRadius") : "0"};
-    background-color : ${props => props.checkDefault("containerBgColor") ? props.getStyles('containerBgColor') : "white"};
-    padding : ${props => props.checkDefault("containerPadding") ? props.getStyles("containerPadding") : 0};
+    margin: ${({ $style }) => $style.check("containerMargin") ? $style.get("containerMargin") : 'auto'};
+    border : ${({ $style }) => $style.check("containerBorder") ? $style.get("containerBorder") : "none"};
+    border-radius : ${({ $style }) => $style.check("containerBorderRadius") ? $style.get("containerBorderRadius") : "0"};
+    background-color : ${({ $style }) => $style.check("containerBgColor") ? $style.get('containerBgColor') : "white"};
+    padding : ${({ $style }) => $style.check("containerPadding") ? $style.get("containerPadding") : 0};
     @media (min-width: 480px) {
          &&& {
              max-width : 480px;
@@ -38,11 +38,11 @@ const ContainerWrapper = styled.div`
 `
 
 
-const Container = ({ children , checkDefault , getStyles , ...rest}) => {
+const Container = ({ children , $style , ...rest}) => {
     return (
-        <ContainerWrapper checkDefault={checkDefault} getStyles={getStyles} className="container" {...rest}>
-        {children}
-    </ContainerWrapper>
+        <ContainerWrapper $style={$style} className="container" {...rest}>
+            {children}  
+        </ContainerWrapper>
     )
 }
 
