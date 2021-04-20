@@ -1,7 +1,7 @@
 import SliderWrapper from "./style";
 
 import styleConstructor from '../../utils/styleConstructor';
-import dataConstructor from "../../utils/styleConstructor";
+import dataConstructor from "../../utils/dataConstructor";
 
 import SlickSlider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
@@ -44,6 +44,34 @@ const MOCK = [
         name : "sliderId",
         value : "",
         setByCustomer : false
+    },
+    {
+        name : "slider__item__1",
+        linkText : "go to link",
+        text : "this is value",
+        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-3.jpg",
+        path : "https://google.com"
+    },
+    {
+        name : "slider__item__2",
+        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-2.jpg",
+        linkText : "go to link",
+        text : "this is value",
+        path : "https://google.com"
+    },
+    {
+        name : "slider__item__3",
+        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-1.jpg",
+        linkText : "go to link",
+        text : "this is value",
+        path : "https://google.com"
+    },
+    {
+        name : "slider__item__4",
+        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-4.jpg",
+        linkText : "go to link",
+        text : "this is value",
+        path : "https://google.com"
     },
 ];
 const componentStyle = [
@@ -104,44 +132,17 @@ const Slider = () => {
         slidesToScroll: 1
     }
 
-    const mockMap = [
-        {
-            linkText : "this is link1",
-            desc : "this is content",
-            bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-3.jpg",
-            path : "https://google.com"
-        },
-        {
-            linkText : "this is link2",
-            desc : "this is content",
-            bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-2.jpg",
-            path : "https://google.com"
-        },
-        {
-            linkText : "this is link3",
-            desc : "this is content",
-            bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-1.jpg",
-            path : "https://google.com"
-        },
-        {
-            linkText : "this is link4",
-            desc : "this is content",
-            bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-4.jpg",
-            path : "https://google.com"
-        },
-
-    ]
     return (
         <SliderWrapper $style={style}>
              <SlickSlider afterChange={(index) => setActiveSlider(index)} className="slider" {...sliderConfig}>
                 {
-                    mockMap.map((el , i) => (
+                    data.get((data) => data.filter(el => el.name.includes("slider__item__"))).map((el , i) => (
                         <div key={i}>
                             <div style={{ backgroundImage : `url(${el.bgSrc})` }} className={`slider__item ${activeSlider === i ? 'slider__item--active' : ""}`}>
                                 <span className={`slider__overlay ${activeSlider === i ? 'slider__overlay--active' : "" }`}></span>
                             <div className="slider__item__content"  >
                                 <div>
-                                    <p>{el.desc}</p>
+                                    <p>{el.text}</p>
                                     <a href={el.path}>{el.linkText}</a> 
                                 </div>
                             </div>
