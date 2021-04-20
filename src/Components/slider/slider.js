@@ -7,7 +7,9 @@ import SlickSlider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
+import { imageFinder } from "../../utils/ImageFinder";
 
+import ReactHtmlParser from "react-html-parser";
 
 const MOCK = [
     {
@@ -16,7 +18,7 @@ const MOCK = [
         setByCustomer : false
     },
     {
-        name : "showDots",
+        name : "showSliderDots",
         value : "",
         setByCustomer : false
     },
@@ -42,36 +44,49 @@ const MOCK = [
     },
     {
         name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "readMoreText",
         value : "",
         setByCustomer : false
     },
     {
         name : "slider__item__1",
-        linkText : "go to link",
-        text : "this is value",
-        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-3.jpg",
-        path : "https://google.com"
+        value : JSON.stringify({
+            Link : '',
+            value : '',
+            TEXT : '',
+        }),
+        setByCustomer : false,
     },
     {
         name : "slider__item__2",
-        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-2.jpg",
-        linkText : "go to link",
-        text : "this is value",
-        path : "https://google.com"
+        value : JSON.stringify({
+            Link : '',
+            value : '',
+            TEXT : '',
+        }),
+        setByCustomer : false,
     },
     {
         name : "slider__item__3",
-        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-1.jpg",
-        linkText : "go to link",
-        text : "this is value",
-        path : "https://google.com"
+        value : JSON.stringify({
+            Link : '',
+            value : '',
+            TEXT : '',
+        }),
+        setByCustomer : false,
     },
     {
         name : "slider__item__4",
-        bgSrc : "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/3d-slider-4.jpg",
-        linkText : "go to link",
-        text : "this is value",
-        path : "https://google.com"
+        value : JSON.stringify({
+            Link : '',
+            value : '',
+            TEXT : '',
+        }),
+        setByCustomer : false,
     },
 ];
 const componentStyle = [
@@ -125,7 +140,7 @@ const Slider = () => {
     const style = styleConstructor(componentStyle);
 
     const sliderConfig = {
-        dots: true,
+        dots: data.check("showSliderDots") ? data.get("showSliderDots") === "yes" && true : true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -138,12 +153,12 @@ const Slider = () => {
                 {
                     data.get((data) => data.filter(el => el.name.includes("slider__item__"))).map((el , i) => (
                         <div key={i}>
-                            <div style={{ backgroundImage : `url(${el.bgSrc})` }} className={`slider__item ${activeSlider === i ? 'slider__item--active' : ""}`}>
+                            <div style={{ backgroundImage : `url(../../${imageFinder}${JSON.parse(el.value).value})` }} className={`slider__item ${activeSlider === i ? 'slider__item--active' : ""}`}>
                                 <span className={`slider__overlay ${activeSlider === i ? 'slider__overlay--active' : "" }`}></span>
                             <div className="slider__item__content"  >
                                 <div>
-                                    <p>{el.text}</p>
-                                    <a href={el.path}>{el.linkText}</a> 
+                                    <p>{ReactHtmlParser(JSON.parse(el).TEXT)}</p>
+                                    <a href={JSON.parse(el.value).Link}>{data.check("readMoreText")? data.get("readMoreText"): "بیشتر بخوانید"}</a> 
                                 </div>
                             </div>
                             </div>

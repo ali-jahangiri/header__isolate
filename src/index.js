@@ -2,13 +2,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Slider from './Components/slider/slider';
+import SliderTwo from './Components/slider2/SliderTwo';
 
 import "./reset.css";
 
 
 const App = () => (
-  <Slider />
+  <div style={{ margin : "10rem 0" }}>
+    <SliderTwo />
+  </div>
 )
 
 ReactDOM.render(
