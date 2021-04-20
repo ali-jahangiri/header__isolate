@@ -9,7 +9,43 @@ import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 
 
-const MOCK = [];
+const MOCK = [
+    {
+        name : "sliderSpeed",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "showDots",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name : "sliderId",
+        value : "",
+        setByCustomer : false
+    },
+];
 const componentStyle = [
     {
         name :  "itemBgColor",
@@ -22,29 +58,37 @@ const componentStyle = [
         setByCustomer : false
     },
     {
-        name :  "itemBgColor",
+        name :  "itemLinkColor",
         value : "",
         setByCustomer : false
     },
     {
-        name :  "itemBgColor",
+        name :  "itemTextColor",
         value : "",
         setByCustomer : false
     },
     {
-        name :  "itemBgColor",
+        name :  "itemTextFontSize",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name :  "itemLinkFontSize",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name :  "sliderMargin",
+        value : "",
+        setByCustomer : false
+    },
+    {
+        name :  "activeDotColor",
         value : "",
         setByCustomer : false
     },
 ];
 
-const SliderItem = ({ title }) => {
-    return (
-        <div className="slider__item">
-            {title}
-        </div>
-    )
-}
 
 const Slider = () => {
     const [activeSlider, setActiveSlider] = useState(0);
@@ -88,8 +132,7 @@ const Slider = () => {
 
     ]
     return (
-        <SliderWrapper>
-            
+        <SliderWrapper $style={style}>
              <SlickSlider afterChange={(index) => setActiveSlider(index)} className="slider" {...sliderConfig}>
                 {
                     mockMap.map((el , i) => (

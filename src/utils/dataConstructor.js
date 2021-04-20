@@ -1,6 +1,7 @@
 import { saveException } from "../utils/ImageFinder";
 
 const dataConstructor = (data) => {
+
     const get = (name) => {
         if(typeof name === "function") {
             return name(data)
