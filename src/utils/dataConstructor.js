@@ -10,6 +10,7 @@ const dataConstructor = (mock) => {
     }
 
     const check = (name) => {
+        console.log(mock);
         return Boolean(mock.filter(item => item.name === name)[0]) ? mock.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
     }
     return {
