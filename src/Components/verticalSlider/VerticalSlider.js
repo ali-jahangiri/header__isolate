@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import SlickSlider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { imageFinder } from "../../utils/ImageFinder";
 
 
 const MOCK = [
@@ -234,7 +235,7 @@ const VerticalSlider = () => {
                             <div className={`slider__item ${activeSlider === i ? "slider__item--active" : "slider__item--deActive"}`}>
                                 <div className="slider__inner">
                                     <div className="slider__outline"></div>
-                                    <div style={{ backgroundImage : `url(${JSON.parse(slide.value).value})` }} className="slider__img"></div>
+                                    <div style={{ backgroundImage : `url(../../${imageFinder}${JSON.parse(slide.value).value})` }} className="slider__img"></div>
                                 </div>
                             </div>
                         </div>
