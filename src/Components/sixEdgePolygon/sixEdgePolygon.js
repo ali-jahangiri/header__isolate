@@ -1,6 +1,5 @@
 import SixEdgePolygonWrapper from "./style"
 
-import styleConstructor from "../../utils/styleConstructor"
 import dataConstructor from "../../utils/dataConstructor"
 import { imageFinder } from "../../utils/ImageFinder"
 
@@ -17,7 +16,7 @@ const componentsStyle = [
     },
     {
         name : "itemTextColor",
-        value : "",
+        value : "red",
         setByCustomer : false
     },
     {
@@ -514,14 +513,13 @@ const componentData = [
 ]
 
 const SixEdgePolygon = () => {
-    const style = styleConstructor(componentsStyle);
     const data = dataConstructor(componentData)
 
     // NOTE we destructuring items of layout one by one
     const [one , two , tree , foure , five , six] = MOCK.cat;
 
     return (
-        <SixEdgePolygonWrapper $style={style}>
+        <SixEdgePolygonWrapper $style={componentsStyle}>
             <div className="sixEdge__row">
             <div className='sixEdge__wrapper'>
                     <div className="sixEdge__item">

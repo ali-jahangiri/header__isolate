@@ -178,8 +178,8 @@ const MOCK = [
 const componentStyles = [
     {
         name : "backgroundColor",
-        value : '',
-        setByCustomer : false
+        value : 'red',
+        setByCustomer : true
     },
     {
         name : "containerBgColor",
@@ -273,8 +273,8 @@ const Footer = () => {
     const data = dataConstructor(MOCK);
 
     return (
-        <Container $style={style}>
-            <FooterWrapper $style={style} >
+    <Container $style={style}>
+            <FooterWrapper check={style.check} get={style.get} style={style}>
             <div className="footer__content">
                 <div>
                     <p>{data.check("address") ? ReactHtmlParser(data.get("address")) : "address"}</p>

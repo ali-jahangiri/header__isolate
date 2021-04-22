@@ -2,14 +2,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import SixEdgePolygon from './Components/sixEdgePolygon/sixEdgePolygon';
 
+import VerticalSlider from './Components/verticalSlider/VerticalSlider';
 
 import "./reset.css";
 
-
 const App = () => (
-  <SixEdgePolygon />
+  <div style={{ margin : "10rem 0" }}>
+    <VerticalSlider />
+  </div>
 )
 
 ReactDOM.render(

@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import withStyleWrapper from "../../playground/withStyleWrapper";
 
-const SixEdgePolygonWrapper = styled.div`
+const SixEdgePolygonWrapper = ({ get , check }) => styled.div`
     width : 26.2rem;
     position : relative;
     @media(max-width : 700px) {width : 19rem;}
-
+    
     .sixEdge {
         &__row {
             width : 100%;
@@ -24,6 +25,9 @@ const SixEdgePolygonWrapper = styled.div`
                     .sixEdge__wrapper {
                         align-self : flex-end;
                         &:last-child {align-self : flex-start;}
+                        &:nth-child(2) {
+                            margin-top : -4rem;
+                        }
                     }
                 }
             }
@@ -34,7 +38,7 @@ const SixEdgePolygonWrapper = styled.div`
                     max-height : 7rem;
                 }
                 .sixEdge__item {
-                    background-color : ${({ $style }) => $style.check("centerItemBgColor") ? $style.get("centerItemBgColor") : ''}
+                    background-color : ${check("centerItemBgColor") ? get("centerItemBgColor") : ''}
                 }
                 @media(max-width : 700px) {
                         position : absolute;
@@ -61,22 +65,22 @@ const SixEdgePolygonWrapper = styled.div`
         &__item {
             width : 10rem;
             height : 10rem;
-            background-color : ${({ $style }) => $style.check("itemBgColor") ? $style.get("itemBgColor") : 'red'};
+            background-color : ${check("itemBgColor") ? get("itemBgColor") : 'red'};
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
             z-index : 0;
             display: flex;
             justify-content : center;
             align-items :center;
             flex-direction : column-reverse;
-            font-size : ${({ $style }) => $style.check("itemFontSize") ? $style.get("itemFontSize") : "1rem"};
-            color : ${({ $style }) => $style.check("itemTextColor") ? $style.get("itemTextColor") : "black"};
+            font-size : ${check("itemFontSize") ? get("itemFontSize") : "1rem"};
+            color : ${check("itemTextColor") ? get("itemTextColor") : "black"};
         }
 
         &__wrapper {
             position : relative;
             z-index : 4;
             &:hover {
-                &::after {box-shadow: 0 0 81px 13px ${({ $style }) => $style.check("itemShadow") ? $style.get("itemShadow") : "#000000b8"};}
+                &::after {box-shadow: 0 0 81px 13px ${check("itemShadow") ? get("itemShadow") : "#000000b8"};}
             }
             &::after {
                 content: "";
@@ -97,4 +101,4 @@ const SixEdgePolygonWrapper = styled.div`
 `
 
 
-export default SixEdgePolygonWrapper;
+export default withStyleWrapper(SixEdgePolygonWrapper);

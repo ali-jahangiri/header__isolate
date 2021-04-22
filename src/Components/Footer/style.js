@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import withStyleWrapper from "../../HOC/withStyleWrapper";
 
-export const FooterWrapper = styled.div`
+const FooterWrapper = ({get , check , children }) => {
+    
+    const StyledWrapper = styled.div`
     width : 100%;
     display : flex;
     align-items : center;
@@ -32,7 +35,7 @@ export const FooterWrapper = styled.div`
     }
     .footer {
         &__content {
-            color : ${({ $style }) => $style.check() ? $style.get() : "black"};
+            background-color : ${get("backgroundColor")};
             height : 100%;
             display : flex;
             justify-content : center;
@@ -52,63 +55,11 @@ export const FooterWrapper = styled.div`
                 }
             }
         }
-        &__socialIcons {
-            display: flex;
-            justify-content : space-around;
-            width : 100%;
-            a {
-                border-radius : 50px;
-                background-color : ${({ $style }) => $style.check('socialIconsBgColor') ? $style.get("socialIconsBgColor") : "white"};
-                display : flex;
-                padding : 0.8rem;
-            }
-            svg ,img {
-                width : 1.5rem;
-                height : 1.5rem;
-            }
-        }
-        &__logo {
-            img {
-                max-width : 200px;
-            }
-        }
-        &__divider {
-            height : ${({ $style  })=> $style.check("dividerHeight") ? $style.get("dividerHeight") : "7rem"};
-            width : 0.3rem;
-            display : block;
-            flex : 0.1;
-            border-left : 2px solid ${({ $style }) => $style.check("dividerColor") ? $style.get("dividerColor") : "grey" };
-        }
-        &__license {
-
-        }
-        &__section {
-            display: flex;
-            flex-direction : column;
-            align-items : center;
-        }
-
-        &__item {
-            color : ${({ $style }) => $style.check("footerItemColor") ? $style.get("footerItemColor") : "black"}; 
-        }
-
-        &__icon {
-            &--email {
-                    fill : ${({ $style }) => $style.check("emailIconColor") ? $style.get("emailIconColor") : 'grey'}
-            }
-            &--phon {
-                fill : ${({ $style }) => $style.check("phonIconColor") ? $style.get("phonIconColor") : 'grey'}
-            }
-            &--address {
-                fill : ${({ $style }) => $style.check("addressIconColor") ? $style.get("addressIconColor") : 'grey'}
-            }
-            &--instagram {
-                fill : ${({ $style }) => $style.check("instagramIconColor") ? $style.get("instagramIconColor") : 'grey'}
-            }
-            &--telegram {
-                fill : ${({ $style }) => $style.check("telegramIconColor") ? $style.get("telegramIconColor") : 'grey'}                
-            }
-        }
+        
     }
-`;
+`
 
+    return <StyledWrapper>{children}</StyledWrapper>
+}
+
+export default withStyleWrapper(FooterWrapper)
