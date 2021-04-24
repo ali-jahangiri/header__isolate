@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import { css, keyframes } from "styled-components";
 import withStyleWrapper from "../../HOC/withStyleWrapper";
 
 const anime = keyframes`
@@ -9,7 +9,6 @@ const anime = keyframes`
         transform : scale(0.5);
     }
 `
-
 
 const fadeIn = keyframes`
     from {transform : scale(0.5);}
@@ -34,7 +33,7 @@ const imageFadeOut = keyframes`
     }
 `
 
-const VerticalSliderWrapper = ({ check , get }) => styled.div`
+const verticalSliderStyle = ({ check , get }) => css`
     position : relative;
     div {outline : none;}
     
@@ -163,4 +162,4 @@ const VerticalSliderWrapper = ({ check , get }) => styled.div`
     }
 `
 
-export default withStyleWrapper(VerticalSliderWrapper);
+export default withStyleWrapper("div")(verticalSliderStyle);

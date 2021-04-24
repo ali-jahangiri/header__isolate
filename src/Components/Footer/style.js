@@ -94,5 +94,5 @@ const FooterStyle = ({get , check }) => css`
     }
 `;
 
-const Target = withStyleWrapper("div")(FooterStyle);
-export default Target;
+
+export default withStyleWrapper("div")(FooterStyle);

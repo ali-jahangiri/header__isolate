@@ -28,5 +28,5 @@ const ContainerWrapper = ({ get , check }) => css`
         }
 `
 
-
-export default withStyleWrapper('div')(ContainerWrapper);
+const Wrapper = withStyleWrapper('div')(ContainerWrapper);
+export default Wrapper;

@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import { css } from "styled-components";
+import withStyleWrapper from '../../HOC/withStyleWrapper';
 
-const SliderWrapper = styled.div`
+const sliderStyle = ({ get , check }) => css`
     .slider {
         position: relative;
         &__item {
@@ -28,15 +29,15 @@ const SliderWrapper = styled.div`
                 width : 80%;
                 height : 180%;
                 top : 100%;
-                background-color : ${({ $style })=> $style.check("itemBgColor") ? $style.get("itemBgColor") : "#ffa07ab0" } ;
+                background-color : ${ check("itemBgColor") ? get("itemBgColor") : "#ffa07ab0" } ;
                 position: relative;
                 display : flex;
                 justify-content : start;
                 align-items: center;
                 clip-path: polygon(0 0, 50% 50%, 100% 100%, 0% 100%);
                 transition : 0.3s;
-                color : ${({ $style }) => $style.check("itemTextColor") ? $style.get("itemTextColor") : "black"};
-                font-size : ${({ $style }) => $style.check("itemTextFontSize") ? $style.get("itemTextFontSize") : "1.1rem"};
+                color : ${check("itemTextColor") ? get("itemTextColor") : "black"};
+                font-size : ${check("itemTextFontSize") ? get("itemTextFontSize") : "1.1rem"};
                 div {
                     width : 50%;
                     display: flex;
@@ -45,14 +46,14 @@ const SliderWrapper = styled.div`
                     flex-direction : column;
                     transform : translateY(100%);
                     a {
-                        color : ${({ $style }) => $style.check("itemLinkColor") ? $style.get("itemLinkColor") : "blue"};
+                        color : ${check("itemLinkColor") ? get("itemLinkColor") : "blue"};
                         text-decoration : none;
-                        font-size : ${({ $style }) => $style.check("itemLinkFontSize") ? $style.get("itemLinkFontSize") : "0.9rem"};
+                        font-size : ${check("itemLinkFontSize") ? get("itemLinkFontSize") : "0.9rem"};
                     }
                 }
 
                 &:hover {
-                    background-color : ${({ $style }) => $style.check("itemBgColorHover") ? $style.get("itemBgColorHover") : "#ffa07ade"} ;
+                    background-color : ${check("itemBgColorHover") ? get("itemBgColorHover") : "#ffa07ade"} ;
                     height : 170%;
                 }
 
@@ -80,7 +81,7 @@ const SliderWrapper = styled.div`
         .slick-active {
             button {
                 &::before {
-                    color : ${({ $style }) => $style.check("activeDotColor") ? $style.get("activeDotColor") : "grey"};
+                    color : ${check("activeDotColor") ? get("activeDotColor") : "grey"};
                 }
             }
         }
@@ -88,4 +89,4 @@ const SliderWrapper = styled.div`
 `
 
 
-export default SliderWrapper;
+export default withStyleWrapper('div')(sliderStyle);

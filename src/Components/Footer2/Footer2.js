@@ -1,11 +1,13 @@
 import { useState } from "react";
 import ReactHtmlParser from "react-html-parser";
 
-import { saveException , imageFinder } from "../../utils/ImageFinder";
+import { imageFinder } from "../../utils/ImageFinder";
 import Container from "../Container";
 import FooterWrapper from "./style";
 
-const data = [
+import dataConstructor from "../../utils/dataConstructor";
+
+const MOCK = [
     {
         name : "copyright",
         value : "",
@@ -136,11 +138,6 @@ const componentStyles = [
         setByCustomer : false
     },
     {
-        name : "",
-        value : '',
-        setByCustomer : false
-    },
-    {
         name : "footerItemColor",
         value : '',
         setByCustomer : false
@@ -205,49 +202,34 @@ const InstagramIcon = () => <svg className='footer__icon footer__icon--instagram
 
 const Footer = () => {
     const [mailboxValue, setMailboxValue] = useState('');
+    const { get , check } = dataConstructor(MOCK);
 
     const mailboxHandler = () => {
         // TODO ^
     }
-    const checkDefaultData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
-    const checkDefault = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) ? componentStyles.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return componentStyles.filter(item => item.name === name)[0].setByCustomer;
-    }
-    const getData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].value : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].value
-    }
-    const getStyles = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) 
-        ? componentStyles.filter(item => item.name === name)[0].value 
-        : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
     return (
-        <Container checkDefault={checkDefault} getStyles={getStyles}>
-            <FooterWrapper  checkDefault={checkDefault} getStyles={getStyles}>
+        <Container $style={componentStyles}>
+            <FooterWrapper $style={componentStyles}>
                 <div className="footer__row">
                     <div className="footer__certificates">
-                    {checkDefaultData('firstCertificate') &&
+                    {check('firstCertificate') &&
 				    			<div className="certificateItem">
-				    				{ReactHtmlParser(getData('firstCertificate'))}
+				    				{ReactHtmlParser(get('firstCertificate'))}
 				    			</div>
 				    		}
-				    		{checkDefaultData('secondCertificate') &&
+				    		{check('secondCertificate') &&
 				    			<div className="certificateItem">
-				    				{ReactHtmlParser(getData('secondCertificate'))}
+				    				{ReactHtmlParser(get('secondCertificate'))}
 				    			</div>
 				    		}
-				    		{checkDefaultData('thirdCertificate') &&
+				    		{check('thirdCertificate') &&
 				    			<div className="certificateItem">
-				    				{ReactHtmlParser(getData('thirdCertificate'))}
+				    				{ReactHtmlParser(get('thirdCertificate'))}
 				    			</div>
 				    		}
-				    		{checkDefaultData('fourthCertificate') &&
+				    		{check('fourthCertificate') &&
 				    			<div className="certificateItem">
-				    				{ReactHtmlParser(getData('fourthCertificate'))}
+				    				{ReactHtmlParser(get('fourthCertificate'))}
 				    			</div>
 				    		}
                     </div>
@@ -256,17 +238,17 @@ const Footer = () => {
                         <button onClick={mailboxHandler}>عضویت در خبرنامه</button>
                     </div>
                 </div>
-                <div style={{ background : `url(${checkDefaultData("footerBgImage") ? getData("footerBgImage") : ""})`}} className="footer__row">
+                <div style={{ background : `url(${check("footerBgImage") ? get("footerBgImage") : ""})`}} className="footer__row">
                 <div className="footer__inner">
                     <div className="footer__links">
                         <div className="footer__heading">
                             <span></span>
-                            {checkDefaultData('footerHeadingText') ? getData("footerHeadingText") : <p>لینک های مفید</p>}
+                            {check('footerHeadingText') ? get("footerHeadingText") : <p>لینک های مفید</p>}
                         </div>
                         <div className="footer__linkContainer">
                             <div>
                             {
-                                data.filter(el => el.name.includes("footerItem") && el.value)
+                                MOCK.filter(el => el.name.includes("footerItem") && el.value)
                                 .slice(0 , 2)
                                 .map(({ value } , i) => (
                                     <a className="footer__item" href={JSON.parse(value).Link} key={i} >{JSON.parse(value).Name}</a>
@@ -275,7 +257,7 @@ const Footer = () => {
                             </div>
                             <div>
                             {
-                                data.filter(el => el.name.includes("footerItem") && el.value)
+                                MOCK.filter(el => el.name.includes("footerItem") && el.value)
                                 .slice(2 , 4)
                                 .map(({ value } , i) => (
                                     <a className="footer__item" href={JSON.parse(value).Link} key={i} >{JSON.parse(value).Name}</a>
@@ -286,23 +268,23 @@ const Footer = () => {
                     </div>
                     {/* TODO remove MOCK span */}
                     <div className="footer__desc">
-                        <p>{checkDefaultData("desc") ? getData("desc") : <span>فروشگاه بیمه ماهان، به عنوان اولین دارنده پروانه فعالیت فروش برخط بیمه به شماره 1695 از بیمه مرکزی جمهوری اسلامی ایران، یک سامانه جامع خرید اینترنتی بیمه آتش سوزی، مسافرتی، عمر، حوادث، بدنه، شخص ثالث، تجهیزات الکترونیک و درمان تکمیلی در کمتر از 5 دقیقه است. بیمه ماهان در این راه با شرکت های معتبر و تحت نظارت بیمه مرکزی جمهوری اسلامی ایران همچون سامان، رازی، ایران، پاسارگاد، پارسیان، سینا، ملت، ما، حافظ، معلم، میهن، نوین، کوثر، بیمه آرمان، تعاون، سرمد، پارسیان، دی، دانا، آسیا، کارآفرین، البرز، حکمت و تجارت نو همکاری می نماید.</span>}</p>
+                        <p>{check("desc") ? get("desc") : <span>فروشگاه بیمه ماهان، به عنوان اولین دارنده پروانه فعالیت فروش برخط بیمه به شماره 1695 از بیمه مرکزی جمهوری اسلامی ایران، یک سامانه جامع خرید اینترنتی بیمه آتش سوزی، مسافرتی، عمر، حوادث، بدنه، شخص ثالث، تجهیزات الکترونیک و درمان تکمیلی در کمتر از 5 دقیقه است. بیمه ماهان در این راه با شرکت های معتبر و تحت نظارت بیمه مرکزی جمهوری اسلامی ایران همچون سامان، رازی، ایران، پاسارگاد، پارسیان، سینا، ملت، ما، حافظ، معلم، میهن، نوین، کوثر، بیمه آرمان، تعاون، سرمد، پارسیان، دی، دانا، آسیا، کارآفرین، البرز، حکمت و تجارت نو همکاری می نماید.</span>}</p>
                     </div>
                     
                     <div className="footer__logo">
-                        <img src={checkDefaultData("logo") && getData("logo")} alt="site logo" />
+                        <img src={check("logo") && get("logo")} alt="site logo" />
                     </div>
                     <div className="footer__row footer__end">
                         <div className="footer__socialIcons">
-                            {checkDefaultData("telegram") && getData("telegram") && <a href={getData("telegram")}>{checkDefaultData("telegramIcon") ? <img src={`../../${imageFinder}${getData("telegram")}`} alt="icon" /> : telegramIcon()}<svg className="polygonShape" viewBox="0 0 50 50">
+                            {check("telegram") && get("telegram") && <a href={get("telegram")}>{check("telegramIcon") ? <img src={`../../${imageFinder}${get("telegram")}`} alt="icon" /> : telegramIcon()}<svg className="polygonShape" viewBox="0 0 50 50">
                                                     <polygon className="hexagon" points="47,37.5 25,50 3,37.5 3,12.5 25,0 47,12.5"></polygon>
                                                 </svg></a>}
-                            {checkDefaultData("instagram") && getData("instagram") && <a href={getData("instagram")}>{checkDefaultData("instagramIcon") ? <img src={`../../${imageFinder}${getData("instagram")}`} alt="icon" />:  InstagramIcon()}<svg className="polygonShape" viewBox="0 0 50 50">
+                            {check("instagram") && get("instagram") && <a href={get("instagram")}>{check("instagramIcon") ? <img src={`../../${imageFinder}${get("instagram")}`} alt="icon" />:  InstagramIcon()}<svg className="polygonShape" viewBox="0 0 50 50">
                                                     <polygon className="hexagon" points="47,37.5 25,50 3,37.5 3,12.5 25,0 47,12.5"></polygon>
                                                 </svg></a> }
                         </div>
                         <div className="footer__copyright">
-                            <p>{checkDefaultData("copyright") && getData("copyright")}</p>
+                            <p>{check("copyright") && get("copyright")}</p>
                             {/* TODO remove test */}
                             تمامی حقوق این وب سایت متعلق به شرکت کارگزاری رسمی بیمه مستقیم برخط فروشگاه بیمه ماهان می باشد.
                         </div>      

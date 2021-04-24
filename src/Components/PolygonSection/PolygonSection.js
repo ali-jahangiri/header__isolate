@@ -1,7 +1,7 @@
 import PolygonWrapper from "./style"
-
-import { saveException } from "../../utils/ImageFinder";
 import Container from "../Container";
+
+import dataConstructor from "../../utils/dataConstructor";
 
 import { Hexagon, ResponsiveHoneycomb } from "react-honeycomb";
 
@@ -23,7 +23,7 @@ const componentStyles = [
     },
 ]
 
-const data = [
+const componentData = [
     {
         name : "mainTitle",
         value : "به سبک خودت بیمه کن",
@@ -41,7 +41,7 @@ const data = [
     },
     {
         name : "countOfItemInOneRow",
-        value : "8",
+        value : "3",
         setByCustomer : true,
     },
 ]
@@ -645,34 +645,16 @@ const MOCK = {
 
 
 const PolygonSection = () => {
-
-    const checkDefaultData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
-    const checkDefault = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) ? componentStyles.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return componentStyles.filter(item => item.name === name)[0].setByCustomer;
-    }
-    const getData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].value : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].value
-    }
-    const getStyles = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) 
-        ? componentStyles.filter(item => item.name === name)[0].value 
-        : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
-
-    
-    const itemClickHandler = (value) => console.log(value);
+  const { get }  = dataConstructor(componentData)
+  const itemClickHandler = (value) => console.log(value);
     console.log(MOCK.cat);
     return (
-        <Container checkDefault={checkDefault} getStyles={getStyles} >
-            <PolygonWrapper checkDefault={checkDefault} getStyles={getStyles}>
+        <Container className="container" $style={componentStyles} >
+            <PolygonWrapper $style={componentStyles} >
                 <ResponsiveHoneycomb 
                     items={MOCK.cat}
                     defaultWidth={1024}
-                    size={(1024 / Number(getData("countOfItemInOneRow"))) * 0.58}
+                    size={(1024 / Number(get("countOfItemInOneRow"))) * 0.58}
                     renderItem={item => (
                         <Hexagon >
                             <div className="polygonSection__item" onClick={() => itemClickHandler(item)}>

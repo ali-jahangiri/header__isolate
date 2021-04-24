@@ -6,14 +6,15 @@ import HeaderAction from "./HeaderAction";
 import ReactHtmlParser from 'react-html-parser';
 import { useEffect , useState } from "react";
 
-import {HeaderWrapper, DropdownTextWrapper, HamburgerIcon} from './style'
-import debounce from "../utils/debounce";
+import HeaderWrapper from './style'
+import debounce from "../../utils/debounce";
 import HeaderMobileDrawer from "./HeaderMobileDrawer";
+import dataConstructor from "../../utils/dataConstructor";
 
 const srcMock = "https://bimemahan.com/assets/front/_images/logo/logo.png";
 
 
-const MOCKHEADERITEM = [
+const MOCK = [
     {
         "id": 8308,
         "parentId": null,
@@ -179,7 +180,7 @@ const componentStyles = [
     },
 ]
 
-const data = [
+const componentData = [
     {
         name: "logo",
         value: '',
@@ -208,34 +209,13 @@ const data = [
 ]
 
 // TODO add actionHandler pattern
-const allItemCount = MOCKHEADERITEM.length;
+const allItemCount = MOCK.length;
 
-const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => {
+const Header = ({ item = MOCK ,  icon = srcMock , actionHandler }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [afterScroll, setAfterScroll] = useState(false);
+    const { get , check } = dataConstructor(componentData);
     
-    // TODO add this to utils folder
-    // utils functions
-    const saveException = () => {}
-    const checkDefaultData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name+ ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].setByCustomer;
-    }
-    const checkDefault = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) ? componentStyles.filter(item => item.name === name)[0].setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return componentStyles.filter(item => item.name === name)[0].setByCustomer;
-    }
-    const getData = name => {
-        return Boolean(data.filter(item => item.name === name)[0]) ? data.filter(item => item.name === name)[0].value : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-        //return data.filter(item => item.name === name)[0].value
-    }
-    const getStyles = name => {
-        return Boolean(componentStyles.filter(item => item.name === name)[0]) 
-        ? componentStyles.filter(item => item.name === name)[0].value 
-        : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true);
-    }
-
-
     const subMenuChecker = (menuElement , index) => {
     if(!menuElement.subMenu.length) return (<Link className="header__item" to={menuElement.link} key={index} >{menuElement.name}</Link> );
     return (
@@ -251,9 +231,9 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
             </Menu>
     )}
   >
-   <DropdownTextWrapper className="header__item" key={index} >
+   <a href="#somewhere" className="header__item" key={index} >
        {menuElement.name}
-    </DropdownTextWrapper>
+    </a>
     </Dropdown>)
     };
     
@@ -266,13 +246,13 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
     } , [])
 
     return (
-        <HeaderWrapper id={checkDefaultData("headerId") ? getData("headerId") : ""} style={{ backgroundImage : `${checkDefaultData('headerBackgroundImage') ? `url(${(getData("headerBackgroundImage"))})` : "none"}` }} getStyles={getStyles} checkDefault={checkDefault}  >
-            {checkDefaultData("banner") ? <div className="header__insertedBanner">{ReactHtmlParser(getData("banner"))}</div> : null}
+        <HeaderWrapper id={check("headerId") ? get("headerId") : ""} $style={componentStyles} style={{ backgroundImage : `${check('headerBackgroundImage') ? `url(${(get("headerBackgroundImage"))})` : "none"}` }} /*getStyles={getStyles} checkDefault={checkDefault}*/  >
+            {check("banner") ? <div className="header__insertedBanner">{ReactHtmlParser(get("banner"))}</div> : null}
             <div className={`header__container ${afterScroll ? "header__container--afterScroll" : ""}`}>
      
-             <HamburgerIcon onClick={() => setIsDrawerOpen(prev => !prev)} >
+             <div className="header__hamburgerIcon" onClick={() => setIsDrawerOpen(prev => !prev)} >
                          <svg height="384pt" viewBox="0 -53 384 384"	width="384pt"	xmlns="http://www.w3.org/2000/svg">	<path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />	<path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />	<path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" /></svg>
-            </HamburgerIcon>
+            </div>
      
              <HeaderAction
                      position="left"
@@ -285,32 +265,31 @@ const Header = ({ item = MOCKHEADERITEM ,  icon = srcMock , actionHandler }) => 
              {item.slice(0 , allItemCount / 2).map(subMenuChecker)}
 
             <div className="header__logo">
-                <img src={checkDefaultData("logo") ? getData('logo') : icon} alt="header_logo" />
+                <img src={check("logo") ? get('logo') : icon} alt="header_logo" />
              </div>
 
              {item.slice(allItemCount / 2 , allItemCount).map(subMenuChecker)}
 
                  <HeaderAction
-                     icon={<svg id="user_1_" data-name="user (1)" xmlns="http://www.w3.org/2000/svg" width="426.667" height="426.666" viewBox="0 0 426.667 426.666"><g id="Group_125" data-name="Group 125"><path id="Path_324" data-name="Path 324" d="M213.333,0C95.467,0,0,95.467,0,213.333S95.467,426.666,213.333,426.666,426.667,331.2,426.667,213.333,331.2,0,213.333,0Zm0,64a64,64,0,1,1-64,64A64.05,64.05,0,0,1,213.333,64Zm0,302.933a153.613,153.613,0,0,1-128-68.693c.533-42.347,85.44-65.707,128-65.707s127.36,23.36,128,65.707A153.609,153.609,0,0,1,213.333,366.933Z" //fill={globalVars['primaryColor']
-                         /></g></svg>}
+                     icon={<svg id="user_1_" data-name="user (1)" xmlns="http://www.w3.org/2000/svg" width="426.667" height="426.666" viewBox="0 0 426.667 426.666"><g id="Group_125" data-name="Group 125"><path id="Path_324" data-name="Path 324" d="M213.333,0C95.467,0,0,95.467,0,213.333S95.467,426.666,213.333,426.666,426.667,331.2,426.667,213.333,331.2,0,213.333,0Zm0,64a64,64,0,1,1-64,64A64.05,64.05,0,0,1,213.333,64Zm0,302.933a153.613,153.613,0,0,1-128-68.693c.533-42.347,85.44-65.707,128-65.707s127.36,23.36,128,65.707A153.609,153.609,0,0,1,213.333,366.933Z"/></g></svg>}
                      position="right"
                      path="" 
-                     text="عضویت/ورود"  
+                     text="عضویت/ورود"
                      action="login"
                  />
               
             </div>
-            <Drawer
-            drawerStyle={{ backgroundColor : `${checkDefault("headerBackgroundMobile") ? getStyles("headerBackgroundMobile") : '#fff'}`}}
+            {/* <Drawer
+            drawerStyle={{ backgroundColor : `${check("headerBackgroundMobile") ? get("headerBackgroundMobile") : '#fff'}`}}
             visible={isDrawerOpen}
             placement="right"
             onClose={() => setIsDrawerOpen(false)}>
-                {checkDefaultData("bannerMobile") ? <div className="header__insertedBanner">{ReactHtmlParser(getData("bannerMobile"))}</div> : null}
+                {check("bannerMobile") ? <div className="header__insertedBanner">{ReactHtmlParser(get("bannerMobile"))}</div> : null}
                 <HeaderMobileDrawer getData={getData} getStyles={getStyles} checkDefault={checkDefault} checkDefaultData={checkDefaultData} items={item} actions={[
                     {handler: (id) => {} , name: 'ثبت نام', id: 'register'},
                     {handler : (id) => {} , name : "سبد خرید", id: 'cart'}
                 ]} />
-            </Drawer>
+            </Drawer> */}
         </HeaderWrapper>
      )
 }

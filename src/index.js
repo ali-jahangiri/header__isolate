@@ -1,16 +1,16 @@
 
+import { Footer } from 'antd/lib/layout/layout';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Container from './Components/Container';
-import Footer from './Components/Footer/Footer';
-import SixEdgePolygon from './Components/sixEdgePolygon/sixEdgePolygon';
 
+import PolygonSection from './Components/PolygonSection';
+import Header from "./Components/Header";
 
 import "./reset.css";
 
 const App = () => (
-  <SixEdgePolygon />
+  <Header />
 )
 
 ReactDOM.render(
