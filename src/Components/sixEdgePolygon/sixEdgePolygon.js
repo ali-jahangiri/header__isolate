@@ -2,11 +2,12 @@ import SixEdgePolygonWrapper from "./style"
 
 import dataConstructor from "../../utils/dataConstructor"
 import { imageFinder } from "../../utils/ImageFinder"
+import styleConstructor from "../../utils/styleConstructor"
 
 const componentsStyle = [
     {
         name : "itemBgColor",
-        value : "lightblue",
+        value : "red",
         setByCustomer : true
     },
     {
@@ -16,17 +17,17 @@ const componentsStyle = [
     },
     {
         name : "itemTextColor",
-        value : "red",
-        setByCustomer : false
+        value : "blue",
+        setByCustomer : true
     },
     {
-        name : "itemShadow",
-        value : "",
-        setByCustomer : false
+        name : "itemShadowColor",
+        value : "black",
+        setByCustomer : true
     },
     {
         name : "centerItemBgColor",
-        value : "",
+        value : "blue",
         setByCustomer : false
     },
 ]
@@ -514,12 +515,12 @@ const componentData = [
 
 const SixEdgePolygon = () => {
     const data = dataConstructor(componentData)
-
+    const style = styleConstructor(componentsStyle);
     // NOTE we destructuring items of layout one by one
     const [one , two , tree , foure , five , six] = MOCK.cat;
 
     return (
-        <SixEdgePolygonWrapper $style={componentsStyle}>
+        <SixEdgePolygonWrapper $style={style}>
             <div className="sixEdge__row">
             <div className='sixEdge__wrapper'>
                     <div className="sixEdge__item">

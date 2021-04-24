@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 import withStyleWrapper from "../../HOC/withStyleWrapper";
 
-const ContainerWrapper = ({ get , check }) => styled.div`
-
+const ContainerWrapper = ({ get , check }) => css`
         width: ${check("containerWidth") ? get("containerWidth") : "100%"};
         display: flex;
         align-self: center;
@@ -29,4 +28,5 @@ const ContainerWrapper = ({ get , check }) => styled.div`
         }
 `
 
-export default withStyleWrapper(ContainerWrapper);
+
+export default withStyleWrapper('div')(ContainerWrapper);

@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled , { css } from "styled-components";
 
 import withStyleWrapper from "../../HOC/withStyleWrapper";
 
-const FooterWrapper = ({get , check }) => styled.div`
+const FooterStyle = ({get , check }) => css`
     width : 100%;
     display : flex;
     align-items : center;
@@ -10,7 +10,7 @@ const FooterWrapper = ({get , check }) => styled.div`
     padding : 1rem ;
     background-color : ${check("backgroundColor") ? get("backgroundColor") : "transparent"};
 
-    @media(max-width: 576px ) {
+    @media(max-width: 576px) {
         flex-direction : column-reverse;
         // adding gap between sections
         & > div {margin : 0.5rem 0;}
@@ -94,5 +94,5 @@ const FooterWrapper = ({get , check }) => styled.div`
     }
 `;
 
-
-export default withStyleWrapper(FooterWrapper)
+const Target = withStyleWrapper("div")(FooterStyle);
+export default Target;
