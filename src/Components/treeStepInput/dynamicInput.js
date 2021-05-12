@@ -1,7 +1,6 @@
 import { Component } from "react";
 
 
-
 class DynamicInput extends Component {
     constructor(props) {
         super(props);
@@ -56,9 +55,7 @@ class DynamicInput extends Component {
                     ...prev.inputValues,
                     [index] : value
                 }
-            }), () => {})
-            // this.props.onChangeHandler(this.state.inputValues)
-            this.onReachEnd()
+            }), this.onReachEnd)
         }
     }
 
@@ -71,7 +68,7 @@ class DynamicInput extends Component {
         return (
             <>
                 {
-                    inputArr.map((el , i) => (
+                    inputArr.map((_ , i) => (
                         <input
                             className={this.props.inputClassName}
                             maxLength={this.props.eachInputValueLength}

@@ -24,7 +24,7 @@ const Index = () => {
   }
 
   return (
-    <DynamicInput inputClassName={"input__"} onChangeHandler={changeHandler} onReachEnd={onReachEnd} countOfInputStep={4} eachInputValueLength={3} />
+    <DynamicInput inputClassName={"input__"} onChangeHandler={changeHandler} onReachEnd={onReachEnd} countOfInputStep={2} eachInputValueLength={2} />
   )
 }
 
