@@ -20,10 +20,47 @@ export const fade = (hex, alpha) => {
 }
 
 
+
+export function debounce(func, wait, immediate) {
+  var timeout;
+
+  return function executedFunction() {
+    var context = this;
+    var args = arguments;
+        
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+    
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+    
+    if (callNow) func.apply(context, args);
+  };
+};
+
+
 export const objFinder = (array,name) => {
     return (array.find(object => object.name === name).value);
 }
 
+
+export const styleConstructor = (style) => {
+  const check = (name) => (
+      Boolean(style.find(item => item.name === name)) ? style.find(item => item.name === name).setByCustomer : saveException('component: Navbar >>> variable: ' + name + + ' url: ' + (typeof window != "undefined" && window.location.current), true)
+  )
+  const get = (name , unit = "") => (
+    `${Boolean(style.find(item => item.name === name)) ? style.find(item => item.name === name).value : saveException('component: Navbar >>> variable: ' + name + ' url: ' + (typeof window != "undefined" && window.location.current), true)}${unit}`
+)
+  return {
+      check,
+      get
+  }
+}
 
 //var inLocal = true;
 export const imageFinder = "/MasterApi/getImage?filename=";
