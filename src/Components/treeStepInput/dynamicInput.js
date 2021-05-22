@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { cloneElement, Component } from "react";
 
 
 class DynamicInput extends Component {
@@ -8,13 +8,42 @@ class DynamicInput extends Component {
             inputArr : new Array(this.props.countOfInputStep).fill(""),
             inputValues : {...new Array(this.props.countOfInputStep).fill("")},
             wasCompleted : false,
-            error : {}
+            error : {},
         }
+        this.triggerComponent = () => cloneElement(this.props.triggerComponent , {onClick : this.validateOnTrigger.bind(this)})
         this.refs = {}
     }
 
+    validateOnTrigger() {
+        const values = Object.values(this.state.inputValues)
+        values.forEach((el , i) => {
+            if(!el || el.length !== this.props.eachInputValueLength) {
+                this.setState(prev => ({
+                    ...prev ,
+                    error : {
+                        ...prev.error,
+                        [i] : true
+                    }
+                }))
+            }else {
+                this.setState(prev => ({
+                    ...prev ,
+                    error : {
+                        ...prev.error,
+                        [i] : false
+                    }
+                }))
+            }
+        })
+    }
+
+    validateOnChange() {
+        const values = Object.values(this.state.inputValues)
+        console.log(values);
+    }
+
     addToState(value, index) {
-        this.setState({ inputValues : {...this.state.inputValues, [index] : value}})
+        this.setState({ inputValues : {...this.state.inputValues, [index] : value}} , this.validateOnChange)
     }
 
     onReachEnd() {
@@ -39,7 +68,7 @@ class DynamicInput extends Component {
                         ...prev.inputValues,
                         [index] : value
                     }
-                }));
+                }), this.validateOnChange);
                 if(index !== this.state.inputArr.length - 1) {
                     return this.refs[index + 1].focus();
                 }
@@ -55,12 +84,15 @@ class DynamicInput extends Component {
                     ...prev.inputValues,
                     [index] : value
                 }
-            }), this.onReachEnd)
+            }), () => {
+                this.onReachEnd()
+                this.validateOnChange()
+            })
         }
     }
 
     componentDidUpdate() {
-        this.props.onChangeHandler(this.state.inputValues)
+        this.props.onChangeHandler(this.state.inputValues);
     }
 
     render() {
@@ -70,7 +102,7 @@ class DynamicInput extends Component {
                 {
                     inputArr.map((_ , i) => (
                         <input
-                            className={this.props.inputClassName}
+                            className={`${this.props.inputClassName} ${this.state.error[i] ? this.props.inputErrorClassName : ""}`}
                             maxLength={this.props.eachInputValueLength}
                             ref={element => this.refs = {...this.refs , [i] : element}}
                             key={i}
@@ -78,6 +110,8 @@ class DynamicInput extends Component {
                             value={inputValues[i]} />
                     ))
                 }
+                {this.triggerComponent()}
+                {/* TODO remove this MOCK placement */}
                 {
                     JSON.stringify(inputValues)
                 }

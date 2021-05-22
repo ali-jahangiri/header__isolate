@@ -1,4 +1,3 @@
-import { cloneElement } from "react";
 import styled from "styled-components/macro";
 import { styleConstructor } from "../utils/ImageFinder"
 

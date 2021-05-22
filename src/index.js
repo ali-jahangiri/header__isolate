@@ -1,7 +1,9 @@
 import "./reset.css";
 import reactDom from 'react-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DynamicInput from "./Components/treeStepInput/dynamicInput";
+import iconConstructor from "./utils/iconConstructor";
+import GroupSlider from "./Components/GroupSlider/GroupSlider";
 
 const App = () => {
   // useEffect(() => {
@@ -14,20 +16,79 @@ const App = () => {
   
 }
 
-const Index = () => {
-  const onReachEnd = values => {
-    console.log(values);
-  }
-
-  const changeHandler = (currentValue) => {
-    console.log("current value" , currentValue);
-  }
-
+const Btn = ({ onClick , text , icon }) => {
+  console.log(icon);
   return (
-    <DynamicInput inputClassName={"input__"} onChangeHandler={changeHandler} onReachEnd={onReachEnd} countOfInputStep={2} eachInputValueLength={2} />
+    <button onClick={onClick} style={{ color : "red" }}>{icon}</button>
+  )
+}
+Btn.defaultProps = {
+  text : "iam a default text"
+}
+const icon = iconConstructor()
+window.scrollTo({
+  top : 0,
+  behavior : "smooth"
+})
+const Index = () => {
+  const componentStyle = [
+    {
+      name : "supportIconColor",
+      value : "red",
+      setByCustomer : false
+    },
+    {
+      name : "reminderIconColor",
+      value : "blue",
+      setByCustomer : false
+    },
+    {
+      name : "walletIconColor",
+      value : "blue",
+      setByCustomer : false
+    },
+    {
+      name : "insuranceIconColor",
+      value : "red",
+      setByCustomer : false
+    },
+    {
+      name : "profileIconColor",
+      value : "pink",
+      setByCustomer : true
+    },
+    {
+      name : "bgColor",
+      value : "pink",
+      setByCustomer : false
+    },
+    {
+      name : "fonSize",
+      value : "pink",
+      setByCustomer : false
+    },
+  ]
+
+  const iconPack = icon(componentStyle , {
+    primaryColor : "blue",
+    'primary_2' : "red",
+  })
+  const [value, setValue] = useState("");
+  return (
+    <div>
+      this is a icon
+      <input value={value} onChange={({ target : { value } }) => setValue(value)} />
+      <Btn icon={iconPack.get("wallet")} />
+      <div onClick={() => console.log('from parent')}>
+        iam the parent
+        <div onClick={() => console.log('from child')}>
+            iam the child
+        </div>
+      </div>
+    </div>
   )
 }
 
-reactDom.render(<Index />,
+reactDom.render(<div style={{ margin : "50rem 0" }}><GroupSlider /></div>,
   document.getElementById('root')
 );
