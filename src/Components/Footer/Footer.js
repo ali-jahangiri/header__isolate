@@ -331,8 +331,3 @@ const Footer = () => {
 
 
 export default Footer;
-
-
-// <Bg $style={componentStyles}>
-//             
-//     </Bg>
