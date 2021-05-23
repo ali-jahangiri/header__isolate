@@ -4,13 +4,13 @@ import WithStyled from "../../HOC/WithStyled";
 const style = ({ get , check }) => css`
     position : fixed;
     background-color: white;
-    bottom: 0;
+    bottom: ${props => props.active ? 0 : "-35%"};
     left: 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    
+    transition : bottom .3s ease;
     div {
         display: flex;
         flex-direction: column-reverse;
@@ -18,7 +18,7 @@ const style = ({ get , check }) => css`
         justify-content: center;
         background-color: white;
         transition: .3s ease-in-out;
-        padding: 2rem;
+        padding: .9rem;
         background : linear-gradient(180deg, white, transparent);
         border-top: 2px solid white;
         flex: 1;
@@ -37,20 +37,20 @@ const style = ({ get , check }) => css`
                 width: 2rem;
             }
             p {
-                /* display: none; */
+                
                 font-size: .75rem;
             }
         }
        
     }
     svg {
-        width: 3.5rem;
+        width: 2.7rem;
         fill: grey;
         transition: 0.5s;
     }
-    @media (max-width : 364px ) {
+    @media (max-width : 364px) {
         div {
-            padding: 1rem 0 !important;
+            padding: .6rem 0 !important;
             flex: 1;
 
             svg {
@@ -64,7 +64,7 @@ const style = ({ get , check }) => css`
     .navItem--active {
         margin-top: -50px;
         border-top: 3px solid black;
-        background : linear-gradient(180deg, #0000000d, transparent);
+        background : linear-gradient(180deg, #f3f3f3, white);
         p {
             font-weight: 700;
             color: black;
@@ -75,6 +75,7 @@ const style = ({ get , check }) => css`
         }
 
     }
+
     .navItem--deActive {
         border-top: 2px solid #8080800a;
 

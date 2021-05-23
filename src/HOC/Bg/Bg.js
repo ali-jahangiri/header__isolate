@@ -6,8 +6,8 @@ import BgStyle from "./BgStyle";
  * witch start with "bg"
  */
 
-const Bg = ({ children , $style }) => (
-    <BgStyle $style={$style.filter(el => el.name.startsWith("bg"))}>
+const Bg = ({ children , style }) => (
+    <BgStyle style={style.filter(el => el.name.startsWith("bg"))}>
         {children}
     </BgStyle>
 )

@@ -37,13 +37,12 @@ const MobileNavItem = ({name , icon , onClickHandler , currentTab }) => {
     )
 }
 
-const MobileNav = () => {
-    const [currentTab, setCurrentTab] = useState(null)
+const MobileNav = ({ handler , currentStep , active }) => {
     
     return (
-        <Wrapper>
+        <Wrapper active={active}>
             {
-                navList.map((el , i) => <MobileNavItem key={i} {...el} currentTab={currentTab} onClickHandler={setCurrentTab} />)
+                navList.map((el , i) => <MobileNavItem key={i} {...el} currentTab={currentStep} onClickHandler={handler} />)
             }
         </Wrapper>
     )

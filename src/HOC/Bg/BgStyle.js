@@ -1,5 +1,6 @@
 import { css } from "styled-components";
-import withStyleWrapper from "../withStyleWrapper";
+import WithStyled from "../WithStyled";
+
 
 // TODO add bg image support
 const BgStyle = ({ check , get }) => css`
@@ -14,4 +15,4 @@ const BgStyle = ({ check , get }) => css`
     background-size: cover;
 `;
 
-export default withStyleWrapper()(BgStyle);
+export default WithStyled(BgStyle)
