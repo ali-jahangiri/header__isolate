@@ -1,63 +1,266 @@
+import 'antd/dist/antd.css';
 import "./reset.css";
 import reactDom from 'react-dom';
-import  MobileNav from './Components/ProfileMobileNav/ProfileMobileNav'
-import TabPageMobile from "./Components/TabPageMobile/TabPagMobile";
-import { useState } from "react";
-import { Children } from "react"
-import IndexTab from "./Components/indexTab/IndexTab";
+import { useState } from 'react';
 
-const App = () => {
-  // useEffect(() => {
-  // return () => {
-  //     // clean up => componentWillUnmount()
-  //   }
-  //   // depend of what ? component need to re render and (componentWillUpdate) and if some case was happened component should and need to re render (shouldComponentUpdate)? 
-  // } , [])
-  // // return statement basicity is a lifecycle method witch is both of functional and class component
+import MobileDrawer from "./Components/MobileDrawer/MobileDrawer";
+import MarketerTreeStepRegister from "./Components/MarketerTreeStepRegister/MarketerTreeStepRegister";
+
+import Form from './Components/Form/Form';
+import FormItem from './Components/Form/FormItem';
+import { useFormOnChange, useFormSubmit } from './Components/Form/Hooks';
+
+
+// import  MobileNav from './Components/ProfileMobileNav/ProfileMobileNav'
+// import TabPageMobile from "./Components/TabPageMobile/TabPagMobile";
+// import { useState } from "react";
+// import { Children } from "react"
+// import IndexTab from "./Components/indexTab/IndexTab";
+
+
+// import useMediaQuery ,{ MediaQueryProvider} from "./utils/Hooks/useMediaQuery"
+// import InsuranceItemMobile from "./Components/InsuranceItemMobile/InsuranceItemMobile";
+// import ReminderItemMobile from "./Components/ReminderItemMobile/ReminderItemMobile";
+// import WalletCartMobile from "./Components/WalletMobile/WalletCartMobile/WalletCartMobile";
+// import WalletItemMobile from "./Components/WalletMobile/WalletItemMobile";
+
+
+// const Tab = ({ children , currentTabPage }) => {
+//     return Children.map(children , Child => {
+//         if(Child?.props?.title === currentTabPage) return Child
+//         else return null
+//     })
+// }
+
+
+
+// const Indexer = () => {
+//   const [currentTabPage, setCurrentTabPage] = useState("index");
+//   const [isNavActive, setIsNavActive] = useState(false);
+//   const isMobile = useMediaQuery("md")
   
-}
+//   const tabPageChanger = tabName => {
+//   setCurrentTabPage(tabName)
+//   setIsNavActive(true)
+//   }
+//   const backActionHandler = () => {
+//     setIsNavActive(false)
+//     setCurrentTabPage("index")
+//   }
+//   return (
+//       isMobile ? <>
+//       <Tab currentTabPage={currentTabPage}>
+//         <TabPageMobile extendStyle={`
+//           .tabPageMobile__bodyContainer {
+//             height : 80vh;
+//             & > div {
+//               display : flex;
+//               height : 100%;
+//               flex-direction : column;
+//                 .indexTab {
+//                   &__row {
+//                     flex : 1;
+                    
+//                 }
+//                   &__item {
+//                     height : 100%;
+//                     display : flex;
+//                     align-items : center;
+//                     &__container {
+//                       height : 80%;
+//                     }
+//                   }
+//               }
+//           }
+//       `} active showBackIcon={false} isNavActive={isNavActive} backActionHandler={backActionHandler} title="index">
+//         <IndexTab clickHandler={tabPageChanger} />
+//       </TabPageMobile>
+//         <TabPageMobile extendStyle={`
+//         .tabPageMobile__bodyContainer {
+//           overflow : hidden;
+//         }
+//       `} backActionHandler={backActionHandler} title="یادآور">
+//         {/* TODO change name of component for version suppoer */}
+//           <ReminderItemMobile index="1" date={"1399/12/13"} desc="من یک توضیح هستم" title="من یک عنوان هستم" />
+//           <ReminderItemMobile index="2" date={"1400/8/2"} desc="من یک توضیح هستم" title="من یک عنوان هستم" />
 
-const Tab = ({ children , currentTabPage }) => {
-    return Children.map(children , Child => {
-        if(Child?.props?.title === currentTabPage) return Child
-        else return null
-    })
-}
+//       </TabPageMobile>
+//         <TabPageMobile extendStyle={`.tabPageMobile__bodyContainer {padding : 0px !important}`} backActionHandler={backActionHandler} title="بیمه نامه ها" >
+//           <InsuranceItemMobile title="بیمه ایران" />
+//           <InsuranceItemMobile title="بیمه ایران" />
+//           <InsuranceItemMobile title="بیمه ایران" />
+//           <InsuranceItemMobile title="بیمه ایران" />
+//           <InsuranceItemMobile title="بیمه ایران" />
+//       </TabPageMobile>
+//       <TabPageMobile backActionHandler={backActionHandler} title="کیف پول">
+//         <WalletCartMobile desc="آخرین تراکنش" date="1399/12/04" amount="50,500" />
 
-export default Tab;
-const Indexer = () => {
-  const [currentTabPage, setCurrentTabPage] = useState("index");
-  const [isOnPageSwitch, setIsOnPageSwitch] = useState(false);
-  const [isNavActive, setIsNavActive] = useState(false);
+//         <WalletItemMobile description="این یک توضیحات دیگری استتوضیحات دیگری استتوضیحات دیگری است." date="1400/5/4" index="1" reduced="12000" />
+//         <WalletItemMobile description="این یک توضیحات دیگری است." date="1400/7/3" index="1" added="12000" />
+//         <WalletItemMobile description="این یک توضیحات دیگری است." date="1365/5/4" index="1" added="12000" />
 
-  const tabPageChanger = tabName => {
-    setIsOnPageSwitch(true)
-    setCurrentTabPage(tabName)
-    setIsOnPageSwitch(false)
+//       </TabPageMobile>
+//       <TabPageMobile backActionHandler={backActionHandler} title="پشتیبانی" >
 
+//       </TabPageMobile>
+//     </Tab>
+//     <MobileNav active={isNavActive} currentStep={currentTabPage} handler={tabPageChanger} /></> : <div>outside of mobile</div>
+    
+//   )
+// }
+
+
+// const Index = ({ key}) => {
+//   const [climeMe, setClimeMe] = useState(false);
+
+//   return (
+//     <div>
+//       Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//       <button onClick={() => setClimeMe(prev => !prev)}>show me</button>
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.Voluptatibus nesciunt modi atque ratione officiis. Sit et perspiciatis placeat debitis voluptatem. Vero esse dolor nulla sequi sint. Et qui dicta. Voluptates enim voluptatum dolor.
+ 
+//  Est quos et dicta nam et. Illum odio voluptate quia consequatur quisquam quibusdam minima molestiae. Aspernatur eius voluptas ratione reprehenderit adipisci enim placeat. Odit non nemo.
+  
+//  Animi ducimus minima qui magni possimus. Voluptas omnis qui exercitationem illum minus qui illo nostrum. Consequatur nulla quia amet. Facere sed nobis illo est omnis sit et ducimus.
+//       <MobileDrawer closeHandler={setClimeMe} title="بیمه نامه ها" visible={climeMe} >
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       Fuga vel aut iste qui qui busdam. Doloremque iste suscipit qui vel facere ut minima nam. Possimus asperiores est esse earum mollitia asperiores.
+//       </MobileDrawer>
+//     </div>
+//   )
+// }
+// Index.defaultProps = {
+  
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// NOTE if we only have rule prop without any assigment , that means the input value should pass base validation
+
+
+const Index = ({ customErr }) => {
+  // const { getFormError , getFormValue } = useFormSubmit()  
+  // const submitHandler = () => {
+  //   console.log(getFormError());
+  // }
+
+  const customChangeHandler = useFormOnChange()
+
+  const clickHandler = () => {
+    customChangeHandler("customInput" , Date.now())
   }
-
   return (
     <div>
-      <Tab currentTabPage={currentTabPage}>
-        <TabPageMobile extendStyle={`opacity : ${isOnPageSwitch ? "0" : "1"}`} title="index">
-          <IndexTab />
-          <button onClick={() => setIsNavActive(!isNavActive)}>active navigation</button>
-        </TabPageMobile>
-        <TabPageMobile extendStyle={`opacity : ${isOnPageSwitch ? "0" : "1"}`} isOnTabPageSwitch={isOnPageSwitch} title="یادآور">
-          this is reminder
-        </TabPageMobile>
-      <TabPageMobile extendStyle={`opacity : ${isOnPageSwitch ? "0" : "1"}`} isOnTabPageSwitch={isOnPageSwitch} title="بیمه نامه ها" >
-        Aut odio id magnam cumque. Delectus id mollitia. Porro eos tempore beatae. Aut cumque voluptatem deleniti sit voluptas in itaque id. Ex non sapiente nihil dolorem aut beatae quaerat debitis. Hic delectus id rerum delectus magni distinctio accusantium cum.
-        perspiciatis sed. Nesciunt excepturi dolorem ab cupiditate repellendus modi quia. Est dolores doloribus placeat earum magnam qui molestiae. Quia excepturi id sint repellat inventore officia. Quibusdam aut et excepturi eveniet.
-        Molestiae reprehenderit aliquam quis dolores pariatur accusamus aut quia ducimus. Voluptatum in ea ea vel sit ipsa quae omnis. Possimus consequuntur voluptas et error tenetur recusandae sequi officiis. Et quas non doloremque. Id quis est. Quisquam totam numquam minima nihil enim voluptas ut quisquam.
+        <FormItem help="Ex deleniti rerum ipsam impedit consequatur in. Et velit et enim accusantium rerum quas aut beatae. Quidem cumque voluptatem ducimus veritatis rerum recusandae natus et. 
+            Doloremque et omnis recusandae. Unde atque ut alias dolore sequi ullam et. Quasi unde repellat quaerat officiis tempore fuga. Non cupiditate repellat nostrum quis ut eius. Illo expedita ea corrupti vel impedit nostrum ab. Et et dignissimos dolore autem." rule={userName => {
+          if(userName.length >= 5) {
+            return true
+          }
+          return false
+        }} placeholder="asdsmj" name="userName" />
+
+        <FormItem rule={password => {
+          if(password.includes('*')) return true
+          else return false
+        }} name="password" />
         
-      </TabPageMobile>
-      </Tab>
-      <MobileNav active={isNavActive} currentStep={currentTabPage} handler={tabPageChanger} />
+        <FormItem help="this is other hepl text" defaultValue="this is default props" name="customInput" rule={gettedValue => {
+          console.log(gettedValue);
+          return false
+        }}>
+           <div className='uploader'>
+             <button onClick={() => clickHandler()}>uploader</button>
+           </div>
+        </FormItem>
     </div>
   )
 }
 
 
-reactDom.render(<Indexer />,document.getElementById('root'));
+const EnhancedWithForm = () => {
+  const [value, setValue] = useState({});
+  return (
+    <Form 
+      changeHandler={e => {setValue(e.value)}}
+    >
+      <Index customErr={value.err} />
+      {
+        JSON.stringify(value)
+      }
+    </Form>
+  )
+}
+
+reactDom.render(<EnhancedWithForm />,document.getElementById('root'));

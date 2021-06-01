@@ -1,5 +1,5 @@
 import { css } from "styled-components"
-import WithStyled from "../../HOC/WithStyled";
+import WithStyled from "../../utils/HOC/WithStyled";;
 
 const style = ({ get , check }) => css`
     position : fixed;

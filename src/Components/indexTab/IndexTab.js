@@ -3,18 +3,22 @@ import Wrapper from "./style";
 
 const iconPack = iconConstructor(["general", "ui"])
 
-const IndexPageItem = ({ title , itemIcon }) => {
+const IndexPageItem = ({ title , itemIcon , onClick }) => {
     const icon = iconPack();
     return (
         <div className="indexTab__item">
-            {
-                icon.get(itemIcon)
-            }
-            <p>{title}</p>
-            <div className="indexTab__item__action">
+            <div className="indexTab__item__container">
+            <div className="indexTab__item__headerIcon">
                 {
-                    icon.get("arrowSoftLeft")
+                    icon.get(itemIcon)
                 }
+            </div>
+            <p>{title}</p>
+            <div onClick={() => onClick(title)} className="indexTab__item__action">
+                {
+                    icon.get("arrowSoftRight")
+                }
+            </div>
             </div>
         </div>
     )
@@ -41,20 +45,20 @@ const items = [
     },
 ]
 
-const IndexTab = () => {
+const IndexTab = ({ clickHandler }) => {
     return (
         <Wrapper>
             <div className="indexTab__row">
                 {
                     items.slice(0 , 2).map((el , i) => (
-                        <IndexPageItem key={i} {...el} />
+                        <IndexPageItem onClick={clickHandler} key={i} {...el} />
                     ))
                 }
             </div>
             <div className="indexTab__row">
                 {
                     items.slice(2 , 4).map((el , i) => (
-                        <IndexPageItem key={i} {...el} /> 
+                        <IndexPageItem onClick={clickHandler} key={i} {...el} /> 
                     ))
                 }
             </div>
