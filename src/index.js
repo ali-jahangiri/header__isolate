@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import "./reset.css";
 import reactDom from 'react-dom';
@@ -10,6 +12,11 @@ import Form from './Components/Form/Form';
 import FormItem from './Components/Form/FormItem';
 import { useFormOnChange, useFormSubmit } from './Components/Form/Hooks';
 
+import CustomAppDatePicker from './Components/CustomAppDatePicker/CustomAppDatePicker';
+
+const App = () => (
+  <CustomAppDatePicker />
+)
 
 // import  MobileNav from './Components/ProfileMobileNav/ProfileMobileNav'
 // import TabPageMobile from "./Components/TabPageMobile/TabPagMobile";
