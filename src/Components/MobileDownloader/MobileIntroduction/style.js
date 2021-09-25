@@ -51,16 +51,27 @@ const style = () => css`
             width: 38%;
             display: flex;
             align-items: center;
-
+            
             img {
                 width : 100%;
                 height: 80%;
+                border: 10px solid white;
+                border-radius: 35px;
+                transition: .3s;
+                cursor: pointer;
+                
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 30px -15px #8080808c;
+                }
+
             }
+
         }
 
         &__body {
             width: 55%;
-            height: 80%;
+            height: 77%;
             display: flex;
             flex-direction: column;
             /* justify-content: space-between; */
@@ -82,7 +93,7 @@ const style = () => css`
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-
+            margin-top: auto;
         }
 
         &__featureBox {
@@ -100,6 +111,7 @@ const style = () => css`
 
 
                 img {
+                    position: relative;
                     width: 2rem;
                     height: 2rem;
                 }
@@ -111,10 +123,15 @@ const style = () => css`
             }
         }
 
+        &__prefix {
+            color: grey;
+        }
+
         &__actionContainer {
             margin-top: auto;
-            /* display: flex; */
-            /* flex-direction: column; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         &__cta {

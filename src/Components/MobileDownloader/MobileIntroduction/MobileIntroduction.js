@@ -5,6 +5,11 @@ import Wrapper from "./style";
 const colors = ["406343" , "664E88" , "889EAF" , "4A403A" , "FFB344"];
 
 const MobileIntroduction = ({ data , componentStyles }) => {
+
+    const downloadHandler = () => {
+        window.location.replace("");
+    }
+
     return (
         <Wrapper id="MobileIntroduction">
             <div className="mobileIntroduction__background" >
@@ -13,7 +18,7 @@ const MobileIntroduction = ({ data , componentStyles }) => {
             </div>
             <div className="mobileIntroduction__container">
                 <div className="mobileIntroduction__phoneFrame">
-                    <img src={data.mobileImage} alt="mobileImage" />
+                    <img onClick={downloadHandler} src={data.mobileImage} alt="mobileImage" />
                 </div>
                 <div className="mobileIntroduction__body">
                     <div className="mobileIntroduction__title">
@@ -35,10 +40,10 @@ const MobileIntroduction = ({ data , componentStyles }) => {
                         }
                     </div>
                     <div className="mobileIntroduction__actionContainer">
-                        {/* <div className="mobileIntroduction__prefix">
-                            <p>Are you Ready to download the application ?</p>
-                        </div> */}
-                        <button className="mobileIntroduction__cta">Download Now</button>
+                        <div className="mobileIntroduction__prefix">
+                            <p>Are you Ready to download the application ? </p>
+                        </div>
+                        <button onClick={downloadHandler} className="mobileIntroduction__cta">Download Now</button>
                     </div>
                 </div>
             </div>

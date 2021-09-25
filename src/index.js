@@ -7,6 +7,7 @@ import reactDom from 'react-dom';
 
 import jalaliday from "jalaliday";
 import MobileIntroduction from './Components/MobileDownloader/MobileIntroduction/MobileIntroduction';
+import MobileRedirectionDownload from './Components/MobileDownloader/MobileRedirectionDownload/MobileRedirectionDownload';
 
 dayjs.extend(jalaliday);
 
@@ -39,101 +40,7 @@ const data = {
 
 const App = () => {
   return (
-    <div>
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      Voluptas quis tenetur necessitatibus neque nihil. Minus ab ab. Molestiae et cupiditate sit animi.
- 
-Deleniti expedita sapiente aut atque. Doloribus consectetur natus deserunt nam. Minima asperiores eos et rerum pariatur illo velit. Est eligendi asperiores aut velit. Quia autem rerum distinctio nihil tempore.
- 
-Soluta mollitia numquam molestiae aperiam perferendis itaque omnis. Saepe voluptas iusto animi sit unde consequatur laborum. Aperiam et iure sit qui. At eos molestiae modi voluptatem porro sapiente delectus dicta. Voluptatum asperiores eaque harum accusantium voluptatem error fugit fugiat dicta. Saepe qui ducimus culpa non saepe enim doloribus.
-      <MobileIntroduction data={data} />
-
-
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-      Ea nobis quisquam quibusdam et repellendus voluptates aut qui. Voluptatem rerum totam est mollitia. Magni a eum. Consectetur dolorum autem consectetur id dolorem qui voluptas ut eaque. Est facilis enim ipsum a dolore aut.
- 
-Voluptatibus ut explicabo. Cupiditate sit atque perferendis illum atque libero aspernatur itaque ut. Et voluptas impedit. Molestiae sed doloribus tenetur harum cum aliquam.
- 
-Porro earum ipsa omnis maiores dolore velit laborum. Iure voluptates quae. Modi quia vel eos enim vel culpa. Quaerat accusamus omnis ipsam ipsa qui temporibus perspiciatis accusantium.
-    </div>
+        <MobileRedirectionDownload />
   )
 }
 
