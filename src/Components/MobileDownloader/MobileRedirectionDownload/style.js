@@ -11,7 +11,7 @@ const animateSvg = keyframes`
     }
 `;
 
-const style = () => css`
+const style = ({ get }) => css`
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -19,10 +19,10 @@ const style = () => css`
     justify-content: center;
     
     & > div {
-        background-color: lightblue;
+        background-color: ${get("bgColor")};
         width: 96%;
         height: 95%;
-        border-radius: 5px;
+        border-radius: ${get("containerRadius")};
         display: flex;
         align-items: center;
         justify-content: center;
