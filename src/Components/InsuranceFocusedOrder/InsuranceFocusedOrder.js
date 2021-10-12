@@ -11,7 +11,7 @@ import InsIntroSection from './InsIntroSection/InsIntroSection';
 import InsFocusStepperOverlay from './InsFocusStepperOverlay';
 
 
-const InsuranceFocusedOrder = ({ 
+const InsuranceFocusedOrder = ({
     visible , 
     setIsVisible
  }) => {
@@ -23,23 +23,23 @@ const InsuranceFocusedOrder = ({
     const flattedStage = mock.pages.map(el => el.forms).flat(1).filter(el => el.typesName !== "Info");
 
     const nextStepHandler = () => {
-        setCurrentStep(prev => prev + 1)
+        if(currentStep === null) {
+            setCurrentStep(0)
+        }else setCurrentStep(prev => prev + 1)
     }
 
 
     const prevStepHandler = () => {
-        setCurrentStep(prev => prev - 1);
+        if(currentStep === 0) {
+            setCurrentStep(null)
+        }else setCurrentStep(prev => prev - 1);
     }
 
     const submitHandler = () => {
         console.log('submit');
     }
 
-
     const reachToEnd = currentStep + 1 === flattedStage.length;
-    const isInStartPoint = currentStep === 0;
-
-
 
 
     return (
@@ -54,23 +54,24 @@ const InsuranceFocusedOrder = ({
                 <Wrapper>
                     <div className="insFocus__header">
                         <div className="insFocus__header__controller">
-
                         </div>
                         <div className="insFocus__header__title">
-                            <p>Title</p>                            
+                            <p>Title</p>
                         </div>
                     </div>
-                    <InsIntroSection 
+                    <InsIntroSection
                         goToNextStepHandler={() => setCurrentStep(0)} 
                         insName={mock.title} 
                         desc={mock.description}
-                        shouldGetHide={currentStep >= 0}
+                        shouldGetHide={currentStep !== null}
                         recoveryStepCount={0}
                      />
                     <div className="insFocus__container">
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+                                    carGroup={mock.carGroup}
+                                    store={store}
                                     _debugFlattedList={flattedStage}
                                     isActive={currentStep === i}
                                     index={i + 1} 
@@ -88,7 +89,7 @@ const InsuranceFocusedOrder = ({
                         </div>
 
                         <div className="insFocus__stepper__controller">
-                            <button disabled={currentStep <= -1} className="insFocus__stepper__controller__prev" onClick={prevStepHandler}>Prev</button>
+                            <button disabled={currentStep === null} className="insFocus__stepper__controller__prev" onClick={prevStepHandler}>Prev</button>
                             <button className="insFocus__stepper__controller__next" onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
                                 {reachToEnd ? "Finish" : "Next"}
                             </button>

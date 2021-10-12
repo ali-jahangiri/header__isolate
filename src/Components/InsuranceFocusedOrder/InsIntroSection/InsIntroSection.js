@@ -4,7 +4,7 @@ import Wrapper from "./style";
 const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , recoveryStepCount }) => {
     const [getHideAuto, setGetHideAuto] = useState(false);
     // const [stepCountForContinue, setStepCountForContinue] = useState(0)
-    
+
     useEffect(() => {
         if(!shouldGetHide && !getHideAuto) {
             let timer = setTimeout(() => {

@@ -14,7 +14,9 @@ const style = () => css`
             margin: 0;
         }
 
-        
+        .ant-select-selection-placeholder {
+            color: #f0f0f0 !important;
+        }
 
         .ant-select-selection {
             background-color: transparent;

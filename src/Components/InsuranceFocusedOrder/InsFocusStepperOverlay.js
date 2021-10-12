@@ -13,7 +13,6 @@ const InsFocusStepperOverlay = ({ shouldGetHide }) => {
         }
     } , [shouldGetHide])
 
-    console.log(shouldGetHide , "shouldGetHide");
 
     return (
         !shouldOverlayGetDestroyed ? <div className={`insFocus__stepper__overlay ${shouldGetHide ? "insFocus__stepper__overlay--getHide" : ""}`} /> : null

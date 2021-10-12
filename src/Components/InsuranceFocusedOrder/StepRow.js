@@ -1,23 +1,37 @@
 import React, {  useLayoutEffect, useRef, useState } from 'react';
 // import NumberInput from './FormBlcok/Input/NumberInput/NumberInput';
 import MultiSelect from './FormBlcok/MultiSelect/MultiSelect';
+import InsRowHelper from './InsRowHelper/InsRowHelper';
 import Wrapper from "./stepRowStyle"
+import Select from "./FormBlcok/Select"
+import InputDetector from './FormBlcok/InputDetector';
+import StepRowMainContent from './StepRowMainContent';
 
 
 const LeftSvgIcon = () => <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"><path d="M10.88,17.715a1,1,0,0,0,0-1.415L7.588,13.007,18,13a1,1,0,0,0,0-2l-10.414.007L10.88,7.715A1,1,0,0,0,9.466,6.3L5.88,9.886a3,3,0,0,0,0,4.243l3.586,3.586A1,1,0,0,0,10.88,17.715Z"/></svg>
 
 
+const carCaseChecker = formData => {
+    if(formData[0]?.isCar) return true
+}
+
 const StepRow = ({
     lbLName , 
     isRequierd,
     typesName,
-    ormData,
+    formData,
     index ,
     isActive,
     _debugFlattedList,
+    store,
+    formName,
+    carGroup,
+    ...rest
 }) => {
-    const [testValue, setTestValue] = useState([]);
+    const [testValue, setTestValue] = useState(null);
     const headerRef = useRef();
+
+    console.log(_debugFlattedList);
 
     useLayoutEffect(()  => {
         if(isActive) {
@@ -25,19 +39,17 @@ const StepRow = ({
         }
     } , [isActive])
     
+    const onChange = () => {
+
+    }
+
     return (
         <Wrapper isActive={isActive}>
             {
                 !isActive && <div className="stepRow__preventUserInteract" />
             }
             <div ref={headerRef} className="stepRow__header">
-                <div className="stepRow__header__help">
-                    <div>
-                        <span />
-                        <p>راهنما</p>
-                        <span />
-                    </div>
-                </div>
+                <InsRowHelper />
                 <div style={{ display : "flex" , alignItems : "center" }}>
                     <div className="stepRow__header__label">
                         <p>{lbLName}</p>
@@ -50,44 +62,15 @@ const StepRow = ({
                     </div>
                 </div>
             </div>
-            <div className="stepRow__mainContent">
-                {/* <Select options={[{ label : "ali" , value : "ali" } , { label : "ali" , value : "asd" } , { label : "ali" , value : "ali" }]} /> */}
-                {/* <NumberInput step={10} max={99999} min={100} value={testValue} onChange={setTestValue} /> */}
-                <MultiSelect selectedList={testValue} onSelect={setTestValue} list={[
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "qui-est-maxime"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "temporibus-aliquid-cumque"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "vel-enim-optio"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "necessitatibus-at-sequi"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "in-qui-minus"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "et-iusto-voluptatem"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "necessitatibus-et-eveniet"
-                    },
-                    {
-                        name : "aut-repellendus-enim",
-                        value : "atque-commodi-sed"
-                    },
-                ]} />
-            </div>
+            <StepRowMainContent
+                carGroup={carGroup}
+                formData={formData}
+                formName={formName}
+                onChange={onChange}
+                rest={rest}
+                store={store}
+                typesName={typesName}
+            />
         </Wrapper>
     )
 }

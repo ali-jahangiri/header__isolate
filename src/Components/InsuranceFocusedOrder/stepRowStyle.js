@@ -1,4 +1,4 @@
-import React, { isValidElement } from 'react';
+import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../utils/HOC/WithStyled';
 
@@ -7,10 +7,11 @@ const style = () => css`
     transition: .3s;
     opacity: .3;
     
+
+
     &:not(&:first-child) {
         margin: 3rem 0;
     }
-
 
 
     .stepRow {
@@ -24,6 +25,50 @@ const style = () => css`
             background-color: transparent;
             z-index: 2;
         }
+
+
+
+        &__mainContent {
+            max-height: 65vh;
+            overflow: hidden;
+            overflow-y: scroll;
+            margin-top: 1rem;
+            position: relative;
+
+            &__scrollOverlayHelper {
+                width: 100%;
+                height: 0rem;
+                background: linear-gradient(180deg, #000000c4, transparent);
+                position: sticky;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                transition: .22s;
+                z-index: 55;
+                
+                &--visible {
+                    height: 3rem;
+                    opacity: 1;
+                }
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #5392FF50;
+                border-radius: 3px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: #5392FF;
+            }
+        }
+
 
         &__header {
             display: flex;
@@ -40,6 +85,13 @@ const style = () => css`
 
             &__help {
                 cursor : pointer;
+                
+
+                &__content {
+                    max-width: 450px;
+                    background-color: red;
+                }
+
                 & div {
                     position: relative;
                     padding: .5rem 1rem;
@@ -55,10 +107,13 @@ const style = () => css`
                         transition: .3s .3s;
 
                         &:last-child {
-                            background-color: red;
+                            background-color: #5392FF;
                             top: 100%;
-                            left: 0;
-                            right: 100%;
+                            width: 0;
+                            left: 100%;
+                            transform: rotate(180deg);
+                            transform-origin: top left;
+                            transition-delay: .9s;
                         }
                     }
 
@@ -79,8 +134,6 @@ const style = () => css`
                         left: 100% !important;
                         transition-delay: .6s;
                     }
-
-                    /* background-color: #5392FF; */
                 }
 
                 &:hover {
