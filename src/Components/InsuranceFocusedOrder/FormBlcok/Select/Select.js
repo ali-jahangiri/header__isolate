@@ -5,9 +5,24 @@ import Wrapper from "./style";
 import { createGlobalStyle } from 'styled-components';
 
 const OptionStyle = createGlobalStyle`
+    
+    .ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
+        background-color: #5392FF50 !important;
+    }
+
+
     .customSelect__option {
         background-color: transparent;
-        color: white;
+        color: white !important;
+        font-size: 1rem;
+        padding: 1rem 0;
+        padding-left: 1rem;
+        display: flex;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
 
         & + .ant-select-dropdown-menu-item-active {
             background-color: #5392FF50 !important;
@@ -41,21 +56,22 @@ const OptionStyle = createGlobalStyle`
 `
 
 const Select = ({ 
-    options = [{ label : "" , value : "" }] , 
+    options = [{ id : "" , dataName : "" }] , 
     value , 
     onSelect , 
-    openAutomatically,
     placeholder,
+    formName,
 }) => {
     const [isSelectOpen, setIsSelectOpen] = useState(false);
-    
+
+    const onSelectHandler = value => onSelect(formName , value);
 
     return (
         <Wrapper>
             <OptionStyle />
             <LibrarySelectComponent
                 defaultValue={value || undefined}
-                onChange={value => onSelect(value)}
+                onChange={value => onSelectHandler(value)}
                 placeholder={placeholder || "Type or Select One Option"}
                 onDropdownVisibleChange={setIsSelectOpen}
                 className="customSelect"
@@ -66,10 +82,10 @@ const Select = ({
                     options.map((el , i) => (
                         <LibrarySelectComponent.Option
                             className="customSelect__option"
-                            key={i} 
-                            value={el.value}
+                            key={i}
+                            value={el.id}
                         >
-                            <p>{el.label}</p>
+                            <p>{el.dataName}</p>
                         </LibrarySelectComponent.Option>
                     ))
                 }

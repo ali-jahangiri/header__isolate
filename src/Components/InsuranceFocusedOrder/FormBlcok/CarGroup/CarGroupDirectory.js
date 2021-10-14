@@ -23,8 +23,8 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem }) => {
             <div className={`carGroupDirectory__container ${selectedItem ? "carGroupDirectory__container--hide" : ""}`}>
                 {
                     list.map((el , i) => (
-                        <CarGroupItem 
-                            // isSelected={selectedItem === el.id} 
+                        <CarGroupItem
+                            // isSelected={selectedItem === el.id}
                             selectHandler={onSelect} key={i} {...el} />
                     ))
                 }

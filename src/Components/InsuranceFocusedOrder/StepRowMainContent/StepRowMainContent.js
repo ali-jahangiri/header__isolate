@@ -31,10 +31,10 @@ const carCaseChecker = formData => {
 const StepRowMainContent = ({
     carGroup ,
     formData,
+    formName,
     typesName ,
     onChange,
     store,
-    formName,
     rest
 }) => {
     const [wasScrolled, setWasScrolled] = useState(false);
@@ -57,7 +57,9 @@ const StepRowMainContent = ({
                 isCarCase={carCaseChecker(formData)}
                 formData={formData} 
                 typesName={typesName} 
-                onChange={onChange} 
+                onChange={onChange}
+                formName={formName}
+                nestedValue={store?.[`Nested_${formName}`]}
                 value={store?.[formName] || ''}
                 {...rest}
             />

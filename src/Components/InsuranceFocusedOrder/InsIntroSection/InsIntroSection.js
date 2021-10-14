@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Wrapper from "./style";
 
-const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , recoveryStepCount }) => {
+const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler }) => {
     const [getHideAuto, setGetHideAuto] = useState(false);
-    // const [stepCountForContinue, setStepCountForContinue] = useState(0)
 
     useEffect(() => {
         if(!shouldGetHide && !getHideAuto) {
@@ -15,9 +14,8 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
         }
     } , [shouldGetHide , getHideAuto])
 
-    // useEffect(() => {
-    //     setStepCountForContinue(recoveryStepCount);
-    // } , [recoveryStepCount])
+
+    const comeBackToIntroAfterAWhile = currentStep === null && availableNextStepCount > 0;
 
     return (
         <Wrapper shouldGetHide={shouldGetHide}>
@@ -28,7 +26,11 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
                 <p>{desc}</p>
             </div>
             <div className="insIntroSection__cta">
-                <button onClick={goToNextStepHandler}>Start Now</button>
+                <button onClick={() => comeBackToIntroAfterAWhile ? introContinueHandler() :  goToNextStepHandler()}>
+                    {
+                        comeBackToIntroAfterAWhile ? "Continue" : "Start Now"
+                    }
+                </button>
             </div>
         </Wrapper>
     )
