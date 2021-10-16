@@ -33,7 +33,7 @@ const style = () => css`
 
 
         &__input {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             position: relative;
             
             span {
@@ -46,6 +46,8 @@ const style = () => css`
                 background-color: white;
                 padding : .2rem .5rem;
                 user-select: none;
+                border-radius: 15px;
+
             }
 
 
@@ -53,7 +55,7 @@ const style = () => css`
                 text-align: right;
                 width : 100%;
                 border-radius: 5px;
-                border: 2px solid lightgrey;
+                border: 2px solid white;
                 outline: none;
                 padding: .9rem .5rem;
                 font-size: 1rem;

@@ -91,6 +91,11 @@ const Select = ({
                 }
             </LibrarySelectComponent>
             <div className={`customSelect__bottomDivider ${isSelectOpen ? "customSelect__bottomDivider--grow" : ""}`} />
+            {
+                options[0]?.hasNestedData && !!options[0]?.nestedData.length && <div className="customSelect__nestedSelection">
+                    
+                </div>
+            }
         </Wrapper>
     )
 }

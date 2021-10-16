@@ -69,14 +69,22 @@ const GlobalStyleForPortalScop = createGlobalStyle`
     }
 
     .customAppDatePicker__modal {
+        .ant-modal-content {
+            background-color: #000000;
+        }
+        
+        .ant-modal-body {
+            background-color: #5392FF50;
+        }
+
         & .ant-drawer-content-wrapper {
             width: 100vw !important;
         }
-
+        
         & .ant-drawer-close {
             display: none !important;
         }
-
+        
         & .ant-drawer-wrapper-body {
             display: flex;
             width: 100%;
@@ -236,7 +244,7 @@ const CustomAppDatePicker = ({
                             style={{ borderColor : (() => {
                             if(inputError) return red
                             else if(manualInputValue && !inputError ) return green
-                            else return"lightgrey";
+                            else return"white";
                         })() }} 
                             onBlur={onLeaveInputHandler} 
                             onChange={inputChangeHandler} 

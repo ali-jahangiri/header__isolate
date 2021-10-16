@@ -16,42 +16,59 @@ const StepRow = ({
     _debugFlattedList,
     store,
     setStore,
+    setIsPossibleToGoNextStep,
+    isPossibleToGoNextStep,
     formName,
     carGroup,
     goToNextStepHandler,
     currentStage,
+    setCurrentStep,
     availableNextStepCount,
     ...rest
 }) => {
     const headerRef = useRef();
 
     useEffect(function autoScrollToCurrentActiveRow () {
+        console.log(is);
         if(isActive) {
             headerRef.current?.scrollIntoView({ behavior : "smooth" });
         }
     } , [isActive , availableNextStepCount]);
 
+    useEffect(function nextBtnEnableHandler() {
+        if(isActive && store?.[formName]) {
+            if(["Long" , "Int" , "Float" , "CheckedForm"].includes(typesName)) setIsPossibleToGoNextStep(true);
+
+        }else if(isActive && !store?.[formName]) {
+            setIsPossibleToGoNextStep(false);
+        }
+    } , [typesName , isPossibleToGoNextStep , isActive , store?.[formName]]);
     
     const onChange = (formName , value , canGoNextStepAutomatically = true) => {
         setStore(prev => ({
             ...prev,
             [formName] : value
         }));
-        if(canGoNextStepAutomatically) goToNextStepHandler();
+        if(canGoNextStepAutomatically && !["Long" , "Int" , "Float" , "CheckedForm"].includes(typesName)) goToNextStepHandler();
     }
 
+    const comeToCurrentPossibleStepHandler = () => {
+        if(store?.[formName]) {
+            headerRef.current.scrollIntoView({ behavior : "smooth" });
+            setCurrentStep(index - 1);
+        }
+    }
     
     return (
         <Wrapper isActive={isActive}>
             {
-                !isActive && <div className="stepRow__preventUserInteract" />
+                !isActive && <div onClick={comeToCurrentPossibleStepHandler} className="stepRow__preventUserInteract" />
             }
             <div ref={headerRef} className="stepRow__header">
                 <InsRowHelper />
                 <div style={{ display : "flex" , alignItems : "center" }}>
                     <div className="stepRow__header__label">
                         <p>{lbLName}</p>
-                        {/* <p>{formName}</p> */}
                     </div>
                     <div className="stepRow__header__index">
                         <div>
@@ -62,13 +79,15 @@ const StepRow = ({
                 </div>
             </div>
             <StepRowMainContent
+                isActive={isActive}
+                goToNextStepHandler={goToNextStepHandler}
                 carGroup={carGroup}
                 formData={formData}
                 formName={formName}
                 onChange={onChange}
-                rest={rest}
                 store={store}
                 typesName={typesName}
+                {...rest}
             />
         </Wrapper>
     )

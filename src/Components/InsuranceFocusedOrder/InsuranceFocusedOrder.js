@@ -17,7 +17,7 @@ const InsuranceFocusedOrder = ({
     const [currentStep, setCurrentStep] = useState(null);
     const [store, setStore] = useState(null);
     const [availableNextStepCount, setAvailableNextStepCount] = useState(0);
-
+    const [isPossibleToGoNextStep, setIsPossibleToGoNextStep] = useState(false);
 
     const flattedStage = mock.pages.map(el => el.forms).flat(1).filter(el => el.typesName !== "Info");
 
@@ -33,7 +33,7 @@ const InsuranceFocusedOrder = ({
             } , availableNextStepCount > 0 ? 0 : 350);
         }
     }
-
+    
 
     const prevStepHandler = () => {
         if(currentStep === 0) {
@@ -45,21 +45,21 @@ const InsuranceFocusedOrder = ({
     }
 
     const submitHandler = () => {
-        console.log('submit');
+        console.log('submit' , store);
     }
 
     const reachToEnd = currentStep + 1 === flattedStage.length;
 
     // console.log(store , "STORE");
-    
     // console.log(availableNextStepCount, 'availableNextStepCount' , currentStep , "currentStep");
+    // console.log(flattedStage , "flatted");
 
     const introContinueHandler = () => {
         setCurrentStep(availableNextStepCount);
         setAvailableNextStepCount(0);
     }
 
-
+    
     return (
         <React.Fragment>
             <ModalStyle />
@@ -91,6 +91,9 @@ const InsuranceFocusedOrder = ({
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+                                    isPossibleToGoNextStep={isPossibleToGoNextStep}
+                                    setIsPossibleToGoNextStep={setIsPossibleToGoNextStep}
+                                    setCurrentStep={setCurrentStep}
                                     availableNextStepCount={availableNextStepCount}
                                     currentStage={currentStep}
                                     goToNextStepHandler={nextStepHandler}
@@ -99,7 +102,7 @@ const InsuranceFocusedOrder = ({
                                     setStore={setStore}
                                     _debugFlattedList={flattedStage}
                                     isActive={currentStep === i}
-                                    index={i + 1} 
+                                    index={i + 1}
                                     key={i} 
                                     {...el} />
                             ))
@@ -115,7 +118,16 @@ const InsuranceFocusedOrder = ({
 
                         <div className="insFocus__stepper__controller">
                             <button disabled={currentStep === null} className="insFocus__stepper__controller__prev" onClick={prevStepHandler}>Prev</button>
-                            <button disabled={availableNextStepCount <= 0} className="insFocus__stepper__controller__next" onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
+                            <button
+                                disabled={(() => {
+                                    console.log(isPossibleToGoNextStep , "isPossibleToGoNextStep" , availableNextStepCount , 'availableNextStepCount');
+                                    if(isPossibleToGoNextStep || availableNextStepCount > 0) return false;
+                                    else if(!isPossibleToGoNextStep || availableNextStepCount <= 0) {
+                                        return true
+                                    }
+                                })()}
+                                className="insFocus__stepper__controller__next" 
+                                onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
                                 {reachToEnd ? "Finish" : "Next"}
                             </button>
                         </div>
