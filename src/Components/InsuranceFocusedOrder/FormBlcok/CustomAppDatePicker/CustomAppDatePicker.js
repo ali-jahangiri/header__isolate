@@ -136,9 +136,6 @@ const CustomAppDatePicker = ({
         onChange ,
         value ,
         selectedDayColor = "lightblue", 
-        label,
-        placeholder , 
-        renderMain , 
         isCurrentlyActive,
         closeOnChange = true , 
         red ,
@@ -255,7 +252,7 @@ const CustomAppDatePicker = ({
                             onChange={inputChangeHandler} 
                             ref={inputRef} 
                             value={manualInputValue}  />
-                        <span style={{ color : inputError ? red : "grey" }} className={value ? "getOnTop" : ""} onClick={() => inputRef.current?.focus()}>تاریخ را  وارد نمایید</span>
+                        <span style={{ color : inputError ? red : "grey" }} className={value ? "getOnTop" : ""}>تاریخ را  وارد نمایید</span>
                         {
                             !hideTodayTrigger && <div onClick={backToTodayHandler} className={`customAppDatePicker__todayTrigger ${value === todayString ? "customAppDatePicker__todayTrigger--disabled" : ""}`}>
                                 <TodayIconSvg />

@@ -27,7 +27,6 @@ const style = () => css`
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     opacity: 0;
     animation: ${initialAnime} .4s .2s forwards alternate;
     transition: .5s;
@@ -74,6 +73,11 @@ const style = () => css`
             }
         }
     }
+
+    ${({ submitted }) => submitted && css`
+        height: 40vh;
+    `};
+
 
     ${({shouldGetHide}) => shouldGetHide && css`
         overflow: hidden;

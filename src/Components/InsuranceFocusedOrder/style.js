@@ -28,8 +28,19 @@ const style = () => css`
         &__container {
             width: 65%;
             margin: 0 auto;
+            position: relative;
             flex: 1;
             overflow: hidden;
+        }
+
+        &__preventUserChangeValueAfterSubmitOverlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 55;
+            width: 100%;
+            height: 9999px;
+            background-color: transparent;
         }
 
         &__stepper {
@@ -40,6 +51,7 @@ const style = () => css`
             padding: 1rem 0;
             transform: translateY(110%);
             animation: ${animateStepper} .8s .3s forwards alternate;
+            transition: .3s;
 
             &__overlay {
                 position: absolute;
@@ -79,6 +91,8 @@ const style = () => css`
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                transition: .3s;
+                overflow: hidden;
 
                 button {
                     width: 45%;
@@ -88,23 +102,31 @@ const style = () => css`
                     text-align: center;
                     padding: .5rem;
                     transition: .3s;
+                    white-space: nowrap;
 
                     &:disabled {
                         opacity : 0.5;
                         cursor: default;
                     }
 
-                } 
-
-                &__prev {
-
                 }
 
-                &__next {
-
-                }
             }
 
+            &--submitted {
+                .insFocus {
+                    &__stepper {
+                        &__controller {
+                            width: 0 !important;
+                            opacity: 0;
+                        }
+
+                        &__timeline {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
 
         }
 

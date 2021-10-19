@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select as LibrarySelectComponent } from 'antd';
 
 import Wrapper from "./style";
@@ -60,20 +60,34 @@ const Select = ({
     value , 
     onSelect , 
     placeholder,
+    isActive,
     formName,
 }) => {
-    const [isSelectOpen, setIsSelectOpen] = useState(false);
+    const [testState, setTestState] = useState(false);
 
     const onSelectHandler = value => onSelect(formName , value);
     
+    useEffect(() => {
+        if(isActive && !value) {
+            let timer = setTimeout(() => {
+                setTestState(true);
+                clearTimeout(timer);
+            } , 400);
+        }else {
+            setTestState(false)
+        }
+    } , [isActive , value]);
+
     return (
         <Wrapper>
             <OptionStyle />
             <LibrarySelectComponent
+                onBlur={() => setTestState(false)}
                 defaultValue={value || undefined}
+                open={testState}
                 onChange={value => onSelectHandler(value)}
                 placeholder={placeholder || "Type or Select One Option"}
-                onDropdownVisibleChange={setIsSelectOpen}
+                onDropdownVisibleChange={setTestState}
                 className="customSelect"
                 showSearch
                 optionFilterProp="label"
@@ -92,7 +106,7 @@ const Select = ({
                     ))
                 }
             </LibrarySelectComponent>
-            <div className={`customSelect__bottomDivider ${isSelectOpen ? "customSelect__bottomDivider--grow" : ""}`} />
+            <div className={`customSelect__bottomDivider ${testState ? "customSelect__bottomDivider--grow" : ""}`} />
         </Wrapper>
     )
 }

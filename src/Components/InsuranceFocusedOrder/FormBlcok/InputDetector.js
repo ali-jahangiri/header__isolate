@@ -39,9 +39,10 @@ const InputDetector = ({
             }else {
                 if(formData.length <= 4) return <BlockSelect value={value} formName={formName} onSelect={onChange} placeholder={placeHolder} options={formData} />
                 else return <Select
+                                value={value}
                                 isActive={isActive}
-                                formName={formName} 
-                                onSelect={onChange} 
+                                formName={formName}
+                                onSelect={onChange}
                                 placeholder={placeHolder} 
                                 options={formData} />
             }
@@ -52,8 +53,13 @@ const InputDetector = ({
                         red={'#950101'} 
                         value={value} 
                         onChange={value => value && onChange(formName , value)} />
-        // case "CheckedForm" : 
-        //     return <MultiSelect onSelect={onChange} selectedList={value} list={formData} />
+        case "CheckedForm" : 
+            return <MultiSelect
+                        placeholder={placeHolder} 
+                        formName={formName} 
+                        onSelect={onChange} 
+                        selectedList={value} 
+                        list={formData} />
         case "Long" :
         case "Int" :
         case "Float" :

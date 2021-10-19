@@ -17,7 +17,7 @@ const InsuranceFocusedOrder = ({
     const [currentStep, setCurrentStep] = useState(null);
     const [store, setStore] = useState(null);
     const [availableNextStepCount, setAvailableNextStepCount] = useState(0);
-
+    const [submitted, setSubmitted] = useState(false)
 
     const flattedStage = mock.pages.map(el => el.forms).flat(1).filter(el => el.typesName !== "Info");
 
@@ -45,22 +45,40 @@ const InsuranceFocusedOrder = ({
     }
 
     const submitHandler = () => {
-        console.log('submit');
+        let timeoutTimer = setTimeout(() => {
+            setSubmitted(true);
+            let internalCurrentStep = 0;
+            let timer = setInterval(() => {
+                if(internalCurrentStep === flattedStage.length) {
+                    clearInterval(timer);
+                    clearTimeout(timeoutTimer)
+                }else {
+                    setCurrentStep(prev => prev + 1)
+                }
+                internalCurrentStep++;
+            } , 1000);
+            
+        } , 200)
+        setCurrentStep(0);
+        
     }
 
-    const reachToEnd = currentStep + 1 === flattedStage.length;
+    const reachToEnd = currentStep === flattedStage.length;
 
     console.log(store , "STORE");
     
-    // console.log(availableNextStepCount, 'availableNextStepCount' , currentStep , "currentStep");
 
     const introContinueHandler = () => {
         setCurrentStep(availableNextStepCount);
         setAvailableNextStepCount(0);
     }
 
-    console.log(availableNextStepCount , "available");
 
+    const redirectHandler = () => {
+
+    }
+
+    
     return (
         <React.Fragment>
             <ModalStyle />
@@ -79,13 +97,18 @@ const InsuranceFocusedOrder = ({
                         </div>
                     </div>
                     <InsIntroSection
+                        redirectHandler={redirectHandler}
+                        submitted={submitted}
                         introContinueHandler={introContinueHandler}
                         availableNextStepCount={availableNextStepCount}
                         currentStep={currentStep}
                         goToNextStepHandler={() => setCurrentStep(0)}
                         insName={mock.title} 
                         desc={mock.description}
-                        shouldGetHide={currentStep !== null}
+                        shouldGetHide={(() => {
+                            if(submitted) return false;
+                            else if(currentStep !== null) return true
+                        })()}
                         recoveryStepCount={0}
                      />
                     <div className="insFocus__container">
@@ -104,10 +127,13 @@ const InsuranceFocusedOrder = ({
                                     index={i + 1} 
                                     key={i} 
                                     {...el} />
-                            ))
+                                    ))
+                        }
+                        {
+                            submitted && <div className="insFocus__preventUserChangeValueAfterSubmitOverlay" />
                         }
                     </div>
-                    <div className="insFocus__stepper">
+                    <div className={`insFocus__stepper ${submitted ? "insFocus__stepper--submitted" : ""}`}>
                         <InsFocusStepperOverlay shouldGetHide={currentStep !== null} />
                         <div className='insFocus__stepper__timeline'>
                             <div style={{
@@ -115,9 +141,14 @@ const InsuranceFocusedOrder = ({
                             }} className="insFocus__stepper__timeline__activePart" />
                         </div>
 
-                        <div className="insFocus__stepper__controller">
+                        <div className={`insFocus__stepper__controller ${submitted ? "insFocus__stepper__controller--hide" : ""}`}>
                             <button disabled={currentStep === null} className="insFocus__stepper__controller__prev" onClick={prevStepHandler}>Prev</button>
-                            <button disabled={availableNextStepCount <= 0} className="insFocus__stepper__controller__next" onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
+                            <button disabled={(() => {
+                                if(reachToEnd) return false;
+                                else if(availableNextStepCount <= 0) {
+                                    return true
+                                }
+                            })()} className="insFocus__stepper__controller__next" onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
                                 {reachToEnd ? "Finish" : "Next"}
                             </button>
                         </div>

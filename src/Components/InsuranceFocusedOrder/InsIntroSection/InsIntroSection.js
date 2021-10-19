@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Wrapper from "./style";
 
-const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler }) => {
+const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler , submitted , redirectHandler }) => {
     const [getHideAuto, setGetHideAuto] = useState(false);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
     const comeBackToIntroAfterAWhile = currentStep === null && availableNextStepCount > 0;
 
     return (
-        <Wrapper shouldGetHide={shouldGetHide}>
+        <Wrapper submitted={submitted} shouldGetHide={shouldGetHide}>
             <div className="insIntroSection__title">
                 <p>{insName}</p>
             </div>
@@ -26,9 +26,9 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
                 <p>{desc}</p>
             </div>
             <div className="insIntroSection__cta">
-                <button onClick={() => comeBackToIntroAfterAWhile ? introContinueHandler() :  goToNextStepHandler()}>
+                <button onClick={() => submitted ? redirectHandler() : (comeBackToIntroAfterAWhile ? introContinueHandler() :  goToNextStepHandler())}>
                     {
-                        comeBackToIntroAfterAWhile ? "Continue" : "Start Now"
+                        submitted ? "Redirect After overview" : (comeBackToIntroAfterAWhile ? "Continue" : "Start Now")
                     }
                 </button>
             </div>

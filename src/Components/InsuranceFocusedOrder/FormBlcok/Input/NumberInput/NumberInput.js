@@ -62,7 +62,7 @@ const NumberInput = ({
             <div className="numberInput__input">
                 <input
                     onBlur={comeBackToSafeNumber}
-                    value={numberSeparator(value)}
+                    value={numberSeparator(value || min)}
                     onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
                 />
             </div>
