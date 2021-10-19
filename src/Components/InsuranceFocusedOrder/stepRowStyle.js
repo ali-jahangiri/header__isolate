@@ -22,6 +22,7 @@ const style = () => css`
             top: 0;
             width: 100%;
             height: 100%;
+            /* background-color: transparent; */
             background-color: transparent;
             z-index: 2;
         }

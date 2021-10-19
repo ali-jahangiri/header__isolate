@@ -4,13 +4,15 @@ import WithStyled from '../../../utils/HOC/WithStyled';
 
 const style = () => css`
     color: white;
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     height: 5rem;
     text-align: center;
     font-size: 1.2rem;
     margin-top: 1rem;
     border-radius: 5px ;
-    border: 2px solid #5392FF40;
+    color: #5392FF;
+    background: #5392FF30;
     display: flex;
     align-items: center;
     justify-content: center;

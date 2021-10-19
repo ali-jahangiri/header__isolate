@@ -50,7 +50,7 @@ const InsuranceFocusedOrder = ({
 
     const reachToEnd = currentStep + 1 === flattedStage.length;
 
-    // console.log(store , "STORE");
+    console.log(store , "STORE");
     
     // console.log(availableNextStepCount, 'availableNextStepCount' , currentStep , "currentStep");
 
@@ -59,6 +59,7 @@ const InsuranceFocusedOrder = ({
         setAvailableNextStepCount(0);
     }
 
+    console.log(availableNextStepCount , "available");
 
     return (
         <React.Fragment>
@@ -91,13 +92,14 @@ const InsuranceFocusedOrder = ({
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+                                    setCurrentStage={setCurrentStep}
                                     availableNextStepCount={availableNextStepCount}
+                                    setAvailableNextStepCount={setAvailableNextStepCount}
                                     currentStage={currentStep}
                                     goToNextStepHandler={nextStepHandler}
                                     carGroup={mock.carGroup}
                                     store={store}
                                     setStore={setStore}
-                                    _debugFlattedList={flattedStage}
                                     isActive={currentStep === i}
                                     index={i + 1} 
                                     key={i} 

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Calendar } from "react-modern-calendar-datepicker";
 import jalaliday from "jalaliday";
 import dayjs from 'dayjs';
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 
 
@@ -69,6 +69,18 @@ const GlobalStyleForPortalScop = createGlobalStyle`
     }
 
     .customAppDatePicker__modal {
+
+        & .ant-modal-content {
+            background: black;
+        }
+        
+        & .ant-modal-body {
+            background: ${"#5392FF" + "50"};
+            /* use color generator */
+            border: 2px solid ${"#5392FF" + "80"};
+            border-radius: 5px;
+        }
+
         & .ant-drawer-content-wrapper {
             width: 100vw !important;
         }
@@ -127,11 +139,11 @@ const CustomAppDatePicker = ({
         label,
         placeholder , 
         renderMain , 
+        isCurrentlyActive,
         closeOnChange = true , 
-        red , 
+        red ,
         green,
-        ...rest
- }) => {
+}) => {
     const [isOpened, setIsOpened] = useState(false);
     const [hideTodayTrigger, setHideTodayTrigger] = useState(false);
     const [inputError, setInputError] = useState(null);
@@ -144,10 +156,7 @@ const CustomAppDatePicker = ({
 
     const todayString = dayjs().calendar("jalali").locale('fa').format("YYYY/MM/DD");
 
-    const calendarChangeHandler = value => {
-        if(!renderMain) rest.validate(rest.id)
-        onChange(makeValidDateString(value))
-    }
+    const calendarChangeHandler = value => onChange(makeValidDateString(value))
 
 
     const backToTodayHandler = () => onChange(todayString);
@@ -196,21 +205,25 @@ const CustomAppDatePicker = ({
 
 
 
+    useEffect(function openDatePickerAutomatically() {
+        if(isCurrentlyActive && !value.trim()) {
+            let timer = setTimeout(() => {
+                setIsOpened(true);
+                clearTimeout(timer)
+            } , 500)
+        }
+    } , [value , isCurrentlyActive])
+
+
     return (
         <>
-        {
-            renderMain ? <Input
-                style={{ textAlign : "center" }}
-                readOnly
-                className={`customAppDatePicker__frontInput ${value ? "customAppDatePicker__frontInput--haveValue" : ""}`}
-                placeholder="Select Some date"
-                value={value} 
-                onClick={() => setIsOpened(true)} /> : <Input
-                    {...rest} 
-                    style={{ textAlign : "center" }} 
-                    value={value}
-                    onClick={() => setIsOpened(true)}  />
-        }
+        <Input
+            style={{ textAlign : "center" }}
+            readOnly
+            className={`customAppDatePicker__frontInput ${value ? "customAppDatePicker__frontInput--haveValue" : ""}`}
+            placeholder="Select Some date"
+            value={value} 
+            onClick={() => setIsOpened(true)} /> 
         <GlobalStyleForPortalScop />
             <ConditionalWrapper
                 className="customAppDatePicker__modal"
@@ -236,7 +249,7 @@ const CustomAppDatePicker = ({
                             style={{ borderColor : (() => {
                             if(inputError) return red
                             else if(manualInputValue && !inputError ) return green
-                            else return"lightgrey";
+                            else return"white";
                         })() }} 
                             onBlur={onLeaveInputHandler} 
                             onChange={inputChangeHandler} 

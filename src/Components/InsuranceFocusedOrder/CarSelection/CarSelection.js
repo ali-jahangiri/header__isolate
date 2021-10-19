@@ -4,7 +4,7 @@ import EmptySearchResult from './EmptySearchResult';
 import SearchBar from './SearchBar';
 
 import ExactCarDirectory from './ExactCarDirectory';
-import { unstable_batchedUpdates } from 'react-dom';
+
 
 const CarSelection = ({
     value , 
@@ -26,10 +26,25 @@ const CarSelection = ({
     }
     
     const selectCarGroupHandler = id => {
-        setInnerStore(prev => ({
-            ...prev ,
-            carGroupId : id,
-        }))
+        if(id?.skipUserSelection) {
+            console.log(id);
+            setInnerStore(prev => ({
+                ...prev ,
+                carGroupId : {
+                    ...id,
+                    name : id.groupName,
+                    imageUrl : id.groupIcon
+                },
+                selectedBeforeItem : id.carId
+            }))
+            selectExactHandler(id.carId)
+        }else {
+            setInnerStore(prev => ({
+                ...prev ,
+                carGroupId : id,
+            }))
+        }
+        
         if(!id) onChange(formName , undefined , false)
     }
     
@@ -54,7 +69,8 @@ const CarSelection = ({
     const selectOtherCarHand = () => onChange(formName , undefined , false)
     
     const itemForMapping = !innerStore.search ? carGroup : carGroup.filter(el => el.name.includes(innerStore.search))
-    
+    const exactCarForMapping = innerStore.search ? exactCarList.filter(el => el.dataName.includes(innerStore.search)) : [];
+
     return (
         <React.Fragment>
             <SearchBar
@@ -65,11 +81,22 @@ const CarSelection = ({
                 selectedItem={innerStore.carGroupId} 
                 onSelect={selectCarGroupHandler} 
                 list={itemForMapping}
+                exactCarList={exactCarForMapping.map(item => {
+                    const { imageUrl , name , id } = carGroup.find(carGroupItem => carGroupItem.id === item.carGroupId);
+                    return {
+                        id : item.id,
+                        groupId : id,
+                        name : item.dataName, 
+                        groupIcon : imageUrl,
+                        groupName : name,
+                    }
+                })}
              />
             {
-                !itemForMapping.length && <EmptySearchResult />
+                !itemForMapping.length && !exactCarForMapping.length && <EmptySearchResult />
             }
             <ExactCarDirectory
+                haveSelectedCarBefore={innerStore?.selectedBeforeItem}
                 selectOtherCarHand={selectOtherCarHand}
                 selectedItem={value}
                 selectedUsage={selectedUsage}

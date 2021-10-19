@@ -65,7 +65,7 @@ const Select = ({
     const [isSelectOpen, setIsSelectOpen] = useState(false);
 
     const onSelectHandler = value => onSelect(formName , value);
-
+    
     return (
         <Wrapper>
             <OptionStyle />
@@ -76,16 +76,18 @@ const Select = ({
                 onDropdownVisibleChange={setIsSelectOpen}
                 className="customSelect"
                 showSearch
+                optionFilterProp="label"
                 dropdownMenuStyle={{ backgroundColor : "#161820" , outline : "none" }}
                 dropdownClassName="customSelect__optionContainer">
                 {
                     options.map((el , i) => (
                         <LibrarySelectComponent.Option
+                            label={el.dataName.trim()}
                             className="customSelect__option"
                             key={i}
                             value={el.id}
                         >
-                            <p>{el.dataName}</p>
+                            <p>{el.dataName.trim()}</p>
                         </LibrarySelectComponent.Option>
                     ))
                 }

@@ -22,6 +22,7 @@ const InputDetector = ({
     numberUnit = { max : 0 , min : 0 , step : 0 },
     placeHolder,
     setOverlayStyle,
+    isActive,
 }) => {
     switch(typesName) {
         case "DropDown" :
@@ -38,14 +39,15 @@ const InputDetector = ({
             }else {
                 if(formData.length <= 4) return <BlockSelect value={value} formName={formName} onSelect={onChange} placeholder={placeHolder} options={formData} />
                 else return <Select
+                                isActive={isActive}
                                 formName={formName} 
                                 onSelect={onChange} 
                                 placeholder={placeHolder} 
                                 options={formData} />
             }
         case "Date" :
-            return <CustomAppDatePicker 
-                        renderMain 
+            return <CustomAppDatePicker
+                        isCurrentlyActive={isActive}
                         green={"#C6D57E"} 
                         red={'#950101'} 
                         value={value} 
