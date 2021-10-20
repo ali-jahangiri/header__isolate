@@ -10,7 +10,7 @@ const style = () => css`
 
 
     &:not(&:first-child) {
-        margin: 3rem 0;
+        margin: 6rem 0;
     }
 
 
