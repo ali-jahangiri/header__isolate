@@ -1,5 +1,5 @@
-import { Modal } from 'antd';
-import React, { useState } from 'react';
+import { Drawer, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
 
 import Wrapper from "./style";
 import ModalStyle from './modalStyle';
@@ -9,7 +9,13 @@ import mock from "../../mock";
 import StepRow from './StepRow';
 import InsIntroSection from './InsIntroSection/InsIntroSection';
 import InsFocusStepperOverlay from './InsFocusStepperOverlay';
+import MediaQueryProvider from '../../utils/Hooks/useMediaQuery/MediaQueryProvider';
+import useMediaQuery from '../../utils/Hooks/useMediaQuery/useMediaQuery';
 
+const DynamicWrapper = ({isMobile ,...rest}) => {
+    if(isMobile) return <Drawer {...rest} />
+    else return <Modal {...rest} />
+}
 
 const InsuranceFocusedOrder = ({
     visible ,
@@ -20,6 +26,8 @@ const InsuranceFocusedOrder = ({
     const [availableNextStepCount, setAvailableNextStepCount] = useState(0);
     const [isPossibleToGoNextStep, setIsPossibleToGoNextStep] = useState(false);
     const [submitted, setSubmitted] = useState(false)
+
+    const headerRef = useRef();
 
     const flattedStage = mock.pages.map(el => el.forms).flat(1).filter(el => el.typesName !== "Info");
 
@@ -38,6 +46,12 @@ const InsuranceFocusedOrder = ({
     
 
     const prevStepHandler = () => {
+        if(isMobile && currentStep === 0) {
+            headerRef.current.scrollIntoView({ behavior : "smooth" })
+            // setCurrentStep(null);
+            setAvailableNextStepCount(prev => prev + 1);
+            return ;
+        }
         if(currentStep === 0) {
             setCurrentStep(null);
         }else {
@@ -90,17 +104,24 @@ const InsuranceFocusedOrder = ({
         } , 500)
     }
 
+
+    const isMobile = useMediaQuery("sm");
+
+    
+
     return (
         <React.Fragment>
             <ModalStyle />
-            <Modal
+            <DynamicWrapper
+                isMobile={isMobile}
+                placement="left"
                 centered
                 footer={null}
                 closable={null}
                 className="insFocus__modal"
                 visible={!!visible}>
                 <Wrapper>
-                    <div className="insFocus__header">
+                    <div ref={headerRef} className="insFocus__header">
                         <div className="insFocus__header__controller">
                             <button disabled={submitted} onClick={closeEntireModal}>بستن</button>
                         </div>
@@ -108,6 +129,19 @@ const InsuranceFocusedOrder = ({
                             <p>عنوان</p>
                         </div>
                     </div>
+                    {
+                        isMobile && <div className={`insFocus__mobileHeader ${currentStep !== null ? "insFocus__mobileHeader--active" : ""}`}>
+                            <div className="insFocus__mobileHeader__container">
+                                <div className="insFocus__mobileHeader__controller">
+                                    <button onClick={closeEntireModal}>بازگشت</button>
+                                </div>
+                                <div className="insFocus__mobileHeader__details">
+                                    <p>{mock.title}</p>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     <InsIntroSection
                         redirectHandler={redirectHandler}
                         submitted={submitted}
@@ -173,9 +207,17 @@ const InsuranceFocusedOrder = ({
                         </div>
                     </div>
                 </Wrapper>
-            </Modal>
+            </DynamicWrapper>
         </React.Fragment>
     )
 }
 
-export default InsuranceFocusedOrder;
+const EnhancedWithMediaQuery = ({...rest}) => {
+    return (
+        <MediaQueryProvider maxWidth>
+            <InsuranceFocusedOrder {...rest} />
+        </MediaQueryProvider>
+    )
+}
+
+export default EnhancedWithMediaQuery;

@@ -9,7 +9,7 @@ const initialAnime = keyframes`
     to {
         opacity: 1;
     }
-`
+`;
 
 const getHideAnime = keyframes`
     from {
@@ -30,7 +30,10 @@ const style = () => css`
     opacity: 0;
     animation: ${initialAnime} .4s .2s forwards alternate;
     transition: .5s;
-    
+    position: relative;
+    z-index: 555;
+
+
     .insIntroSection {
 
         &__title {
@@ -84,6 +87,23 @@ const style = () => css`
         height: 0;
         animation: ${getHideAnime} .3s forwards alternate;;
     `};
+
+    @media (max-width : 480px) {
+        width: 85%;
+        height: 100vh;
+        
+        .insIntroSection {
+
+            &__title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            &__desc {
+                font-size: 1rem;
+            }
+        }
+    }
 `
 
 

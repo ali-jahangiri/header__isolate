@@ -6,6 +6,7 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
 
     useEffect(() => {
         if(!shouldGetHide && !getHideAuto) {
+            console.log('come after');
             let timer = setTimeout(() => {
                 setGetHideAuto(true);
                 goToNextStepHandler();

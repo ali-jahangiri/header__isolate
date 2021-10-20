@@ -79,15 +79,15 @@ const NumberInput = ({
 
 
 
-    useLayoutEffect(() => {
-        let timer = 0;
-        if(inputRef.current && isActive) {
-            timer = setTimeout(() => {
-                inputRef.current.focus();
-                clearTimeout(timer);
-            } , 700)
-        }else if(!isActive && timer) clearTimeout(timer);
-    } , [inputRef.current , isActive])
+    // useLayoutEffect(() => {
+    //     let timer = 0;
+    //     if(inputRef.current && isActive) {
+    //         timer = setTimeout(() => {
+    //             inputRef.current.focus();
+    //             clearTimeout(timer);
+    //         } , 700)
+    //     }else if(!isActive && timer) clearTimeout(timer);
+    // } , [inputRef.current , isActive])
 
 
     useEffect(function initialRenderMinNumberLiftToStoreHandler() {

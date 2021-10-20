@@ -11,6 +11,8 @@ const style = () => css`
 
     &:not(&:first-child) {
         margin: 6rem 0;
+        padding-top: 4rem;
+
     }
 
 
@@ -25,6 +27,11 @@ const style = () => css`
             /* background-color: transparent; */
             background-color: transparent;
             z-index: 2;
+
+            @media (max-width : 480px) {
+                display: none;
+            }
+
         }
 
 
@@ -76,12 +83,27 @@ const style = () => css`
             justify-content: space-between;
             align-items: center;
 
+            @media (max-width : 480px) {
+                /* padding-top: 3rem; */
+            }
+
+            & > div {
+                @media (max-width : 480px) {
+                    flex-direction: column-reverse;
+
+                    .stepRow__header__index {
+                        align-self: flex-end;
+                    }
+                }
+            }
+
             p {
                 margin: 0;
             }
             
             &__label {
                 font-size: 1.5rem;
+                text-align: right;
             }
 
             &__help {
@@ -176,6 +198,23 @@ const style = () => css`
     ${({isActive}) => isActive && css`
         opacity: 1;
     `};
+
+
+    @media (max-width : 480px) {
+        max-height: 100vh;
+        height: 100vh;
+
+        .stepRow {
+            &__header {
+                padding-top: 30%;
+
+                &__help {
+                    margin-right: .5rem;
+                }
+            }
+
+        }
+    }
 `
 
 

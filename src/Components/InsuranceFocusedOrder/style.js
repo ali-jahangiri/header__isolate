@@ -33,6 +33,63 @@ const style = () => css`
             overflow: hidden;
         }
 
+        &__mobileHeader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            transition: .3s .3s;
+            border-bottom: 3px solid transparent;
+            overflow: hidden;
+            background: black;
+            z-index: 9999;
+
+            
+            &__controller {
+                button {
+                    background: #5392ff30;
+                    padding: .5rem 1rem;
+                    border: 2px solid #5392ff50;
+                    border-radius: 5px;
+                }
+            }
+            
+            &__container {
+                padding: 0 1rem;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: linear-gradient(0deg, #5392ff50, #5392FF20);
+                
+            }
+
+            &__details {
+                font-weight: 600;
+                font-size: 1.1rem;
+                opacity: 0;
+                transition: .3s .5s;
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            &--active {
+                height: 15vh;
+                border-color: #5392FF;
+            
+                .insFocus {
+                    &__mobileHeader {
+                        &__details {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
         &__preventUserChangeValueAfterSubmitOverlay {
             position: absolute;
             left: 0;
@@ -167,6 +224,36 @@ const style = () => css`
             &__title {
                 font-size: 1.5rem;
                 font-weight : 900;
+            }
+        }
+    }
+
+    @media (max-width : 480px) {
+        .insFocus {
+            &__container {
+                width: 90%;
+            }
+
+            &__stepper {
+                position: fixed;
+                width: 100%;
+                flex-direction: column-reverse;
+                bottom: 0;
+                left: 0;
+                background: linear-gradient(0deg, black, transparent);
+
+                &__timeline {
+                    width: 90%;
+                    margin: 0 auto;
+                }
+
+                &__controller {
+                    width: 90%;
+                    margin-bottom: 1rem;
+                    button {
+                        padding: .8rem 0;
+                    }
+                }
             }
         }
     }
