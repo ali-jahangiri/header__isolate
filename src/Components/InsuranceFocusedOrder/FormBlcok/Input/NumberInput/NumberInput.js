@@ -103,15 +103,12 @@ const NumberInput = ({
             <div className="numberInput__btn">
                 <button disabled={reachToMin} onClick={decrementHandler}>-</button>
             </div>
-            <div className={`numberInput__input ${haveInvalidInputNumber ? "numberInput__input--invalidForced" : ""} ${haveValidNumberValue ? "numberInput__input--haveValue" : ""}`}>
-                <form onSubmit={formSubmitHandler}>
-                    <input
-                        ref={inputRef}
-                        onBlur={comeBackToSafeNumber}
-                        value={numberSeparator(usageNumberValue)}
-                        onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
-                    />
-                </form>
+            <div className="numberInput__input">
+                <input
+                    onBlur={comeBackToSafeNumber}
+                    value={numberSeparator(value || min)}
+                    onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
+                />
             </div>
             <div className="numberInput__btn">
                 <button disabled={reachToMax} onClick={incrementHandler}>+</button>

@@ -1,8 +1,9 @@
 import React from 'react';
 import CarGroupItem from './CarGroupItem';
 import Wrapper from "./directoryStyle";
+import ExactCarItemGroup from "./ExactCarItemInGroup";
 
-const CarGroupDirectory = ({ list = [] , onSelect , selectedItem }) => {
+const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList }) => {
     // TODO replace Image component
 
     const resetSelectedItemHandler = () => {
@@ -26,6 +27,14 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem }) => {
                         <CarGroupItem
                             // isSelected={selectedItem === el.id}
                             selectHandler={onSelect} key={i} {...el} />
+                    ))
+                }
+                {
+                    exactCarList?.map((el , i) => (
+                        <ExactCarItemGroup 
+                            onSelect={onSelect} 
+                            key={i} 
+                            {...el} />
                     ))
                 }
             </div>

@@ -71,6 +71,7 @@ const style = () => css`
                 left: 50%;
                 top: 50%;
                 transform: translate(-50% , -50%);
+                /* transform: translate(-120% , -50%); */
                 position: absolute;
             }
         }
@@ -98,8 +99,10 @@ const style = () => css`
             }
 
         }
+
     }
 
+    
 
     ${({isSelected}) => isSelected && css`
         width: 100%;
@@ -115,15 +118,18 @@ const style = () => css`
         .exactCarSelection {
 
             &__carNameContainer {
+                cursor: default;
                 p {
                     transition : all .3s , left .3s .5s;
-                    left: 90%;
+                    left: 95%;
                     font-size: 1.2rem;
+                    transform: translate(-100% , -50%);
                 }
             }
         }
     `};
 
+    
     ${({ isDisabled }) => isDisabled && css`
         flex: 0 0 0;
         overflow: hidden;

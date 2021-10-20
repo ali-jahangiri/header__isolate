@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CarUsage from './CarUsage';
 import Wrapper from "./exactCarStyle";
 
@@ -13,6 +13,7 @@ const ExactCarSelection = ({
     isSelected,
     index,
     haveSomeThingSelected,
+    selectedBefore,
     selectExactUsageHandler,
 }) => {
     const [selectedUsage, setSelectedUsage] = useState(null);
@@ -29,10 +30,13 @@ const ExactCarSelection = ({
         setSelectedUsage(usageId);
     }
 
+  
     return (
         <Wrapper 
             isDisabled={haveSomeThingSelected && !isSelected} 
-            isSelected={isSelected}>
+            isSelected={isSelected}
+            selectedBefore={selectedBefore}
+            >
             <div style={{ animationDelay : `${index * 100}ms` }}>
                 <div
                     className="exactCarSelection__carNameContainer"
@@ -41,7 +45,7 @@ const ExactCarSelection = ({
                     <p>{dataName}</p>
                 </div>
                 {
-                    haveSomeThingSelected && <div className="exactCarSelection__carNameChangeTrigger">
+                    haveSomeThingSelected && !selectedBefore && <div className="exactCarSelection__carNameChangeTrigger">
                         <p onClick={selectOtherCarHand}>Choice other Car</p>
                     </div>
                 }

@@ -46,8 +46,7 @@ const style = () => css`
                 background-color: white;
                 padding : .2rem .5rem;
                 user-select: none;
-                border-radius: 15px;
-
+                border-radius: 35px;
             }
 
 

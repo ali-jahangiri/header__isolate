@@ -13,7 +13,6 @@ const StepRow = ({
     formData,
     index ,
     isActive,
-    _debugFlattedList,
     store,
     setStore,
     setIsPossibleToGoNextStep,
@@ -22,8 +21,9 @@ const StepRow = ({
     carGroup,
     goToNextStepHandler,
     currentStage,
-    setCurrentStep,
+    setCurrentStage,
     availableNextStepCount,
+    setAvailableNextStepCount,
     ...rest
 }) => {
     const headerRef = useRef();
@@ -52,13 +52,16 @@ const StepRow = ({
         if(canGoNextStepAutomatically && !["Long" , "Int" , "Float" , "CheckedForm"].includes(typesName)) goToNextStepHandler();
     }
 
-    const comeToCurrentPossibleStepHandler = () => {
-        if(store?.[formName]) {
-            headerRef.current.scrollIntoView({ behavior : "smooth" });
-            setCurrentStep(index - 1);
-        }
-    }
-    
+
+    // const jumpToCurrentItemHandler = () => {
+    //     if(store?.[formName] || currentStage + availableNextStepCount === (index - 1)) {
+    //         // headerRef.current.scrollIntoView({ behavior : "smooth" });
+    //         // setCurrentStage(index - 1);
+    //         // console.log(index , 'index' , availableNextStepCount , "avalble" , (index - 1) - availableNextStepCount , 'calc');
+    //         // setAvailableNextStepCount(((index - 1) - availableNextStepCount))
+    //     }
+    // }
+
     return (
         <Wrapper isActive={isActive}>
             {
@@ -80,7 +83,6 @@ const StepRow = ({
             </div>
             <StepRowMainContent
                 isActive={isActive}
-                goToNextStepHandler={goToNextStepHandler}
                 carGroup={carGroup}
                 formData={formData}
                 formName={formName}

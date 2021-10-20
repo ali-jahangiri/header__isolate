@@ -22,7 +22,6 @@ const InputDetector = ({
     step,
     minNumber,
     setOverlayStyle,
-    goToNextStepHandler,
     isActive,
 }) => {
     switch(typesName) {
@@ -45,20 +44,27 @@ const InputDetector = ({
                                                     placeholder={placeHolder} 
                                                     options={formData} />
                 else return <Select
-                                formName={formName} 
-                                onSelect={onChange} 
+                                value={value}
+                                isActive={isActive}
+                                formName={formName}
+                                onSelect={onChange}
                                 placeholder={placeHolder} 
                                 options={formData} />
             }
         case "Date" :
-            return <CustomAppDatePicker 
-                        renderMain 
+            return <CustomAppDatePicker
+                        isCurrentlyActive={isActive}
                         green={"#C6D57E"} 
                         red={'#950101'} 
                         value={value} 
                         onChange={value => value && onChange(formName , value)} />
-        // case "CheckedForm" : 
-        //     return <MultiSelect onSelect={onChange} selectedList={value} list={formData} />
+        case "CheckedForm" : 
+            return <MultiSelect
+                        placeholder={placeHolder} 
+                        formName={formName} 
+                        onSelect={onChange} 
+                        selectedList={value} 
+                        list={formData} />
         case "Long" :
         case "Int" :
         case "Float" :
