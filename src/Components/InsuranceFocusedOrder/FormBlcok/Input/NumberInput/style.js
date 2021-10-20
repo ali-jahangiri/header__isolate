@@ -62,18 +62,9 @@ const style = () => css`
                 transition: .3s;
                 letter-spacing: 2px;
 
-                &::-webkit-outer-spin-button,
-                &::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0;
-                }
-
-                -moz-appearance: textfield;
-                
-
 
                 &:focus {
-                    background-color: #5392FF50;
+                    background-color: #5392FF20;
                 }
             }
 

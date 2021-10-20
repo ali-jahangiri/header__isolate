@@ -29,7 +29,6 @@ const StepRow = ({
     const headerRef = useRef();
 
     useEffect(function autoScrollToCurrentActiveRow () {
-        console.log(is);
         if(isActive) {
             headerRef.current?.scrollIntoView({ behavior : "smooth" });
         }
@@ -65,7 +64,7 @@ const StepRow = ({
     return (
         <Wrapper isActive={isActive}>
             {
-                !isActive && <div onClick={comeToCurrentPossibleStepHandler} className="stepRow__preventUserInteract" />
+                !isActive && <div className="stepRow__preventUserInteract" />
             }
             <div ref={headerRef} className="stepRow__header">
                 <InsRowHelper />
@@ -82,6 +81,7 @@ const StepRow = ({
                 </div>
             </div>
             <StepRowMainContent
+                goToNextStepHandler={goToNextStepHandler}
                 isActive={isActive}
                 carGroup={carGroup}
                 formData={formData}

@@ -18,6 +18,7 @@ const InputDetector = ({
     nestedValue,
     formName,
     placeHolder,
+    goToNextStepHandler,
     maxNumber,
     step,
     minNumber,

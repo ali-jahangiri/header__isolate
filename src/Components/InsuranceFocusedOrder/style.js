@@ -135,9 +135,33 @@ const style = () => css`
             width : 80%;
             margin: 0 auto;
             padding: 1rem 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
 
             &__controller {
+                button {
+                    height: 100%;
+                    background-color: transparent;
+                    padding: .5rem 1rem;
+                    cursor: pointer;
+                    border: none;
+                    transition: .3s;
 
+                    &:disabled {
+                        opacity: .5;
+                        cursor: default;
+                        
+                        &:hover {
+                            color: white !important;
+                        }
+                    }
+
+                    &:hover {
+                        color: #5392FF;
+                    }
+
+                }
             }
 
             &__title {

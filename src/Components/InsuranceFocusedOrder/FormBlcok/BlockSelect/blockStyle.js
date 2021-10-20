@@ -11,7 +11,8 @@ const style = () => css`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1% 0;
+    flex: 1 0 45%;
+    margin: .3rem;
     
     
     

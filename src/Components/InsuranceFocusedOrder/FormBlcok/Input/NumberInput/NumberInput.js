@@ -27,7 +27,6 @@ const NumberInput = ({
     formName,
 }) => {
     const inputRef = useRef();
-    const isFirstRender = useRef(true);
     const [haveInvalidInputNumber, setHaveInvalidInputNumber] = useState(false);
 
     const innerChangeHandler = value => onChange(formName , value);
@@ -53,8 +52,8 @@ const NumberInput = ({
         }else innerChangeHandler(value);
     }
 
-    const comeBackToSafeNumber = () => {
-        if(value && value < min) {
+    const comeBackToSafeNumberHandler = () => {
+        if(+value < min) {
             innerChangeHandler(min);
             setHaveInvalidInputNumber(true);
             let timer = setTimeout(() => {
@@ -67,7 +66,7 @@ const NumberInput = ({
 
     const formSubmitHandler = e => {
         e.preventDefault();
-        if(haveValidNumberValue) {
+        if(haveValidNumberValue && isActive) {
             if(!value) onChange(formName , usageNumberValue);
             submitHandler();
         }
@@ -80,35 +79,36 @@ const NumberInput = ({
 
 
 
-    // useLayoutEffect(() => {
-    //     let timer = 0;
-    //     if(inputRef.current && isActive) {
-    //         timer = setTimeout(() => {
-    //             inputRef.current.focus();
-    //             clearTimeout(timer);
-    //         } , 700)
-    //     }else if(!isActive && timer) clearTimeout(timer);
-    // } , [inputRef.current , isActive])
+    useLayoutEffect(() => {
+        let timer = 0;
+        if(inputRef.current && isActive) {
+            timer = setTimeout(() => {
+                inputRef.current.focus();
+                clearTimeout(timer);
+            } , 700)
+        }else if(!isActive && timer) clearTimeout(timer);
+    } , [inputRef.current , isActive])
 
 
     useEffect(function initialRenderMinNumberLiftToStoreHandler() {
-        if(isFirstRender.current && isActive) {
-            innerChangeHandler(min);
-            isFirstRender.current = false;
-        }
-    } , [isFirstRender.current , isActive])
+        innerChangeHandler(min);
+    } , [])
 
     return (
         <Wrapper>
             <div className="numberInput__btn">
                 <button disabled={reachToMin} onClick={decrementHandler}>-</button>
             </div>
-            <div className="numberInput__input">
-                <input
-                    onBlur={comeBackToSafeNumber}
-                    value={numberSeparator(value || min)}
-                    onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
-                />
+            <div className={`numberInput__input ${haveInvalidInputNumber ? "numberInput__input--invalidForced" : ""}`}>
+                <form onSubmit={formSubmitHandler}>
+                    <input
+                        ref={inputRef}
+                        onBlur={comeBackToSafeNumberHandler}
+                        defaultValue={value || min}
+                        value={numberSeparator(value)}
+                        onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
+                    />
+                </form>
             </div>
             <div className="numberInput__btn">
                 <button disabled={reachToMax} onClick={incrementHandler}>+</button>

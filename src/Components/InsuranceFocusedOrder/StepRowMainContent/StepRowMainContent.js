@@ -33,6 +33,7 @@ const StepRowMainContent = ({
     formData,
     formName,
     typesName ,
+    goToNextStepHandler,
     onChange,
     isActive,
     store,
@@ -64,7 +65,6 @@ const StepRowMainContent = ({
                 formName={formName}
                 nestedValue={store?.[`Nested_${formName}`]}
                 value={store?.[formName] || ''}
-                isActive={isActive}
                 {...rest}
             />
         </div>

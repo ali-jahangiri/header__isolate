@@ -11,7 +11,7 @@ const App = () => {
         <ConfigProvider locale={faIR} direction="rtl">
             <div>
                 <button style={{ transform : "scale(5)" }} onClick={setIsVisible}>click</button>
-                <InsuranceFocusedOrder visible={isVisible} />
+                <InsuranceFocusedOrder onClose={() => setIsVisible(false)} visible={isVisible} />
             </div>
         </ConfigProvider>
     )
