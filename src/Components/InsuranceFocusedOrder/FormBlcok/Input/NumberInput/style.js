@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 import WithStyled from '../../../../../utils/HOC/WithStyled';
 
 const style = () => css`
-    width: 90%;
+    width: 100%;
     margin: 2rem auto;
     display: flex;
 
@@ -13,6 +13,7 @@ const style = () => css`
             width: 15%;
 
             button {
+                user-select: none;
                 width: 100%;
                 font-size: 1.5rem;
                 background-color: transparent;
@@ -26,6 +27,7 @@ const style = () => css`
                     border-color: #5392FF;
                 }
 
+                
                 &:focus {
                     background-color: #5392FF50;
                 }
@@ -74,6 +76,22 @@ const style = () => css`
                     background-color: #5392FF50;
                 }
             }
+
+
+            &--haveValue {
+                input {
+                    background-color: #5392FF30
+                }
+            }
+
+            &--invalidForced {
+                input {
+                    background-color: #ff000030;
+                    border-color: #ff000035;
+                }
+            }
+
+
         }
     }
 `

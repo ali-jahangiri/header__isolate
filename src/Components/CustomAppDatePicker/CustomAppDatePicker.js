@@ -59,8 +59,6 @@ const CustomAppDatePicker = ({ onChange , value , selectedDayColor = "lightblue"
     const todayString = dayjs().calendar("jalali").locale('fa').format("YYYY/MM/DD");
 
     const calendarChangeHandler = value => {
-        // console.log(value , "pure" , makeValidDateObject(value) , "exchanged");
-        console.log(value);
         onChange(makeValidDateString(value))
     }
 
@@ -109,9 +107,6 @@ const CustomAppDatePicker = ({ onChange , value , selectedDayColor = "lightblue"
             <GlobalStyleForPortalScop />
             <Modal className="customAppDatePicker__modal" width={380} maskClosable centered destroyOnClose onCancel={() => setIsOpened(false)} closable footer={null} visible={isOpened}>
                 <ModalWrapper>
-                    {/* <div className="customAppDatePicker__header">
-                        <p> <span>{label}</span> : انتخاب تاریخ برای </p>
-                    </div> */}
                     <Calendar
                         colorPrimary={selectedDayColor}
                         shouldHighlightWeekends

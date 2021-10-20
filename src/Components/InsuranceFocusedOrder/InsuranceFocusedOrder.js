@@ -17,7 +17,11 @@ const InsuranceFocusedOrder = ({
     const [currentStep, setCurrentStep] = useState(null);
     const [store, setStore] = useState(null);
     const [availableNextStepCount, setAvailableNextStepCount] = useState(0);
+<<<<<<< HEAD
+    const [isPossibleToGoNextStep, setIsPossibleToGoNextStep] = useState(false);
+=======
     const [submitted, setSubmitted] = useState(false)
+>>>>>>> 119d2aae9d4babc84a161611e2cbc30e37d3cb1f
 
     const flattedStage = mock.pages.map(el => el.forms).flat(1).filter(el => el.typesName !== "Info");
 
@@ -33,7 +37,7 @@ const InsuranceFocusedOrder = ({
             } , availableNextStepCount > 0 ? 0 : 350);
         }
     }
-
+    
 
     const prevStepHandler = () => {
         if(currentStep === 0) {
@@ -45,6 +49,9 @@ const InsuranceFocusedOrder = ({
     }
 
     const submitHandler = () => {
+<<<<<<< HEAD
+        console.log('submit' , store);
+=======
         let timeoutTimer = setTimeout(() => {
             setSubmitted(true);
             let internalCurrentStep = 0;
@@ -61,6 +68,7 @@ const InsuranceFocusedOrder = ({
         } , 200)
         setCurrentStep(0);
         
+>>>>>>> 119d2aae9d4babc84a161611e2cbc30e37d3cb1f
     }
 
     const reachToEnd = currentStep === flattedStage.length;
@@ -115,7 +123,13 @@ const InsuranceFocusedOrder = ({
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+<<<<<<< HEAD
+                                    isPossibleToGoNextStep={isPossibleToGoNextStep}
+                                    setIsPossibleToGoNextStep={setIsPossibleToGoNextStep}
+                                    setCurrentStep={setCurrentStep}
+=======
                                     setCurrentStage={setCurrentStep}
+>>>>>>> 119d2aae9d4babc84a161611e2cbc30e37d3cb1f
                                     availableNextStepCount={availableNextStepCount}
                                     setAvailableNextStepCount={setAvailableNextStepCount}
                                     currentStage={currentStep}
@@ -124,7 +138,7 @@ const InsuranceFocusedOrder = ({
                                     store={store}
                                     setStore={setStore}
                                     isActive={currentStep === i}
-                                    index={i + 1} 
+                                    index={i + 1}
                                     key={i} 
                                     {...el} />
                                     ))
@@ -143,12 +157,25 @@ const InsuranceFocusedOrder = ({
 
                         <div className={`insFocus__stepper__controller ${submitted ? "insFocus__stepper__controller--hide" : ""}`}>
                             <button disabled={currentStep === null} className="insFocus__stepper__controller__prev" onClick={prevStepHandler}>Prev</button>
+<<<<<<< HEAD
+                            <button
+                                disabled={(() => {
+                                    console.log(isPossibleToGoNextStep , "isPossibleToGoNextStep" , availableNextStepCount , 'availableNextStepCount');
+                                    if(isPossibleToGoNextStep || availableNextStepCount > 0) return false;
+                                    else if(!isPossibleToGoNextStep || availableNextStepCount <= 0) {
+                                        return true
+                                    }
+                                })()}
+                                className="insFocus__stepper__controller__next" 
+                                onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
+=======
                             <button disabled={(() => {
                                 if(reachToEnd) return false;
                                 else if(availableNextStepCount <= 0) {
                                     return true
                                 }
                             })()} className="insFocus__stepper__controller__next" onClick={() => reachToEnd ? submitHandler() : nextStepHandler()}>
+>>>>>>> 119d2aae9d4babc84a161611e2cbc30e37d3cb1f
                                 {reachToEnd ? "Finish" : "Next"}
                             </button>
                         </div>

@@ -36,7 +36,7 @@ const StepRowMainContent = ({
     onChange,
     isActive,
     store,
-    rest
+    ...rest
 }) => {
     const [wasScrolled, setWasScrolled] = useState(false);
     const [overlayStyle, setOverlayStyle] = useState({});
@@ -53,6 +53,8 @@ const StepRowMainContent = ({
         <div onScroll={scrollHandler} className="stepRow__mainContent">
             <div style={overlayStyle} className={`stepRow__mainContent__scrollOverlayHelper ${wasScrolled ? "stepRow__mainContent__scrollOverlayHelper--visible" : ""}`} />
             <InputDetector
+                isActive={isActive}
+                goToNextStepHandler={goToNextStepHandler}
                 setOverlayStyle={setOverlayStyle}
                 carGroup={carGroup}
                 isCarCase={carCaseChecker(formData)}

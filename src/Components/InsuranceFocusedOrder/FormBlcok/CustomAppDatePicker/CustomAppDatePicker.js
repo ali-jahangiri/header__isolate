@@ -84,11 +84,11 @@ const GlobalStyleForPortalScop = createGlobalStyle`
         & .ant-drawer-content-wrapper {
             width: 100vw !important;
         }
-
+        
         & .ant-drawer-close {
             display: none !important;
         }
-
+        
         & .ant-drawer-wrapper-body {
             display: flex;
             width: 100%;
