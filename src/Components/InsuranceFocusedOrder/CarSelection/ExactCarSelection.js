@@ -32,7 +32,7 @@ const ExactCarSelection = ({
 
   
     return (
-        <Wrapper 
+        <Wrapper
             isDisabled={haveSomeThingSelected && !isSelected} 
             isSelected={isSelected}
             selectedBefore={selectedBefore}
@@ -40,13 +40,12 @@ const ExactCarSelection = ({
             <div style={{ animationDelay : `${index * 100}ms` }}>
                 <div
                     className="exactCarSelection__carNameContainer"
-                    onClick={() => selectExactHandler(id)}
-                >
+                    onClick={() => selectExactHandler(id)}>
                     <p>{dataName}</p>
                 </div>
                 {
                     haveSomeThingSelected && !selectedBefore && <div className="exactCarSelection__carNameChangeTrigger">
-                        <p onClick={selectOtherCarHand}>Choice other Car</p>
+                        <p onClick={selectOtherCarHand}>انتخاب مجدد خودرو</p>
                     </div>
                 }
                 {

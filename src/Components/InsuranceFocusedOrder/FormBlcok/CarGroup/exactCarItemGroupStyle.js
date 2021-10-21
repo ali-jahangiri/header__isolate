@@ -30,6 +30,24 @@ const style = () => css`
     &:hover {
         border-color: #5392FF;
     }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+            margin: 0;
+            margin-top: .5rem;
+        }
+    }
+
+    @media (max-width : 480px) {
+        flex-direction: row-reverse;
+
+        img {
+            width: 2.5rem;
+        }
+    }
 `
 
 export default WithStyled(style);

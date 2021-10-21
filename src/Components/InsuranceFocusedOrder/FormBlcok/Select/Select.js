@@ -60,34 +60,34 @@ const Select = ({
     value , 
     onSelect , 
     placeholder,
-    isActive,
+    otherTest,
     formName,
 }) => {
-    const [testState, setTestState] = useState(false);
+    const [isSelectOpen, setIsSelectOpen] = useState(false);
 
     const onSelectHandler = value => onSelect(formName , value);
     
     useEffect(() => {
-        if(isActive && !value) {
+        if(otherTest && !value) {
             let timer = setTimeout(() => {
-                setTestState(true);
+                setIsSelectOpen(true);
                 clearTimeout(timer);
-            } , 400);
+            } , 600);
         }else {
-            setTestState(false)
+            setIsSelectOpen(false)
         }
-    } , [isActive , value]);
+    } , [otherTest , value]);
 
     return (
         <Wrapper>
             <OptionStyle />
             <LibrarySelectComponent
-                onBlur={() => setTestState(false)}
+                onBlur={() => setIsSelectOpen(false)}
                 defaultValue={value || undefined}
-                open={testState}
+                open={isSelectOpen}
                 onChange={value => onSelectHandler(value)}
                 placeholder={placeholder || "Type or Select One Option"}
-                onDropdownVisibleChange={setTestState}
+                onDropdownVisibleChange={setIsSelectOpen}
                 className="customSelect"
                 showSearch
                 optionFilterProp="label"
@@ -106,7 +106,7 @@ const Select = ({
                     ))
                 }
             </LibrarySelectComponent>
-            <div className={`customSelect__bottomDivider ${testState ? "customSelect__bottomDivider--grow" : ""}`} />
+            <div className={`customSelect__bottomDivider ${isSelectOpen ? "customSelect__bottomDivider--grow" : ""}`} />
         </Wrapper>
     )
 }

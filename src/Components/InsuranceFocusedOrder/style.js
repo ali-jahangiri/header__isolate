@@ -77,7 +77,7 @@ const style = () => css`
             }
 
             &--active {
-                height: 15vh;
+                height: 12vh;
                 border-color: #5392FF;
             
                 .insFocus {
@@ -94,10 +94,11 @@ const style = () => css`
             position: absolute;
             left: 0;
             top: 0;
-            z-index: 55;
+            z-index: 99999;
             width: 100%;
             height: 9999px;
             background-color: transparent;
+            overflow: hidden;
         }
 
         &__stepper {
@@ -152,6 +153,7 @@ const style = () => css`
                 overflow: hidden;
 
                 button {
+                    border-radius: 3px;
                     width: 45%;
                     background-color: #5392FF;
                     border: none;
@@ -240,7 +242,7 @@ const style = () => css`
                 flex-direction: column-reverse;
                 bottom: 0;
                 left: 0;
-                background: linear-gradient(0deg, black, transparent);
+                background: black;
 
                 &__timeline {
                     width: 90%;
@@ -250,6 +252,7 @@ const style = () => css`
                 &__controller {
                     width: 90%;
                     margin-bottom: 1rem;
+                    
                     button {
                         padding: .8rem 0;
                     }

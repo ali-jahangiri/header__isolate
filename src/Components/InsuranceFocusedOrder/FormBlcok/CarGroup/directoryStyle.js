@@ -10,7 +10,7 @@ const style = () => css`
         &__container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-end;
+            justify-content: center;
             transition: all .3s , height .5s;
             max-height: 5000px;
 
@@ -26,6 +26,13 @@ const style = () => css`
                 max-height: 0px;
                 overflow: hidden;
                 opacity: 0;
+            }
+
+
+
+            @media (max-width : 480px) {
+                justify-content : center;
+                padding-bottom: 2rem;
             }
         }
 

@@ -40,6 +40,7 @@ const style = () => css`
             font-size: 3.5rem;
             font-weight: 500;
             text-align: center;
+            margin-bottom: 1rem;
 
             p {
                 margin: 0;
@@ -51,6 +52,7 @@ const style = () => css`
             animation: ${initialAnime} .4s .4s forwards alternate;  
             text-align: center;
             direction: rtl;
+            font-size: 1rem;
         }
 
         &__cta {
@@ -101,6 +103,10 @@ const style = () => css`
 
             &__desc {
                 font-size: 1rem;
+            }
+
+            &__cta {
+                width: 100%;
             }
         }
     }

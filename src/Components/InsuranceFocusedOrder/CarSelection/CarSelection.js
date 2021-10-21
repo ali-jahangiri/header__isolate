@@ -27,7 +27,6 @@ const CarSelection = ({
     
     const selectCarGroupHandler = id => {
         if(id?.skipUserSelection) {
-            console.log(id);
             setInnerStore(prev => ({
                 ...prev ,
                 carGroupId : {

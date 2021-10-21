@@ -15,13 +15,13 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList 
         onSelect(null);
     }
 
-    console.log(exactCarList);
-
     return (
         <Wrapper>
             <div ref={overviewNodeRef} className={`carGroupDirectory__overview ${selectedItem ? "carGroupDirectory__overview--visible" : ""}`}>
                 <div className="carGroupDirectory__overview__otherChoice">
-                    <button onClick={resetSelectedItemHandler}>Choice Other Brand</button>
+                    <button onClick={resetSelectedItemHandler}>
+                        انتخاب شرکت سازنده
+                    </button>
                 </div>
                 <div className="carGroupDirectory__overview__content">
                     <p>{selectedItem?.name}</p>
@@ -32,7 +32,6 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList 
                 {
                     list.map((el , i) => (
                         <CarGroupItem
-                            // isSelected={selectedItem === el.id}
                             selectHandler={onSelect} key={i} {...el} />
                     ))
                 }

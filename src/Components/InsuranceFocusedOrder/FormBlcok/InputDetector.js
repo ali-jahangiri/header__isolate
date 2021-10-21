@@ -24,6 +24,7 @@ const InputDetector = ({
     minNumber,
     setOverlayStyle,
     isActive,
+    isInSubmitReview,
 }) => {
     switch(typesName) {
         case "DropDown" :
@@ -46,7 +47,7 @@ const InputDetector = ({
                                                     options={formData} />
                 else return <Select
                                 value={value}
-                                isActive={isActive}
+                                otherTest={isActive}
                                 formName={formName}
                                 onSelect={onChange}
                                 placeholder={placeHolder} 
@@ -61,6 +62,8 @@ const InputDetector = ({
                         onChange={value => value && onChange(formName , value)} />
         case "CheckedForm" : 
             return <MultiSelect
+                        isInSubmitReview={isInSubmitReview}
+                        isActive={isActive}
                         placeholder={placeHolder} 
                         formName={formName} 
                         onSelect={onChange} 
@@ -70,13 +73,14 @@ const InputDetector = ({
         case "Int" :
         case "Float" :
             return <NumberInput
+                        isInSubmitReview={isInSubmitReview}
                         isActive={isActive}
                         submitHandler={goToNextStepHandler}
                         formName={formName}
-                        min={minNumber}
-                        max={maxNumber}
-                        step={step}
-                        value={value}
+                        min={minNumber || 0}
+                        max={maxNumber || 99999999999}
+                        step={step || 1000}
+                        value={value || 0}
                         onChange={onChange} />
         case "CreateYear" : 
             return <Select

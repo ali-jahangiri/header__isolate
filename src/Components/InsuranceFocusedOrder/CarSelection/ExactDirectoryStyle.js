@@ -8,6 +8,10 @@ const style = () => css`
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 1rem;
+
+    @media (max-width : 480px) {
+        padding-bottom: 5rem;
+    }
 `
 
 export default WithStyled(style);

@@ -4,8 +4,8 @@ import WithStyled from '../../../../utils/HOC/WithStyled';
 
 const style = () => css`
     width: 100%;
-    margin: 2rem 0;
-
+    margin-top: 2rem;
+    
     ${({ haveList }) => haveList && css`
         .ant-select-search {
             height: 38px !important;
@@ -43,6 +43,10 @@ const style = () => css`
         p {
             margin: 0;
         }
+    }
+
+    .ant-select-selection__placeholder {
+        font-size: 1rem;
     }
 
     .ant-select-selection__choice__remove {

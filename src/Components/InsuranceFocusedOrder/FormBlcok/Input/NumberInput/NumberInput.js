@@ -25,6 +25,8 @@ const NumberInput = ({
     submitHandler,
     isActive,
     formName,
+    isInSubmitReview,
+
 }) => {
     const inputRef = useRef();
     const [haveInvalidInputNumber, setHaveInvalidInputNumber] = useState(false);
@@ -49,7 +51,7 @@ const NumberInput = ({
         const numberedValue = Number(value);
         if(numberedValue > max) {
             innerChangeHandler(max)
-        }else innerChangeHandler(value);
+        }else innerChangeHandler(numberedValue);
     }
 
     const comeBackToSafeNumberHandler = () => {
@@ -79,15 +81,17 @@ const NumberInput = ({
 
 
 
-    // useLayoutEffect(() => {
-    //     let timer = 0;
-    //     if(inputRef.current && isActive) {
-    //         timer = setTimeout(() => {
-    //             inputRef.current.focus();
-    //             clearTimeout(timer);
-    //         } , 700)
-    //     }else if(!isActive && timer) clearTimeout(timer);
-    // } , [inputRef.current , isActive])
+    useLayoutEffect(() => {
+        if(!isInSubmitReview) {
+            let timer = 0;
+            if(inputRef.current && isActive) {
+                timer = setTimeout(() => {
+                    inputRef.current.focus();
+                    clearTimeout(timer);
+                } , 700)
+            }else if(!isActive && timer) clearTimeout(timer);
+        }
+    } , [inputRef.current , isActive , isInSubmitReview])
 
 
     useEffect(function initialRenderMinNumberLiftToStoreHandler() {
@@ -105,7 +109,7 @@ const NumberInput = ({
                         ref={inputRef}
                         onBlur={comeBackToSafeNumberHandler}
                         defaultValue={value || min}
-                        value={numberSeparator(value)}
+                        value={value === 0 ? 0 : numberSeparator(value)}
                         onChange={({ target : { value } }) => controlledInputValueChangeHandler(makePureNumber(value))}
                     />
                 </form>

@@ -14,7 +14,15 @@ const style = () => css`
             margin: 0;
         }
 
-        .ant-select-selection-placeholder {
+        .ant-select-selection-selected-value {
+            p {
+                font-weight: 500;
+                font-size: 1.1rem;
+            }
+        }
+
+        .ant-select-selection__placeholder {
+            font-size: 1rem;
             color: #f0f0f0 !important;
         }
 

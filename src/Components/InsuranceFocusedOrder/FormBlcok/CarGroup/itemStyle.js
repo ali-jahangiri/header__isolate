@@ -36,6 +36,25 @@ const style = () => css`
         border-color: #5392FF;
     }
 
+
+    @media (max-width : 591px) {
+        opacity: 1;
+        flex-direction: row-reverse;
+        width: 100%;
+        align-items: center;
+        margin: 0.5rem;
+        min-width: 100%;
+        flex: 1 0 100%;
+
+        p {
+            margin-top: 0;
+        }
+
+        img {
+            width: 2.5rem;
+        }
+    }
+
 `
 
 

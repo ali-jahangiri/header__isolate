@@ -61,6 +61,10 @@ const style = () => css`
         max-height: 0;
         opacity: 0;
     `};
+
+    @media (max-width : 480px) {
+        width: 100%;
+    }
 `
 
 

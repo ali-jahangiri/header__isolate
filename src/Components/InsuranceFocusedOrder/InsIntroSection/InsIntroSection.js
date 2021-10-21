@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Wrapper from "./style";
 
 const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler , submitted , redirectHandler }) => {
     const [getHideAuto, setGetHideAuto] = useState(false);
+    const timerRef = useRef();
 
     useEffect(() => {
-        if(!shouldGetHide && !getHideAuto) {
-            console.log('come after');
-            let timer = setTimeout(() => {
+        timerRef.current = setTimeout(() => {
+            if(!shouldGetHide && !getHideAuto) {
                 setGetHideAuto(true);
                 goToNextStepHandler();
-                clearTimeout(timer);
-            } , 5000);
-        }
-    } , [shouldGetHide , getHideAuto])
+                clearTimeout(timerRef.current);
+            }
+        } , 5000);
+    } , [])
 
 
     const comeBackToIntroAfterAWhile = currentStep === null && availableNextStepCount > 0;
+
+
+    const innerGoNextHandler = () => {
+        goToNextStepHandler();
+        if(timerRef.current !== undefined) {
+            clearTimeout(timerRef.current)
+        }
+    }
 
     return (
         <Wrapper submitted={submitted} shouldGetHide={shouldGetHide}>
@@ -27,9 +35,9 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
                 <p>{desc}</p>
             </div>
             <div className="insIntroSection__cta">
-                <button onClick={() => submitted ? redirectHandler() : (comeBackToIntroAfterAWhile ? introContinueHandler() :  goToNextStepHandler())}>
+                <button onClick={() => submitted ? redirectHandler() : (comeBackToIntroAfterAWhile ? introContinueHandler() :  innerGoNextHandler())}>
                     {
-                        submitted ? "Redirect After overview" : (comeBackToIntroAfterAWhile ? "Continue" : "Start Now")
+                        submitted ? "ارسال به صفحه نتایج" : (comeBackToIntroAfterAWhile ? "ادامه" : "!شروع کنید")
                     }
                 </button>
             </div>

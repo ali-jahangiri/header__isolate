@@ -31,6 +31,7 @@ const style = () => css`
     & > div {
         position: relative;
         background-color: #5392FF30;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,6 +50,11 @@ const style = () => css`
         
         p {
             margin: 0;
+        }
+
+        @media (max-width : 480px) {
+            animation: none;
+            opacity: 1;
         }
     }
     
@@ -71,8 +77,9 @@ const style = () => css`
                 left: 50%;
                 top: 50%;
                 transform: translate(-50% , -50%);
-                /* transform: translate(-120% , -50%); */
                 position: absolute;
+                max-width: 50%;
+                text-align: center;
             }
         }
         
@@ -109,9 +116,10 @@ const style = () => css`
         & > div {
             margin: 0;
             max-height: 100rem;
+            background-color: #5392FF10;
 
             &:hover {
-                background-color: #5392FF30 !important;
+                background-color: #5392FF10;
             }
         }
 
@@ -123,9 +131,14 @@ const style = () => css`
                     transition : all .3s , left .3s .5s;
                     left: 95%;
                     font-size: 1.2rem;
+                    text-align: right;
                     transform: translate(-100% , -50%);
                 }
             }
+        }
+        
+        @media (max-width : 480px) {
+            margin-bottom: 1rem;
         }
     `};
 
@@ -134,7 +147,14 @@ const style = () => css`
         flex: 0 0 0;
         overflow: hidden;
         opacity: 0;
-
+        
+        .exactCarSelection {
+            &__carNameContainer {
+                p {
+                    white-space: nowrap;
+                }
+            }
+        }
     `};
 
 

@@ -1,5 +1,5 @@
 import { Drawer, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Wrapper from "./style";
 import ModalStyle from './modalStyle';
@@ -62,25 +62,28 @@ const InsuranceFocusedOrder = ({
 
     const submitHandler = () => {
         console.log('submit' , store);
-        let timeoutTimer = setTimeout(() => {
-            setSubmitted(true);
-            let internalCurrentStep = 0;
-            let timer = setInterval(() => {
-                if(internalCurrentStep === flattedStage.length) {
-                    clearInterval(timer);
-                    clearTimeout(timeoutTimer)
-                }else {
-                    setCurrentStep(prev => prev + 1)
-                }
-                internalCurrentStep++;
-            } , 1000);
+        if(isMobile) {
             
-        } , 200)
-        setCurrentStep(0);
-        
+        }else {
+            setSubmitted(true);
+            let timeoutTimer = setTimeout(() => {
+                let internalCurrentStep = 0;
+                let timer = setInterval(() => {
+                    if(internalCurrentStep === flattedStage.length) {
+                        clearInterval(timer);
+                        clearTimeout(timeoutTimer)
+                    }else {
+                        setCurrentStep(prev => prev + 1)
+                    }
+                    internalCurrentStep++;
+                } , 1000);
+                
+            } , 700)
+            setCurrentStep(0);
+        }
     }
 
-    const reachToEnd = currentStep === flattedStage.length;
+    const reachToEnd = currentStep + 1 === flattedStage.length;
 
     
     const introContinueHandler = () => {
@@ -107,12 +110,11 @@ const InsuranceFocusedOrder = ({
 
     const isMobile = useMediaQuery("sm");
 
-    
-
     return (
         <React.Fragment>
             <ModalStyle />
             <DynamicWrapper
+                destroyOnClose
                 isMobile={isMobile}
                 placement="left"
                 centered
@@ -161,6 +163,7 @@ const InsuranceFocusedOrder = ({
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+                                    isInSubmitReview={submitted}
                                     isPossibleToGoNextStep={isPossibleToGoNextStep}
                                     setIsPossibleToGoNextStep={setIsPossibleToGoNextStep}
                                     setCurrentStep={setCurrentStep}

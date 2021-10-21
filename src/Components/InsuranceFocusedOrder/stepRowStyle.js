@@ -104,6 +104,12 @@ const style = () => css`
             &__label {
                 font-size: 1.5rem;
                 text-align: right;
+                
+                &__optionalLabel {
+                    margin-top: .5rem !important;
+                    font-size: 1rem;
+                    opacity: .5;
+                }
             }
 
             &__help {
@@ -206,7 +212,7 @@ const style = () => css`
 
         .stepRow {
             &__header {
-                padding-top: 30%;
+                padding-top: 22%;
 
                 &__help {
                     margin-right: .5rem;
