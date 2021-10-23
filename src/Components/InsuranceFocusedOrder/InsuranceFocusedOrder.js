@@ -1,25 +1,29 @@
 import { Drawer, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Wrapper from "./style";
 import ModalStyle from './modalStyle';
 
 // mock 
-import mock from "../../mock";
+
 import StepRow from './StepRow';
 import InsIntroSection from './InsIntroSection/InsIntroSection';
 import InsFocusStepperOverlay from './InsFocusStepperOverlay';
 import MediaQueryProvider from '../../utils/Hooks/useMediaQuery/MediaQueryProvider';
 import useMediaQuery from '../../utils/Hooks/useMediaQuery/useMediaQuery';
 
-const DynamicWrapper = ({isMobile ,...rest}) => {
+const DynamicWrapper = ({ isMobile, renderWithNoWrapper , ...rest }) => {
+    if(renderWithNoWrapper) return <>{rest.children}</>
     if(isMobile) return <Drawer {...rest} />
     else return <Modal {...rest} />
 }
 
 const InsuranceFocusedOrder = ({
     visible ,
-    onClose
+    onClose,
+    mock,
+    componentStyles,
+    renderWithNoWrapper
 }) => {
     const [currentStep, setCurrentStep] = useState(null);
     const [store, setStore] = useState(null);
@@ -101,26 +105,35 @@ const InsuranceFocusedOrder = ({
             setIsPossibleToGoNextStep(0);
             setStore(null);
             clearTimeout(timer);
-        } , 500)
+        } , 200);
     }
 
 
     const isMobile = useMediaQuery("sm");
 
-    
+    useEffect(() => {
+        if(renderWithNoWrapper) {
+            let timer = setTimeout(() => {
+                setCurrentStep(0)
+                clearTimeout(timer)
+            } , 500)
+        }
+    } , [renderWithNoWrapper])
 
     return (
         <React.Fragment>
             <ModalStyle />
             <DynamicWrapper
+                renderWithNoWrapper={renderWithNoWrapper}
                 isMobile={isMobile}
                 placement="left"
                 centered
+                destroyOnClose
                 footer={null}
                 closable={null}
                 className="insFocus__modal"
                 visible={!!visible}>
-                <Wrapper>
+                <Wrapper id="insuranceFocusedOrder" style={componentStyles}>
                     <div ref={headerRef} className="insFocus__header">
                         <div className="insFocus__header__controller">
                             <button disabled={submitted} onClick={closeEntireModal}>بستن</button>
@@ -142,25 +155,29 @@ const InsuranceFocusedOrder = ({
                             </div>
                         </div>
                     }
-                    <InsIntroSection
-                        redirectHandler={redirectHandler}
-                        submitted={submitted}
-                        introContinueHandler={introContinueHandler}
-                        availableNextStepCount={availableNextStepCount}
-                        currentStep={currentStep}
-                        goToNextStepHandler={() => visible && setCurrentStep(0)}
-                        insName={mock.title} 
-                        desc={mock.description}
-                        shouldGetHide={(() => {
-                            if(submitted) return false;
-                            else if(currentStep !== null) return true
-                        })()}
-                        recoveryStepCount={0}
-                     />
+                    {
+                        !renderWithNoWrapper && <InsIntroSection
+                            style={componentStyles}
+                            redirectHandler={redirectHandler}
+                            submitted={submitted}
+                            introContinueHandler={introContinueHandler}
+                            availableNextStepCount={availableNextStepCount}
+                            currentStep={currentStep}
+                            goToNextStepHandler={() => visible && setCurrentStep(0)}
+                            insName={mock.title} 
+                            desc={mock.description}
+                            shouldGetHide={(() => {
+                                if(submitted) return false;
+                                else if(currentStep !== null) return true
+                            })()}
+                            recoveryStepCount={0}
+                        />
+                    }
                     <div className="insFocus__container">
                         {
                             flattedStage.map((el , i) => (
                                 <StepRow
+                                    style={componentStyles}
                                     isPossibleToGoNextStep={isPossibleToGoNextStep}
                                     setIsPossibleToGoNextStep={setIsPossibleToGoNextStep}
                                     setCurrentStep={setCurrentStep}

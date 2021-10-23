@@ -20,6 +20,7 @@ const NumberInput = ({
     onChange ,
     max, 
     min,
+    style,
     value, 
     step,
     submitHandler,
@@ -79,15 +80,16 @@ const NumberInput = ({
 
 
 
-    // useLayoutEffect(() => {
-    //     let timer = 0;
-    //     if(inputRef.current && isActive) {
-    //         timer = setTimeout(() => {
-    //             inputRef.current.focus();
-    //             clearTimeout(timer);
-    //         } , 700)
-    //     }else if(!isActive && timer) clearTimeout(timer);
-    // } , [inputRef.current , isActive])
+    useLayoutEffect(() => {
+        console.log(formName , isActive);
+        let timer = 0;
+        if(inputRef.current && isActive) {
+            timer = setTimeout(() => {
+                inputRef.current.focus();
+                clearTimeout(timer);
+            } , 700)
+        }else if(!isActive && timer) clearTimeout(timer);
+    } , [inputRef.current , isActive])
 
 
     useEffect(function initialRenderMinNumberLiftToStoreHandler() {
@@ -95,7 +97,7 @@ const NumberInput = ({
     } , [])
 
     return (
-        <Wrapper>
+        <Wrapper style={style}>
             <div className="numberInput__btn">
                 <button disabled={reachToMin} onClick={decrementHandler}>-</button>
             </div>

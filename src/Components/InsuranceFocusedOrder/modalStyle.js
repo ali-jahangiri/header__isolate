@@ -4,6 +4,15 @@ import { createGlobalStyle } from 'styled-components';
 
 const ModalStyle = createGlobalStyle`
 
+    .insFocus__portal {
+        background-color: black;
+    }
+
+    .infFocus__introPreview {
+        height: 500px;
+        overflow: hidden;
+    }
+
     .insFocus__modal {
 
         width: 100vw !important;

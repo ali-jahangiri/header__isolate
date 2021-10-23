@@ -13,10 +13,10 @@ const animateStepper = keyframes`
 
 `
 
-const style = () => css`
+const style = ({ get }) => css`
     width : 100%;
     height: 100%;
-    background-color: black;
+    background-color: ${get("mainBgColor")};
     color: white;
     display: flex;
     align-items: center;
@@ -48,9 +48,9 @@ const style = () => css`
             
             &__controller {
                 button {
-                    background: #5392ff30;
+                    background: ${get("primaryColor") + 30};
                     padding: .5rem 1rem;
-                    border: 2px solid #5392ff50;
+                    border: 2px solid ${get("primaryColor") + 50};
                     border-radius: 5px;
                 }
             }
@@ -61,7 +61,7 @@ const style = () => css`
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                background: linear-gradient(0deg, #5392ff50, #5392FF20);
+                background: linear-gradient(0deg, ${get("primaryColor") + 50}, ${get("primaryColor") + 20});
                 
             }
 
@@ -78,7 +78,7 @@ const style = () => css`
 
             &--active {
                 height: 15vh;
-                border-color: #5392FF;
+                border-color: ${get("primaryColor")};
             
                 .insFocus {
                     &__mobileHeader {
@@ -128,7 +128,7 @@ const style = () => css`
 
             &__timeline {
                 width: 75%;
-                background-color: #192841;
+                background-color: ${get("primaryColor") + 30};
                 height: .2rem;
                 border-radius: 10px;
                 margin-right: auto;
@@ -137,7 +137,7 @@ const style = () => css`
                 &__activePart {
                     transition: .3s;
                     width: 50%;
-                    background-color: #5392FF;
+                    background-color: ${get("primaryColor")};
                     height: 100%;
                 }
             }
@@ -153,7 +153,8 @@ const style = () => css`
 
                 button {
                     width: 45%;
-                    background-color: #5392FF;
+                    background-color: ${get("primaryColor")};
+                    color: ${get("mainControllerTextColor")};
                     border: none;
                     cursor: pointer;
                     text-align: center;
@@ -215,7 +216,7 @@ const style = () => css`
                     }
 
                     &:hover {
-                        color: #5392FF;
+                        color: ${get("primary")};
                     }
 
                 }

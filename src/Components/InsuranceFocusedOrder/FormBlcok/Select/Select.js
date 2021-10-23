@@ -7,7 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 const OptionStyle = createGlobalStyle`
     
     .ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
-        background-color: #5392FF50 !important;
+        background-color: ${({ style }) => style.find(item => item.name === "primaryColor").value} !important;
     }
 
 
@@ -25,9 +25,9 @@ const OptionStyle = createGlobalStyle`
         }
 
         & + .ant-select-dropdown-menu-item-active {
-            background-color: #5392FF50 !important;
+            background-color: ${({ style }) => style.find(item => item.name === "primaryColor").value + 50} !important;
             & + .ant-select-dropdown-menu-item-selected {
-                background-color: #5392FF90 !important;
+                background-color: ${({ style }) => style.find(item => item.name === "primaryColor").value + 90} !important;
             }
         }
 
@@ -44,12 +44,12 @@ const OptionStyle = createGlobalStyle`
             }
 
             ::-webkit-scrollbar-thumb {
-                background: #5392FF50;
+                background: ${({ style }) => style.find(item => item.name === "primaryColor").value + 50};
                 border-radius: 3px;
             }
             
             ::-webkit-scrollbar-thumb:hover {
-                background: #5392FF;
+                background: ${({ style }) => style.find(item => item.name === "primaryColor").value};
             }
         }
     }
@@ -60,6 +60,7 @@ const Select = ({
     value , 
     onSelect , 
     placeholder,
+    style,
     isActive,
     formName,
 }) => {
@@ -79,8 +80,8 @@ const Select = ({
     } , [isActive , value]);
 
     return (
-        <Wrapper>
-            <OptionStyle />
+        <Wrapper style={style}>
+            <OptionStyle style={style} />
             <LibrarySelectComponent
                 onBlur={() => setTestState(false)}
                 defaultValue={value || undefined}

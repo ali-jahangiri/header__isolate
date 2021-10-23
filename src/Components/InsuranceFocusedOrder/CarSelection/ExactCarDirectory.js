@@ -2,12 +2,13 @@ import React from 'react';
 import ExactCarSelection from './ExactCarSelection';
 import Wrapper from "./ExactDirectoryStyle";
 
-const ExactCarDirectory = ({ itemList = [] , selectExactHandler , selectedItem , selectExactUsageHandler , selectOtherCarHand , haveSelectedCarBefore }) => {
+const ExactCarDirectory = ({ itemList = [] , selectExactHandler , selectedItem , selectExactUsageHandler , selectOtherCarHand , haveSelectedCarBefore , style}) => {
     return (
         <Wrapper>
             {
                 itemList.map((el , i) => (
                     <ExactCarSelection
+                        style={style}
                         selectedBefore={haveSelectedCarBefore === el.id}
                         selectOtherCarHand={selectOtherCarHand}
                         selectExactUsageHandler={selectExactUsageHandler}

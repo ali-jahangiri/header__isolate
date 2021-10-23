@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     width: 100%;
     margin: 2rem auto;
     display: flex;
@@ -17,19 +17,19 @@ const style = () => css`
                 width: 100%;
                 font-size: 1.5rem;
                 background-color: transparent;
-                border: 2px solid #5392FF95;
+                border: 2px solid ${get("primaryColor") + 95};
                 border-radius: 5px;
                 cursor: pointer;
                 height: 100%;
                 transition : .25s;
                 
                 &:hover {
-                    border-color: #5392FF;
+                    border-color: ${get("primaryColor")};
                 }
 
                 
                 &:focus {
-                    background-color: #5392FF50;
+                    background-color: ${get("primaryColor") + 50};
                 }
 
                 &:disabled {
@@ -37,7 +37,7 @@ const style = () => css`
                     cursor: default;
 
                     &:hover {
-                        border-color: #5392FF95;
+                        border-color: ${get("primaryColor") +95};
                     }
                 }
             }
@@ -54,8 +54,8 @@ const style = () => css`
                 text-align: center;
                 outline: none;
                 border: none;
-                border-top: 2px solid #5392FF50;
-                border-bottom: 2px solid #5392FF50;
+                border-top: 2px solid ${get("primaryColor") + 50};
+                border-bottom: 2px solid ${get("primaryColor") + 50};
                 font-weight: 900;
                 font-size: 1.5rem;
                 padding: .4rem 0;
@@ -64,14 +64,14 @@ const style = () => css`
 
 
                 &:focus {
-                    background-color: #5392FF20;
+                    background-color: ${get("primaryColor") + 20};
                 }
             }
 
 
             &--haveValue {
                 input {
-                    background-color: #5392FF30
+                    background-color: ${get("primaryColor") + 30}
                 }
             }
 

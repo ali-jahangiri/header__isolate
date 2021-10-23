@@ -7,7 +7,8 @@ import ExactCarDirectory from './ExactCarDirectory';
 
 
 const CarSelection = ({
-    value , 
+    value ,
+    style,
     onChange,
     formName,
     carGroup = [],
@@ -74,10 +75,12 @@ const CarSelection = ({
     return (
         <React.Fragment>
             <SearchBar
+                style={style}
                 shouldGetHide={innerStore.carGroupId}
                 value={innerStore.search} 
                 onChange={searchValueChangeHandler} />
             <CarGroupDirectory
+                style={style}
                 selectedItem={innerStore.carGroupId} 
                 onSelect={selectCarGroupHandler} 
                 list={itemForMapping}
@@ -96,6 +99,7 @@ const CarSelection = ({
                 !itemForMapping.length && !exactCarForMapping.length && <EmptySearchResult />
             }
             <ExactCarDirectory
+                style={style}
                 haveSelectedCarBefore={innerStore?.selectedBeforeItem}
                 selectOtherCarHand={selectOtherCarHand}
                 selectedItem={value}

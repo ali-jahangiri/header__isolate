@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Calendar } from "react-modern-calendar-datepicker";
 import jalaliday from "jalaliday";
 import dayjs from 'dayjs';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 
 
@@ -44,83 +44,89 @@ const regex = /^[1-4]\d{3}\/((0[1-6]\/((3[0-1])|([1-2][0-9])|(0[1-9])))|((1[0-2]
 
 
 const GlobalStyleForPortalScop = createGlobalStyle`
-
-    .customAppDatePicker__frontInput {
-        background-color: transparent;
-        border: 2px solid #5392FF;
-        padding: 1.7rem 0;
-        cursor : pointer;
-        background-color: #5392FF30;
-        margin-top: .5rem;
-        color: white;
-        font-size: 1rem;
-        
-        
-        &::placeholder {
+    ${({ primary }) => css`
+        .customAppDatePicker__frontInput {
+            background-color: transparent;
+            border: 2px solid ${primary};
+            padding: 1.7rem 0;
+            cursor : pointer;
+            background-color: ${primary + 30};
+            margin-top: .5rem;
             color: white;
             font-size: 1rem;
+            
+            
+            &::placeholder {
+                color: white;
+                font-size: 1rem;
+            }
+
+
+            &:hover {
+                border: 2px solid ${primary};
+            }
+
+            &--haveValue {
+                letter-spacing: 2px;
+                background-color: ${primary + 60};
+            }
+
         }
 
-        &--haveValue {
-            letter-spacing: 2px;
-            background-color: #5392FF60;
-        }
 
-    }
+        .customAppDatePicker__modal {
 
-    .customAppDatePicker__modal {
+            & .ant-modal-content {
+                background: black;
+            }
+            
+            & .ant-modal-body {
+                background: ${primary + 50};
+                border: 2px solid ${primary + 80};
+                border-radius: 5px;
+            }
 
-        & .ant-modal-content {
-            background: black;
-        }
-        
-        & .ant-modal-body {
-            background: ${"#5392FF" + "50"};
-            /* use color generator */
-            border: 2px solid ${"#5392FF" + "80"};
-            border-radius: 5px;
-        }
-
-        & .ant-drawer-content-wrapper {
-            width: 100vw !important;
-        }
-        
-        & .ant-drawer-close {
-            display: none !important;
-        }
-        
-        & .ant-drawer-wrapper-body {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-        }
-
-        & .ant-drawer-body {
-            width: 100%;
-            height: 100%;
-
-            & > div {
+            & .ant-drawer-content-wrapper {
+                width: 100vw !important;
+            }
+            
+            & .ant-drawer-close {
+                display: none !important;
+            }
+            
+            & .ant-drawer-wrapper-body {
                 display: flex;
-                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+
+            & .ant-drawer-body {
+                width: 100%;
                 height: 100%;
 
+                & > div {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
 
-                & .Calendar {
-                    max-width: 400px !important;
-                    margin: auto !important;
-                }
 
-                & .customAppDatePicker__controller {
-                    margin-top: auto;
+                    & .Calendar {
+                        max-width: 400px !important;
+                        margin: auto !important;
+                    }
+
+                    & .customAppDatePicker__controller {
+                        margin-top: auto;
+                    }
                 }
             }
-        }
 
-        .ant-modal-close-x {
-            display: none;
+            .ant-modal-close-x {
+                display: none;
+            }
         }
-    }
+    `};
 `;
 
 
@@ -133,13 +139,14 @@ const ConditionalWrapper = ({ isMobile , children , ...rest }) => {
 
 
 const CustomAppDatePicker = ({ 
-        onChange ,
-        value ,
-        selectedDayColor = "lightblue", 
-        isCurrentlyActive,
-        closeOnChange = true , 
-        red ,
-        green,
+    onChange ,
+    value ,
+    style,
+    selectedDayColor = "lightblue", 
+    isCurrentlyActive,
+    closeOnChange = true , 
+    red ,
+    green,
 }) => {
     const [isOpened, setIsOpened] = useState(false);
     const [hideTodayTrigger, setHideTodayTrigger] = useState(false);
@@ -161,6 +168,7 @@ const CustomAppDatePicker = ({
     const inputChangeHandler = ({ target : { value : inputValue } }) => {
         setManualInputValue(inputValue);
         setHaveUseInputChange(true);
+        
         if(regex.test(inputValue)) {
             setInputError(false)
             onChange(inputValue);
@@ -221,7 +229,7 @@ const CustomAppDatePicker = ({
             placeholder="Select Some date"
             value={value} 
             onClick={() => setIsOpened(true)} /> 
-        <GlobalStyleForPortalScop />
+        <GlobalStyleForPortalScop primary={style.find(el => el.name === "primaryColor").value} />
             <ConditionalWrapper
                 className="customAppDatePicker__modal"
                 isMobile={isMobile}

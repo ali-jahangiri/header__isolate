@@ -20,7 +20,7 @@ const getHideAnime = keyframes`
     }
 `
 
-const style = () => css`
+const style = ({ get }) => css`
     height: 50vh;
     width: 75%;
     margin: 0 auto;
@@ -37,7 +37,7 @@ const style = () => css`
     .insIntroSection {
 
         &__title {
-            font-size: 3.5rem;
+            font-size: ${get("introInsNameFontSize")};
             font-weight: 500;
             text-align: center;
 
@@ -47,6 +47,7 @@ const style = () => css`
         }
 
         &__desc {
+            font-size: ${get("introInsDescFontSize")};
             opacity: 0;
             animation: ${initialAnime} .4s .4s forwards alternate;  
             text-align: center;
@@ -65,13 +66,13 @@ const style = () => css`
                 border: none;
                 cursor: pointer;
                 padding: .7rem 0;
-                background-color: #5392FF50;
-                border: 2px solid #5392FF;
+                background-color: ${get("primaryColor") + 50};
+                border: 2px solid ${get("primaryColor")};
                 border-radius: 5px;
                 transition: .3s;
                 
                 &:hover {
-                    background-color: #5392FF80;
+                    background-color: ${get("primaryColor")};
                 }
             }
         }
