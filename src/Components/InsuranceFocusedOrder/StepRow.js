@@ -25,6 +25,7 @@ const StepRow = ({
     currentStage,
     setCurrentStage,
     availableNextStepCount,
+    style,
     setAvailableNextStepCount,
     isInSubmitReview,
     ...rest
@@ -76,7 +77,7 @@ const StepRow = ({
     // }
 
     return (
-        <Wrapper isActive={isActive}>
+        <Wrapper style={style} isActive={isActive}>
             {
                 !isActive && <div className="stepRow__preventUserInteract" />
             }
@@ -98,6 +99,7 @@ const StepRow = ({
                 </div>
             </div>
             <StepRowMainContent
+                style={style}
                 goToNextStepHandler={goToNextStepHandler}
                 isActive={isActive}
                 carGroup={carGroup}

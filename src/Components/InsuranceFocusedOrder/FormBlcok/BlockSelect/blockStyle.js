@@ -2,12 +2,12 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
 
     width: 49%;
     font-size: 1rem;
     border-radius: 5px;
-    border: 2px solid #5392FF;
+    border: 2px solid ${get("primaryColor") + 80};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,7 @@ const style = () => css`
         cursor: pointer;
         user-select: none;
         padding: 1.2rem;
-        background-color: #5392FF20;
+        background-color: ${get("primaryColor") + 30};
         border: none;
         width: 100%;
         height: 100%;
@@ -32,11 +32,11 @@ const style = () => css`
 
         
         &:hover {
-            background-color: #5392FF35;
+            background-color: ${get("primaryColor") + 50};
         }
 
         &:active {
-            background-color: #5392FF55;
+            background-color: ${get("primaryColor") + 60};
         }
     }
 
@@ -44,7 +44,11 @@ const style = () => css`
 
     ${({ isSelected }) => isSelected && css`
         button {
-            background-color: #5392FF75;
+            background-color: ${get("primaryColor") + 70};
+
+            &:hover {
+                background-color: ${get("primaryColor") + 65};
+            }
         }
     `};
 `

@@ -35,6 +35,7 @@ const StepRowMainContent = ({
     typesName ,
     goToNextStepHandler,
     onChange,
+    style,
     isActive,
     store,
     isInSubmitReview,
@@ -49,11 +50,13 @@ const StepRowMainContent = ({
         }else setWasScrolled(false);
     } , 50)
 
+
     return (
         <div onScroll={scrollHandler} className="stepRow__mainContent">
             <div style={overlayStyle} className={`stepRow__mainContent__scrollOverlayHelper ${wasScrolled ? "stepRow__mainContent__scrollOverlayHelper--visible" : ""}`} />
             <InputDetector
                 isInSubmitReview={isInSubmitReview}
+                style={style}
                 isActive={isActive}
                 goToNextStepHandler={goToNextStepHandler}
                 setOverlayStyle={setOverlayStyle}

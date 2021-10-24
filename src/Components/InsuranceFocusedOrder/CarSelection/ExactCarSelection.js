@@ -6,11 +6,11 @@ const ExactCarSelection = ({
     dataName, 
     hasNestedData , 
     nestedData , 
-    nestedDataName , 
     selectOtherCarHand,
     id , 
     selectExactHandler ,
     isSelected,
+    style,
     index,
     haveSomeThingSelected,
     selectedBefore,
@@ -33,6 +33,7 @@ const ExactCarSelection = ({
   
     return (
         <Wrapper
+            style={style}
             isDisabled={haveSomeThingSelected && !isSelected} 
             isSelected={isSelected}
             selectedBefore={selectedBefore}
@@ -51,6 +52,7 @@ const ExactCarSelection = ({
                 {
                     isSelected && hasNestedData && <div ref={usageContainerRef} className="exactCarSelection__carTypeContainer">
                         <CarUsage
+                            style={style}
                             selectedItem={selectedUsage}
                             item={nestedData} 
                             selectHandler={internalSelectUsageHandler}

@@ -2,11 +2,11 @@ import React from 'react';
 import { css } from "styled-components";
 import WithStyled from '../../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     width: 150px;
     flex: 1 0 150px;
     max-width: 190px;
-    border: 2px solid #5392FF90;
+    border: 2px solid ${get("primaryColor") + 90};
     user-select: none;
     transition : .3s;
     margin: 1rem;
@@ -28,7 +28,7 @@ const style = () => css`
     }
 
     &:hover {
-        border-color: #5392FF;
+        border-color: ${get("primaryColor")};
     }
 
     div {

@@ -20,6 +20,7 @@ const NumberInput = ({
     onChange ,
     max, 
     min,
+    style,
     value, 
     step,
     submitHandler,
@@ -94,12 +95,13 @@ const NumberInput = ({
     } , [inputRef.current , isActive , isInSubmitReview])
 
 
+
     useEffect(function initialRenderMinNumberLiftToStoreHandler() {
         innerChangeHandler(min);
     } , [])
 
     return (
-        <Wrapper>
+        <Wrapper style={style}>
             <div className="numberInput__btn">
                 <button disabled={reachToMin} onClick={decrementHandler}>-</button>
             </div>

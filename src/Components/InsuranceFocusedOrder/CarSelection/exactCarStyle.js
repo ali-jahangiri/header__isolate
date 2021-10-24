@@ -24,18 +24,18 @@ const carUsageAnime = keyframes`
     }
 `
 
-const style = () => css`
+const style = ({ get }) => css`
     flex: 1 0 150px;
     transition : .3s;
 
     & > div {
         position: relative;
-        background-color: #5392FF30;
         overflow: hidden;
+        background-color: ${get("primaryColor") + 30};
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid #5392FF;
+        border: 2px solid ${get("primaryColor")};
         border-radius: 5px;
         margin: .5rem;
         min-height: 4rem;
@@ -45,7 +45,7 @@ const style = () => css`
         animation: ${initialAnimation} .3s forwards alternate;
         
         &:hover {
-            background-color: #5392FF50;
+            background-color: ${get("primaryColor") + 50};
         }
         
         p {
@@ -119,7 +119,7 @@ const style = () => css`
             background-color: #5392FF10;
 
             &:hover {
-                background-color: #5392FF10;
+                background-color: ${get("primaryColor") + 30} !important;
             }
         }
 

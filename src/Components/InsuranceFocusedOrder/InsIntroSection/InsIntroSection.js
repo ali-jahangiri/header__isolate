@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Wrapper from "./style";
 
-const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler , submitted , redirectHandler }) => {
+const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide , currentStep , availableNextStepCount , introContinueHandler , submitted , redirectHandler , style }) => {
     const [getHideAuto, setGetHideAuto] = useState(false);
     const timerRef = useRef();
 
@@ -27,7 +27,7 @@ const InsIntroSection = ({ insName , desc , goToNextStepHandler , shouldGetHide 
     }
 
     return (
-        <Wrapper submitted={submitted} shouldGetHide={shouldGetHide}>
+        <Wrapper style={style} submitted={submitted} shouldGetHide={shouldGetHide}>
             <div className="insIntroSection__title">
                 <p>{insName}</p>
             </div>

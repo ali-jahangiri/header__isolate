@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     position: relative;
     transition: .3s;
     opacity: .3;
@@ -24,7 +24,6 @@ const style = () => css`
             top: 0;
             width: 100%;
             height: 100%;
-            /* background-color: transparent; */
             background-color: transparent;
             z-index: 2;
 
@@ -68,12 +67,12 @@ const style = () => css`
             }
 
             ::-webkit-scrollbar-thumb {
-                background: #5392FF50;
+                background: ${get("primaryColor") + 50};
                 border-radius: 3px;
             }
             
             ::-webkit-scrollbar-thumb:hover {
-                background: #5392FF;
+                background: ${get("primaryColor")};
             }
         }
 
@@ -84,7 +83,6 @@ const style = () => css`
             align-items: center;
 
             @media (max-width : 480px) {
-                /* padding-top: 3rem; */
             }
 
             & > div {
@@ -132,11 +130,11 @@ const style = () => css`
                         top: 0;
                         width: 0;
                         height: 2px;
-                        background-color: #5392FF;
+                        background-color: ${get("primaryColor")};
                         transition: .3s .3s;
 
                         &:last-child {
-                            background-color: #5392FF;
+                            background-color: ${get("primaryColor")};
                             top: 100%;
                             width: 0;
                             left: 100%;
@@ -154,7 +152,7 @@ const style = () => css`
                         height: 0;
                         transition: .3s;
                         width: 2px;
-                        background-color: #5392FF;
+                        background-color: ${get("primaryColor")};
 
                     }
 
@@ -180,7 +178,7 @@ const style = () => css`
             &__index {
                 font-size: 1.2rem;
                 /* primary */
-                color: #5392FF;
+                color: ${get("primaryColor")};
                 display: flex;
                 align-items: center;
 
@@ -193,7 +191,7 @@ const style = () => css`
                         width: 1.2rem;
                         height: 1.2rem;
                         /* primary */
-                        fill: #5392FF;
+                        fill: ${get("primaryColor")};
                     }
                 }
 

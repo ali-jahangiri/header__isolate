@@ -20,6 +20,7 @@ const InputDetector = ({
     placeHolder,
     goToNextStepHandler,
     maxNumber,
+    style,
     step,
     minNumber,
     setOverlayStyle,
@@ -30,6 +31,7 @@ const InputDetector = ({
         case "DropDown" :
             if(isCarCase) {
                 return <CarSelection
+                            style={style}
                             selectedUsage={nestedValue}
                             formName={formName}
                             exactCarList={formData} 
@@ -39,13 +41,15 @@ const InputDetector = ({
                             carGroup={carGroup}
                         />
             }else {
-                if(formData.length <= 4) return <BlockSelect 
+                if(formData.length <= 4) return <BlockSelect
+                                                    style={style}
                                                     value={value} 
                                                     formName={formName} 
                                                     onSelect={onChange} 
                                                     placeholder={placeHolder} 
                                                     options={formData} />
                 else return <Select
+                                style={style}
                                 value={value}
                                 otherTest={isActive}
                                 formName={formName}
@@ -55,6 +59,7 @@ const InputDetector = ({
             }
         case "Date" :
             return <CustomAppDatePicker
+                        style={style}
                         isCurrentlyActive={isActive}
                         green={"#C6D57E"} 
                         red={'#950101'} 
@@ -64,6 +69,7 @@ const InputDetector = ({
             return <MultiSelect
                         isInSubmitReview={isInSubmitReview}
                         isActive={isActive}
+                        style={style}
                         placeholder={placeHolder} 
                         formName={formName} 
                         onSelect={onChange} 
@@ -74,6 +80,7 @@ const InputDetector = ({
         case "Float" :
             return <NumberInput
                         isInSubmitReview={isInSubmitReview}
+                        style={style}
                         isActive={isActive}
                         submitHandler={goToNextStepHandler}
                         formName={formName}
@@ -84,6 +91,7 @@ const InputDetector = ({
                         onChange={onChange} />
         case "CreateYear" : 
             return <Select
+                        style={style}
                         formName={formName}
                         options={formData} 
                         value={value}

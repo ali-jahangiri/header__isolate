@@ -2,13 +2,13 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     width: calc(100% - 2rem);
     margin: 1rem auto;
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
-    border: 2px solid #5392FF80;
+    border: 2px solid ${get("primaryColor") + 80};
     transition: .3s;
     position: sticky;
     left: 0;
@@ -34,21 +34,21 @@ const style = () => css`
         align-items: center;
         justify-content: center;
         transform : .3s;
-        border-right: 0px solid #5392FF;
+        border-right: 0px solid ${get("primaryColor")};
 
         svg {
             transition : .3s;
             width: 1rem;
             height: 1rem;
-            fill: #5392FF;
+            fill: ${get("primaryColor")};
         }
     }
 
     ${({ isFocused }) => isFocused && css`
-        border-color: #5392FF;
+        border-color: ${get("primaryColor")};
 
         div {
-            background-color: #5392FF80;
+            background-color: ${get("primaryColor") + 80};
             border-right-width: 2px;
 
             svg {

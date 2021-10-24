@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     position: relative;
     margin: 2rem 0;
     
@@ -32,7 +32,7 @@ const style = () => css`
             box-shadow : none;
             height: 34px;
             border-radius: 0;
-            border-bottom: 2px solid #5392FF50;
+            border-bottom: 2px solid ${get("primaryColor") + 60};
             color: white;
             text-align: right;
         }
@@ -43,7 +43,7 @@ const style = () => css`
             bottom: 0;
             transition: .3s;
             height: 2px;
-            background-color: #5392FF;
+            background-color: ${get("primaryColor")};
             width: 0;
 
             &--grow {

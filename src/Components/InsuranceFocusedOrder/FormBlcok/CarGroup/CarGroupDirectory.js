@@ -3,7 +3,7 @@ import CarGroupItem from './CarGroupItem';
 import Wrapper from "./directoryStyle";
 import ExactCarItemGroup from "./ExactCarItemInGroup";
 
-const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList }) => {
+const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList , style }) => {
     // TODO replace Image component
     const overviewNodeRef = useRef();
 
@@ -15,8 +15,9 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList 
         onSelect(null);
     }
 
+
     return (
-        <Wrapper>
+        <Wrapper style={style}>
             <div ref={overviewNodeRef} className={`carGroupDirectory__overview ${selectedItem ? "carGroupDirectory__overview--visible" : ""}`}>
                 <div className="carGroupDirectory__overview__otherChoice">
                     <button onClick={resetSelectedItemHandler}>
@@ -32,12 +33,14 @@ const CarGroupDirectory = ({ list = [] , onSelect , selectedItem , exactCarList 
                 {
                     list.map((el , i) => (
                         <CarGroupItem
+                            style={style}
                             selectHandler={onSelect} key={i} {...el} />
                     ))
                 }
                 {
                     exactCarList?.map((el , i) => (
                         <ExactCarItemGroup 
+                            style={style}
                             onSelect={onSelect} 
                             key={i} 
                             {...el} />

@@ -2,17 +2,16 @@ import React from 'react';
 import Wrapper from "./style";
 import Block from "./Block";
 
-const BlockSelect = ({ options = [] , value , onSelect , formName  }) => {
+const BlockSelect = ({ options = [] , value , onSelect , formName , style }) => {
     
-    const selectHandler = value => onSelect(formName , value)
+    const selectHandler = value => onSelect(formName , value);
 
-    
     return (
-        <Wrapper>
+        <Wrapper style={style}>
             <div className="blockSelect__itemContainer">
                 {
                     options.map((el , i) => (
-                        <Block isSelected={el.id === value} selectHandler={selectHandler} key={i} {...el} />
+                        <Block style={style} isSelected={el.id === value} selectHandler={selectHandler} key={i} {...el} />
                     ))
                 }
             </div>

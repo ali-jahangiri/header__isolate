@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'styled-components';
 import WithStyled from '../../../../utils/HOC/WithStyled';
 
-const style = () => css`
+const style = ({ get }) => css`
     width: 100%;
     
     .carGroupDirectory {
@@ -66,15 +66,15 @@ const style = () => css`
             &__otherChoice {
 
                 button {
-                    border: 2px solid #5392FF;
+                    border: 2px solid ${get("primaryColor")};
                     border-radius: 5px;
                     padding: .3rem 1rem;
-                    background-color: #5392FF50;
+                    background-color: ${get("primaryColor") + 50};
                     cursor: pointer;
                     transition : .3s;
 
                     &:hover {
-                        background-color: #5392FF80;
+                        background-color: ${get("primaryColor") + 80};
                     }
                 }
             }
