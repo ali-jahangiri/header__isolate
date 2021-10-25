@@ -1,13 +1,13 @@
 import React from 'react';
-import { css, keyframes } from 'styled-components';
+import { css } from 'styled-components';
 import WithStyled from '../../utils/HOC/WithStyled';
 
 
 const style = ({ get }) => css`
 
-    height: 0;
+    height: 500px;
     overflow: hidden;
-    opacity: 0;
+    opacity: 1;
     background-color: black;
     width: 90%;
     margin: 0 auto;
@@ -36,6 +36,8 @@ const style = ({ get }) => css`
             font-size: ${get("introInsDescFontSize")};
             text-align: center;
             direction: rtl;
+            width: 90%;
+            margin: 0 auto;
         }
 
         &__cta {
@@ -56,11 +58,33 @@ const style = ({ get }) => css`
         }
     }
 
+    ${({ getHide }) => {
+        return getHide && css`
+        opacity: 0;
+        height: 0; 
+        `
+    }};
 
-    ${({ visible }) => visible && css`
-        opacity: 1;
-        height: 500px;
-    `};
+    @media (max-width : 480px) {
+        .intro {
+            &__title {
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            &__desc {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+
+            &__cta {
+                font-size: 1.1rem;
+                width: 90%;
+            }
+        }
+    }
+
+
 `
 
 

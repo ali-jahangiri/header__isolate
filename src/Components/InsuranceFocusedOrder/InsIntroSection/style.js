@@ -48,6 +48,8 @@ const style = ({ get }) => css`
         }
 
         &__desc {
+            width: 90%;
+            margin: 0 auto;
             font-size: ${get("introInsDescFontSize")};
             opacity: 0;
             animation: ${initialAnime} .4s .4s forwards alternate;  

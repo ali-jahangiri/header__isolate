@@ -12,7 +12,7 @@ const ModalStyle = createGlobalStyle`
         height: 500px;
         overflow: hidden;
     }
-
+    
     .insFocus__modal {
 
         width: 100vw !important;
@@ -22,25 +22,15 @@ const ModalStyle = createGlobalStyle`
 
         /* reset antd styles */
 
-        .ant-drawer-content-wrapper {
-            width: 100% !important;
-        }
+        .ant-drawer-content-wrapper { width: 100% !important; }
 
-        .ant-drawer-wrapper-body {
-            overflow: hidden;
-        }
+        .ant-drawer-wrapper-body { overflow: hidden; }
 
-        .ant-drawer-body {
-            padding: 0;
-        }
+        .ant-drawer-body { padding: 0; }
 
-        .ant-modal-content {
-            padding: 0;
-        }
+        .ant-modal-content { padding: 0; }
 
-        .ant-modal-content {
-            height: 100%;
-        }
+        .ant-modal-content { height: 100%; }
         
         .ant-modal-body {
             padding: 0;

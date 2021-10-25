@@ -76,6 +76,10 @@ const GlobalStyleForPortalScop = createGlobalStyle`
 
         .customAppDatePicker__modal {
 
+            & .ant-drawer-body {
+                background-color: ${primary + 50};
+            }
+
             & .ant-modal-content {
                 background: black;
             }
@@ -99,6 +103,7 @@ const GlobalStyleForPortalScop = createGlobalStyle`
                 width: 100%;
                 align-items: center;
                 justify-content: center;
+                background-color: black;
             }
 
             & .ant-drawer-body {
@@ -226,7 +231,7 @@ const CustomAppDatePicker = ({
             style={{ textAlign : "center" }}
             readOnly
             className={`customAppDatePicker__frontInput ${value ? "customAppDatePicker__frontInput--haveValue" : ""}`}
-            placeholder="Select Some date"
+            placeholder="تاریخی را انتخاب کنید"
             value={value} 
             onClick={() => setIsOpened(true)} /> 
         <GlobalStyleForPortalScop primary={style.find(el => el.name === "primaryColor").value} />
@@ -260,7 +265,7 @@ const CustomAppDatePicker = ({
                             onChange={inputChangeHandler} 
                             ref={inputRef} 
                             value={manualInputValue}  />
-                        <span style={{ color : inputError ? red : "grey" }} className={value ? "getOnTop" : ""}>تاریخ را  وارد نمایید</span>
+                        <span onClick={() => inputRef.current?.focus()} style={{ color : inputError ? red : "grey" }} className={value ? "getOnTop" : ""}>تاریخ را  وارد نمایید</span>
                         {
                             !hideTodayTrigger && <div onClick={backToTodayHandler} className={`customAppDatePicker__todayTrigger ${value === todayString ? "customAppDatePicker__todayTrigger--disabled" : ""}`}>
                                 <TodayIconSvg />

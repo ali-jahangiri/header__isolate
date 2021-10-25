@@ -4,8 +4,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Wrapper from "./style";
 import ModalStyle from './modalStyle';
 
-// mock 
-
 import StepRow from './StepRow';
 import InsIntroSection from './InsIntroSection/InsIntroSection';
 import InsFocusStepperOverlay from './InsFocusStepperOverlay';
@@ -13,7 +11,7 @@ import MediaQueryProvider from '../../utils/Hooks/useMediaQuery/MediaQueryProvid
 import useMediaQuery from '../../utils/Hooks/useMediaQuery/useMediaQuery';
 
 const DynamicWrapper = ({ isMobile, renderWithNoWrapper , ...rest }) => {
-    if(renderWithNoWrapper) return <>{rest.children}</>
+    if(renderWithNoWrapper) return rest.children
     if(isMobile) return <Drawer {...rest} />
     else return <Modal {...rest} />
 }
@@ -23,7 +21,9 @@ const InsuranceFocusedOrder = ({
     onClose,
     mock,
     componentStyles,
-    renderWithNoWrapper
+    renderWithNoWrapper,
+    visibleIntroOnRenderWithNoWrapperHandler,
+    closeParent,
 }) => {
     const [currentStep, setCurrentStep] = useState(null);
     const [store, setStore] = useState(null);
@@ -52,12 +52,12 @@ const InsuranceFocusedOrder = ({
     const prevStepHandler = () => {
         if(isMobile && currentStep === 0) {
             headerRef.current.scrollIntoView({ behavior : "smooth" })
-            // setCurrentStep(null);
             setAvailableNextStepCount(prev => prev + 1);
             return ;
         }
         if(currentStep === 0) {
             setCurrentStep(null);
+            if(renderWithNoWrapper) visibleIntroOnRenderWithNoWrapperHandler()
         }else {
             setAvailableNextStepCount(prev => prev + 1);
             setCurrentStep(prev => prev - 1);
@@ -102,6 +102,7 @@ const InsuranceFocusedOrder = ({
 
 
     const closeEntireModal = () => {
+        if(renderWithNoWrapper) closeParent()
         onClose(false);
         let timer = setTimeout(() => {
             setCurrentStep(null);
@@ -119,7 +120,7 @@ const InsuranceFocusedOrder = ({
             let timer = setTimeout(() => {
                 setCurrentStep(0)
                 clearTimeout(timer)
-            } , 500)
+            } , 1800);
         }
     } , [renderWithNoWrapper])
 
@@ -132,7 +133,6 @@ const InsuranceFocusedOrder = ({
                 isMobile={isMobile}
                 placement="left"
                 centered
-                destroyOnClose
                 footer={null}
                 closable={null}
                 className="insFocus__modal"
